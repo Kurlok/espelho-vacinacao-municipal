@@ -28,34 +28,27 @@
 
 <body>
     <div class="d-flex" id="wrapper">
-    @auth
-
+        @auth
         <!-- Sidebar -->
         <div class="bg-info" id="sidebar-wrapper">
             <div class="sidebar-heading text-center">{{ config('app.name', 'Laravel') }}</div>
             <div class="list-group list-group-flush">
-                <a href="#" class="list-group-item list-group-item-action bg-info text-white">Pacientes</a>
+                <a href="{{ route('pacientes') }}" class="list-group-item list-group-item-action bg-info text-white">Pacientes</a>
                 <a href="#" class="list-group-item list-group-item-action bg-info text-white">Vacinas</a>
                 <a href="#" class="list-group-item list-group-item-action bg-info text-white">Relatórios</a>
-
             </div>
         </div>
         @endauth
         <!-- /#sidebar-wrapper -->
-
         <!-- Page Content -->
         <div id="page-content-wrapper">
-
             <nav class="navbar navbar-expand-lg navbar-light bg-success border-bottom">
-            @auth
-
+                @auth
                 <button class="btn btn-light" id="menu-toggle">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 @endauth
-
                 <button class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    
                     <i class="fas fa-user"></i>
                 </button>
 
@@ -63,7 +56,7 @@
                     <ul class="navbar-nav ml-auto">
                         @guest
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="nav-link text-white" href="{{ route('login') }}">{{ __('Entrar') }}</a>
                         </li>
                         @if (Route::has('register'))
                         <li class="nav-item">
@@ -79,7 +72,7 @@
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
+                                    {{ __('Sair') }}
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -92,12 +85,15 @@
                 </div>
             </nav>
 
-            <div class="container-fluid">
-                <!-- <h1 class="mt-4">Simple Sidebar</h1>
+            <!-- <div class="container-fluid"> -->
+            <!-- <h1 class="mt-4">Simple Sidebar</h1>
     <p>The starting state of the menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will change.</p>
     <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>. The top navbar is optional, and just for demonstration. Just create an element with the <code>#menu-toggle</code> ID which will toggle the menu when clicked.</p> -->
+            <main class="py-4">
+
                 @yield('content')
-            </div>
+            </main>
+            <!-- </div> -->
         </div>
         <!-- /#page-content-wrapper -->
 

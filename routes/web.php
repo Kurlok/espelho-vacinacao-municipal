@@ -15,6 +15,9 @@
 //     return view('welcome');
 // });
 Route::get('/', 'HomeController@index')->name('/')->middleware('auth');
+Route::get('/pacientes', 'PacientesController@index')->name('pacientes')->middleware('auth');
+Route::get('/pacientes/cadastro', 'PacientesController@visualizaPaciente')->name('pacientesCadastro')->middleware('auth');
+
 
 Auth::routes(['register' => false]);
 
