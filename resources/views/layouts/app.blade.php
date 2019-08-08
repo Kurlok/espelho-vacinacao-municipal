@@ -28,34 +28,42 @@
 
 <body>
     <div class="d-flex" id="wrapper">
+    @auth
 
         <!-- Sidebar -->
-        <div class="bg-light border-right" id="sidebar-wrapper">
-            <div class="sidebar-heading">{{ config('app.name', 'Laravel') }}</div>
+        <div class="bg-info" id="sidebar-wrapper">
+            <div class="sidebar-heading text-center">{{ config('app.name', 'Laravel') }}</div>
             <div class="list-group list-group-flush">
-                <a href="#" class="list-group-item list-group-item-action bg-light">Pacientes</a>
-                <a href="#" class="list-group-item list-group-item-action bg-light">Vacinas</a>
+                <a href="#" class="list-group-item list-group-item-action bg-info text-white">Pacientes</a>
+                <a href="#" class="list-group-item list-group-item-action bg-info text-white">Vacinas</a>
+                <a href="#" class="list-group-item list-group-item-action bg-info text-white">Relatórios</a>
+
             </div>
         </div>
+        @endauth
         <!-- /#sidebar-wrapper -->
 
         <!-- Page Content -->
         <div id="page-content-wrapper">
 
-            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <nav class="navbar navbar-expand-lg navbar-light bg-success border-bottom">
+            @auth
+
                 <button class="btn btn-light" id="menu-toggle">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                @endauth
 
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                <i class="fas fa-user"></i>
-                            </button>
+                <button class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    
+                    <i class="fas fa-user"></i>
+                </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         @guest
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="nav-link text-white" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
                         @if (Route::has('register'))
                         <li class="nav-item">
@@ -64,7 +72,7 @@
                         @endif
                         @else
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
 
