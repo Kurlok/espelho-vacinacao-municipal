@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Paciente;
 use Illuminate\Http\Request;
 
 class PacientesController extends Controller
