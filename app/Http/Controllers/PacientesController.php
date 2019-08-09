@@ -34,7 +34,7 @@ class PacientesController extends Controller
     {
         $q = Input::get('q');
         if ($q != "") {
-            $listaPacientes = Paciente::where('nome', 'LIKE', '%' . $q . '%')->paginate(20)->setPath('pacientes');
+            $listaPacientes = Paciente::where('nome', 'LIKE', '%' . $q . '%')->paginate(20)->setPath('/pacientes/busca');
             $pagination = $listaPacientes->appends(array(
                 'q' => Input::get('q')
             ));
