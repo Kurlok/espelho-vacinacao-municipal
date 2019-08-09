@@ -35,35 +35,24 @@
                     </tr>
                 </thead>
                 <tbody>
-
+                    @foreach ($listaPacientes as $paciente)
                     <tr>
-                        <td>224</td>
-                        <td>Felipe Augusto Barcelos</td>
-                        <td>Centro</td>
-                        <td>16/02/1990</td>
+                        <td>{{$paciente->id}}</td>
+                        <td>{{$paciente->nome}}</td>
+                        <td>{{$paciente->localidade}}</td>
+                        <td>{{ date('d/m/Y', strtotime($paciente->data_nascimento))}}</td>
                         <td class="actions">
                             <a class="btn btn-success btn-xs" href="view.html">Visualizar</a>
                             <a class="btn btn-warning btn-xs" href="{{ route('pacientesCadastro') }}">Editar</a>
                             <a class="btn btn-danger btn-xs" href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
                         </td>
-                    </tr>
-
+                    </tr>                   
+                    @endforeach
                 </tbody>
             </table>
 
         </div>
     </div>
-
-    <nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item"><a class="page-link" href="#">Anterior</a></li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item"><a class="page-link" href="#">Próximo</a></li>
-  </ul>
-</nav>
-
-
+    {{ $listaPacientes->links() }}
 </div>
 @endsection

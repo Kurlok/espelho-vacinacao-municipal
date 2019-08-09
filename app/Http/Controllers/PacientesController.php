@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Paciente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PacientesController extends Controller
 {
@@ -14,10 +15,20 @@ class PacientesController extends Controller
 
     public function index()
     {
-        $listaPacientes = Paciente::all();
-        return view('pacientes/pacientes');
+        $listaPacientes = Paciente::paginate(20);
+      //  $listaPacientes = DB::table('pacientes')->paginate(15);
+
+        return view('pacientes/pacientes',
+        [
+            'listaPacientes' => $listaPacientes,
+        ],
+    );
     }   
     
+    public function getPacientes()
+    {
+    } 
+
     public function visualizaPaciente()
     {
         return view('pacientes/cadastro');
