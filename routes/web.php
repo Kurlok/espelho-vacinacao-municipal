@@ -1,4 +1,5 @@
 <?php
+use App\Paciente;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +19,10 @@ Route::get('/', 'HomeController@index')->name('/')->middleware('auth');
 Route::get('/pacientes', 'PacientesController@index')->name('pacientes')->middleware('auth');
 Route::get('/pacientes/cadastro', 'PacientesController@editaPaciente')->name('pacientesCadastro')->middleware('auth');
 Route::get('/pacientes/paginacao', 'HomeController@getUsers')->name('pacientespaginacao');
- 
+
 
 Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::any('/pacientes/busca', 'PacientesController@buscaPaciente')->name('pacientesBusca');

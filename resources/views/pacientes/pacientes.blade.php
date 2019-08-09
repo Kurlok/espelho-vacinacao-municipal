@@ -8,14 +8,17 @@
             <h2>Pacientes</h2>
         </div>
         <div class="col-md-6 ">
-            <div class="input-group">
-                <input name="data[search]" class="form-control" id="search" type="text" placeholder="Pesquisar nome">
-                <span class="input-group-append">
-                    <button class="btn btn-primary" type="submit">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </span>
-            </div>
+            <form action="/pacientes/busca" method="POST" role="search">
+                {{ csrf_field() }}
+                <div class="input-group">
+                    <input name="q" class="form-control" id="search" type="text" placeholder="Pesquisar nome">
+                    <span class="input-group-append">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </form>
         </div>
         <div class="col-md-3 ">
             <a href="add.html" class="btn btn-primary pull-right h2">Novo Paciente</a>
@@ -46,7 +49,7 @@
                             <a class="btn btn-warning btn-xs" href="{{ route('pacientesCadastro') }}">Editar</a>
                             <a class="btn btn-danger btn-xs" href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
                         </td>
-                    </tr>                   
+                    </tr>
                     @endforeach
                 </tbody>
             </table>
