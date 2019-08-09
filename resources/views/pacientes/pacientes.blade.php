@@ -38,6 +38,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @if(isset($listaPacientes))
                     @foreach ($listaPacientes as $paciente)
                     <tr>
                         <td>{{$paciente->id}}</td>
@@ -51,11 +52,14 @@
                         </td>
                     </tr>
                     @endforeach
+                    @endif
                 </tbody>
             </table>
 
         </div>
     </div>
+    @if(isset($listaPacientes))
     {{ $listaPacientes->links() }}
+    @endif
 </div>
 @endsection
