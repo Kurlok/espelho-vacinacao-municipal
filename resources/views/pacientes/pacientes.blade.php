@@ -21,7 +21,7 @@
             </form>
         </div>
         <div class="col-md-3 ">
-            <a href="add.html" class="btn btn-primary pull-right h2">Novo Paciente</a>
+            <a href="{{ route('pacientesCadastro') }}" class="btn btn-primary pull-right h2">Novo Paciente</a>
         </div>
     </div>
 
@@ -34,6 +34,7 @@
                         <th>Nome</th>
                         <th>Localidade</th>
                         <th>Data de nascimento</th>
+                        <th>Nº SUS</th>
                         <th class="actions">Ações</th>
                     </tr>
                 </thead>
@@ -45,6 +46,8 @@
                         <td>{{$paciente->nome}}</td>
                         <td>{{$paciente->localidade}}</td>
                         <td>{{ date('d/m/Y', strtotime($paciente->data_nascimento))}}</td>
+                        <td>{{ $paciente->sus}}</td>
+
                         <td class="actions">
                             <a class="btn btn-success btn-xs" href="view.html">Visualizar</a>
                             <a class="btn btn-warning btn-xs" href="{{ route('pacientesCadastro') }}">Editar</a>

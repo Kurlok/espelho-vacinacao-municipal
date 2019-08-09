@@ -120,6 +120,7 @@
                             <label for="nome">BCG</label>
                             <input type="date" class="form-control" id="codigo">
                         </div>
+                        
                     </div>
                     <button type="submit" class="btn btn-primary">Cadastrar</button>
 

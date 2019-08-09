@@ -16,7 +16,7 @@ class PacientesController extends Controller
 
     public function index()
     {
-        $listaPacientes = Paciente::paginate(20);
+        $listaPacientes = Paciente::paginate(15);
       //  $listaPacientes = DB::table('pacientes')->paginate(15);
 
         return view('pacientes/pacientes',
@@ -44,7 +44,8 @@ class PacientesController extends Controller
             $listaPacientes = Paciente::where('nome', 'LIKE', '%' . $q . '%')
             ->orWhere ( 'localidade', 'LIKE', '%' . $q . '%' )
             ->orWhere ( 'data_nascimento', 'LIKE', '%' . $dataSql . '%' )
-            ->paginate(20)->setPath('/pacientes/busca');
+            ->orWhere ( 'sus', 'LIKE', '%' . $q . '%' )
+            ->paginate(15)->setPath('/pacientes/busca');
             $pagination = $listaPacientes->appends(array(
                 'q' => Input::get('q')
             ));

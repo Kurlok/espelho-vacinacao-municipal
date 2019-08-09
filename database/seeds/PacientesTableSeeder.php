@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
 
 class PacientesTableSeeder extends Seeder
 {
@@ -27,18 +28,19 @@ class PacientesTableSeeder extends Seeder
             ]
         );
     //}
-
-        for ($i = 0; $i < 50; $i++) {
+    $faker = Faker::create();
+    
+    for ($i = 0; $i < 50; $i++) {
             DB::table('pacientes')->insert(
                 [
-                    'nome' => Str::random(20),
+                    'nome' => $faker->name,
                     'nome_mae' => Str::random(20),
                     'sus' => Str::random(13),
                     'sexo' => 'Feminino',
                     'data_nascimento' => today(),
                     'gestante' => 'Não',
                     'obito' => 'Sim',
-                    'localidade' => Str::random(20),
+                    'localidade' => $faker->city,
                     'telefone' => Str::random(15),
                     'telefone_alternativo' => Str::random(15),
                     'reacao_vacinal' => Str::random(50),
