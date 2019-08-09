@@ -11,6 +11,7 @@ class PacientesTableSeeder extends Seeder
      */
     public function run()
     {
+        for ($i=0;$i<102;$i++){
         DB::table('pacientes')->insert(
             [
                 'nome' => 'Felipe Augusto Barcelos',
@@ -25,7 +26,8 @@ class PacientesTableSeeder extends Seeder
                 'telefone_alternativo' => '(41) 99999-9999',
             ]
         );
-    
+    }
+
         for ($i = 0; $i < 50; $i++) {
             DB::table('pacientes')->insert(
                 [

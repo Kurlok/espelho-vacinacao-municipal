@@ -33,15 +33,28 @@ class PacientesController extends Controller
     public function buscaPaciente()
     {
         $q = Input::get('q');
+
+        //Conversão da data
+        $dataBr = $q;
+        $date = str_replace('/', '-', $dataBr );
+        $dataSql = date("Y-m-d", strtotime($date));
+
+        //Busca
         if ($q != "") {
-            $listaPacientes = Paciente::where('nome', 'LIKE', '%' . $q . '%')->paginate(20)->setPath('/pacientes/busca');
+            $listaPacientes = Paciente::where('nome', 'LIKE', '%' . $q . '%')
+            ->orWhere ( 'localidade', 'LIKE', '%' . $q . '%' )
+            ->orWhere ( 'data_nascimento', 'LIKE', '%' . $dataSql . '%' )
+            ->paginate(20)->setPath('/pacientes/busca');
             $pagination = $listaPacientes->appends(array(
                 'q' => Input::get('q')
             ));
             if (count($listaPacientes) > 0)
-            return view('pacientes/pacientes', ['listaPacientes' => $listaPacientes])->withDetails($listaPacientes)->withQuery($q);
-               // return view('pacientes/pacientes')->withDetails($paciente)->withQuery($q);
+            return view('pacientes/pacientes', ['listaPacientes' => $listaPacientes]);
         }
+        else {
+            return redirect()->route('pacientes');
+        }
+
         return view('pacientes/pacientes')->withMessage('No Details found. Try to search again !');
     }
 
