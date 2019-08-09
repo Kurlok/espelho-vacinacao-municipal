@@ -14,6 +14,7 @@ class PacientesController extends Controller
 
     public function index()
     {
+        $listaPacientes = Paciente::all();
         return view('pacientes/pacientes');
     }   
     
@@ -24,7 +25,7 @@ class PacientesController extends Controller
 
     public function editaPaciente()
     {
-        return view('pacientes/pacientes');
+        return view('pacientes/cadastro');
     } 
 
 }
