@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
 
         <div class="col-md-12">
-            <form>
+            <form method="POST" action="/cadastro/teste">
 
                 <div class="card">
                     <div class="card-header bg-warning">{{ __('Dados Pessoais') }}</div>
@@ -19,7 +19,7 @@
                             <div class="form-group col-md-2">
                                 <label for="idade">Idade</label>
                                 <input type="text" class="form-control" id="idade" value="@if(isset($paciente)){{Carbon\Carbon::createFromDate($paciente->data_nascimento)->diff(Carbon\Carbon::now())->format('%yA %mM %dD')}}@endif" disabled>
-                                
+
 
                             </div>
                             <div class="form-group col-md-6">

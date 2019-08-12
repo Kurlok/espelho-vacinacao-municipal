@@ -21,7 +21,7 @@
             </form>
         </div>
         <div class="col-md-3 ">
-            <a href="{{ route('pacientesCadastro') }}" class="btn btn-primary pull-right h2">Novo Paciente</a>
+            <a href="{{ route('telaCadastro') }}" class="btn btn-primary pull-right h2">Novo Paciente</a>
         </div>
     </div>
 

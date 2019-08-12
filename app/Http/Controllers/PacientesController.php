@@ -29,7 +29,7 @@ class PacientesController extends Controller
     }
 
     public function getPaciente(int $id)
-    { 
+    {
         $paciente = Paciente::find($id);
         return view(
             'pacientes/cadastro',
@@ -70,10 +70,34 @@ class PacientesController extends Controller
         return view('pacientes/cadastro');
     }
 
-    public function cadastrarPaciente()
+    public function telaCadastro()
     {
-
         return view('pacientes/cadastro');
+    }
+
+    public function cadastrarPaciente(Request $request)
+    {
+        $paciente = new Paciente();
+        $paciente->nome = $request->nome;
+        $paciente->nome_mae = $request->nome_mae;
+        $paciente->data_nascimento = $request->data_nascimento;
+        $paciente->localidade = $request->localidade;
+        $paciente->sus = $request->sus;
+        $paciente->sexo = $request->sexo;
+        $paciente->gestante = $request->gestante;
+        $paciente->obito = $request->obito;
+        $paciente->telefone = $request->telefone;
+        $paciente->telefone_alternativo = $request->telefone_alternativo;
+        $paciente->telefone_alternativo = $request->observacoes;
+
+        $paciente->save();
+
+        return redirect()->route('telaCadastro')->with('mensagemAlteracaoDados', 'Dados alterados com sucesso!');
+
+        // return view(
+        //     'pacientes/cadastro',
+        //     ['paciente' => $paciente]
+        // );
     }
 
     public function editarPaciente(Request $request, int $id)
