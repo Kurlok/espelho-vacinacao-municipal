@@ -13,8 +13,10 @@
                     <div class="card-body border-secondary">
                         <div class="form-row">
                             <div class="form-group col-md-2">
-                                <label for="nome">Código</label>
-                                <input type="text" class="form-control" id="codigo" disabled>
+                                <label for="id">Código</label>
+                                @if(isset($paciente))
+                                @endif
+                                <input type="text" class="form-control" id="id" disabled>
                             </div>
                             <div class="form-group col-md-2">
                                 <label for="idade">Idade</label>
@@ -33,12 +35,12 @@
 
                         <div class="form-row">
                             <div class="form-group col-md-4">
-                                <label for="nomeMae">Nome da mãe</label>
-                                <input type="text" class="form-control" id="nomeMae" placeholder="Nome da mãe">
+                                <label for="nome_mae">Nome da mãe</label>
+                                <input type="text" class="form-control" id="nome_mae" placeholder="Nome da mãe">
                             </div>
                             <div class="form-group col-md-2">
-                                <label for="dataNascimento">Nascimento</label>
-                                <input type="date" class="form-control" id="dataNascimento">
+                                <label for="data_nascimento">Nascimento</label>
+                                <input type="date" class="form-control" id="data_nascimento">
                             </div>
 
                             <div class="col-md-2 ">
@@ -79,12 +81,12 @@
                                 <input type="text" class="form-control" id="localidade" placeholder="Pinheiral de baixo">
                             </div>
                             <div class="form-group col-md-3">
-                                <label for="nome">Telefone</label>
-                                <input type="text" class="form-control" id="telefone1" placeholder="(00) 00000-0000">
+                                <label for="telefone">Telefone</label>
+                                <input type="text" class="form-control" id="telefone" placeholder="(00) 00000-0000">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="nome">Telefone Alternativo</label>
-                                <input type="text" class="form-control" id="telefone2" placeholder="(00) 00000-0000">
+                                <input type="text" class="form-control" id="telefone_alternativo" placeholder="(00) 00000-0000">
                             </div>
 
                         </div>
