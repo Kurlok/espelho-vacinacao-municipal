@@ -6,6 +6,7 @@ use App\Paciente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Carbon\Carbon;
 
 class PacientesController extends Controller
 {
@@ -27,8 +28,14 @@ class PacientesController extends Controller
         );
     }
 
-    public function getPacientes()
-    { }
+    public function getPaciente(int $id)
+    { 
+        $paciente = Paciente::find($id);
+        return view(
+            'pacientes/cadastro',
+            ['paciente' => $paciente]
+        );
+    }
 
     public function buscaPaciente()
     {

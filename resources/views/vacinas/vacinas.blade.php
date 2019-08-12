@@ -33,7 +33,6 @@
                         <th>Código</th>
                         <th>Vacina</th>
                         <th>Dose</th>
-                        <th>Administração</th>
                         <th class="actions">Ações</th>
                     </tr>
                 </thead>
@@ -44,11 +43,10 @@
                         <td>{{$vacina->id}}</td>
                         <td>{{$vacina->vacina}}</td>
                         <td>{{$vacina->dose}}</td>
-                        <td>{{$vacina->aplicacao}}</td>
 
                         <td class="actions">
                             <a class="btn btn-success btn-xs" href="view.html">Visualizar</a>
-                            <a class="btn btn-warning btn-xs" href="{{ route('pacientesCadastro') }}">Editar</a>
+                            <a class="btn btn-warning btn-xs" href="#">Editar</a>
                             <a class="btn btn-danger btn-xs" href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
                         </td>
                     </tr>

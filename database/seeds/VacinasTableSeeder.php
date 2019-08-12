@@ -15,7 +15,6 @@ class VacinasTableSeeder extends Seeder
             DB::table('vacinas')->insert([
                 'vacina' => Str::random(10),
                 'dose' => '1ª',
-                'aplicacao' => 'Subcutânea',
             ]);
         }
     }
