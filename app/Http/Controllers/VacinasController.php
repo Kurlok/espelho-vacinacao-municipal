@@ -20,7 +20,16 @@ class VacinasController extends Controller
      */
     public function index()
     {
-        view('vacinas/vacinas');
+        $listaVacinas = Vacina::paginate(15);
+        //  $listaPacientes = DB::table('pacientes')->paginate(15);
+
+        return view(
+            'vacinas/vacinas',
+            [
+                'listaVacinas' => $listaVacinas,
+            ],
+        );
+
     }
 
     /**

@@ -25,6 +25,7 @@ class PacientesTableSeeder extends Seeder
                 'localidade' => 'Centro',
                 'telefone' => '(42) 93242-4213',
                 'telefone_alternativo' => '(41) 99999-9999',
+
             ]
         );
     //}
@@ -43,7 +44,7 @@ class PacientesTableSeeder extends Seeder
                     'localidade' => $faker->city,
                     'telefone' => Str::random(15),
                     'telefone_alternativo' => Str::random(15),
-                    'reacao_vacinal' => Str::random(50),
+                    'observacoes' => Str::random(500),
 
                 ]
             );

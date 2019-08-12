@@ -19,8 +19,9 @@ Route::get('/', 'HomeController@index')->name('/')->middleware('auth');
 Route::get('/pacientes', 'PacientesController@index')->name('pacientes')->middleware('auth');
 Route::get('/pacientes/cadastro', 'PacientesController@cadastrarPaciente')->name('pacientesCadastro')->middleware('auth');
 Route::get('/pacientes/cadastro/{id}', 'PacientesController@editarPaciente')->name('pacientesEditar')->middleware('auth');
-
 Route::get('/pacientes/paginacao', 'HomeController@getUsers')->name('pacientespaginacao')->middleware('auth');
+
+Route::get('/vacinas', 'VacinasController@index')->name('vacinas')->middleware('auth');
 
 
 

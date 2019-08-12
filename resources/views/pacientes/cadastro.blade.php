@@ -90,6 +90,10 @@
                             </div>
 
                         </div>
+                        <div class="form-group">
+                            <label for="observacoes">Observações</label>
+                            <textarea class="form-control" id="observacoes" rows="4"></textarea>
+                        </div>
                     </div>
                     <div class="card-header bg-warning">{{ __('Vacinas') }}</div>
                     <div class="card-body ">
@@ -98,40 +102,40 @@
                                 <label for="nome">Pólio</label>
                                 <input type="date" class="form-control" id="polio">
                             </div>
-                        <div class="form-group col-md-2">
-                            <label for="nome">Tríplice</label>
-                            <input type="date" class="form-control" id="codigo">
-                        </div>
+                            <div class="form-group col-md-2">
+                                <label for="nome">Tríplice</label>
+                                <input type="date" class="form-control" id="codigo">
+                            </div>
 
-                        <div class="form-group col-md-2">
-                            <label for="nome">Hepatite A</label>
-                            <input type="date" class="form-control" id="codigo">
-                        </div>
+                            <div class="form-group col-md-2">
+                                <label for="nome">Hepatite A</label>
+                                <input type="date" class="form-control" id="codigo">
+                            </div>
 
-                        <div class="form-group col-md-2">
-                            <label for="nome">Hepatite B</label>
-                            <input type="date" class="form-control" id="codigo">
-                        </div>
+                            <div class="form-group col-md-2">
+                                <label for="nome">Hepatite B</label>
+                                <input type="date" class="form-control" id="codigo">
+                            </div>
 
-                        <div class="form-group col-md-2">
-                            <label for="nome">Tetravalente</label>
-                            <input type="date" class="form-control" id="codigo">
-                        </div>
+                            <div class="form-group col-md-2">
+                                <label for="nome">Tetravalente</label>
+                                <input type="date" class="form-control" id="codigo">
+                            </div>
 
-                        <div class="form-group col-md-2">
-                            <label for="nome">BCG</label>
-                            <input type="date" class="form-control" id="codigo">
+                            <div class="form-group col-md-2">
+                                <label for="nome">BCG</label>
+                                <input type="date" class="form-control" id="codigo">
+                            </div>
+
                         </div>
-                        
+                        <button type="submit" class="btn btn-primary">Cadastrar</button>
+
                     </div>
-                    <button type="submit" class="btn btn-primary">Cadastrar</button>
 
                 </div>
 
+            </form>
+
         </div>
-
-        </form>
-
     </div>
-</div>
-@endsection
+    @endsection

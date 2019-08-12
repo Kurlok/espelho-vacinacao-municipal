@@ -23,9 +23,10 @@ class CreatePacientesTable extends Migration
             $table->string('gestante');
             $table->string('obito');
             $table->string('localidade');
-            $table->string('reacao_vacinal')->nullable();
             $table->string('telefone')->nullable();
             $table->string('telefone_alternativo')->nullable();
+            $table->text('observacoes')->nullable();
+
             $table->timestamps();
         });
     }

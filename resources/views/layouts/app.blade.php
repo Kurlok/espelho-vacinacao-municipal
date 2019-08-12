@@ -34,7 +34,7 @@
             <div class="sidebar-heading text-center">{{ config('app.name', 'Laravel') }}</div>
             <div class="list-group list-group-flush">
                 <a href="{{ route('pacientes') }}" class="list-group-item list-group-item-action bg-info text-white">Pacientes</a>
-                <a href="#" class="list-group-item list-group-item-action bg-info text-white">Vacinas</a>
+                <a href="{{ route('vacinas') }}" class="list-group-item list-group-item-action bg-info text-white">Vacinas</a>
                 <a href="#" class="list-group-item list-group-item-action bg-info text-white">Relatórios</a>
             </div>
         </div>
