@@ -20,14 +20,15 @@ Route::get('/pacientes', 'PacientesController@index')->name('pacientes')->middle
 Route::get('/pacientes/cadastro', 'PacientesController@cadastrarPaciente')->name('pacientesCadastro')->middleware('auth');
 Route::get('/pacientes/{id}', 'PacientesController@getPaciente')->name('pacienteId')->middleware('auth');
 Route::get('/pacientes/paginacao', 'HomeController@getUsers')->name('pacientespaginacao')->middleware('auth');
+Route::any('/pacientes/busca', 'PacientesController@buscaPaciente')->name('pacientesBusca');
 
 Route::get('/vacinas', 'VacinasController@index')->name('vacinas')->middleware('auth');
+Route::get('/vacinas/cadastro', 'VacinasController@cadastrarVacina')->name('vacinasCadastro')->middleware('auth');
 
 
 
 Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::any('/pacientes/busca', 'PacientesController@buscaPaciente')->name('pacientesBusca');
 
 

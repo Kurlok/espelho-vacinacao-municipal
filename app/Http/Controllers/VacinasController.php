@@ -12,7 +12,11 @@ class VacinasController extends Controller
     {
         $this->middleware('auth');
     }
+    public function cadastrarVacina()
+    {
 
+        return view('vacinas/cadastro');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -28,6 +32,7 @@ class VacinasController extends Controller
             [
                 'listaVacinas' => $listaVacinas,
             ],
+            
         );
 
     }
