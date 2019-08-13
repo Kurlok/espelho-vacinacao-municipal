@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Vacina;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class VacinasController extends Controller
 {
