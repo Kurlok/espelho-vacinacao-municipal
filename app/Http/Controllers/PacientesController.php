@@ -120,7 +120,7 @@ class PacientesController extends Controller
 
         $paciente = Paciente::find($id);
         $paciente->nome = $request->nome;
-        $paciente->nome_mae = $request->nome;
+        $paciente->nome_mae = $request->nome_mae;
         $paciente->data_nascimento = $request->data_nascimento;
         $paciente->localidade = $request->localidade;
         $paciente->sus = $request->sus;
@@ -128,6 +128,7 @@ class PacientesController extends Controller
         $paciente->gestante = $gestante;
         $paciente->obito = $obito;
         $paciente->telefone = $request->telefone;
+        $paciente->telefone_alternativo = $request->telefone_alternativo;
         $paciente->observacoes = $request->observacoes;
 
         $paciente->save();
