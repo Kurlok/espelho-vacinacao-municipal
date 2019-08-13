@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @push('scripts')
+<script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
+<script src="{{ asset('js/jquery.mask.js') }}"></script>
+
 <script>
     //Input mask
     $(document).ready(function($) {
