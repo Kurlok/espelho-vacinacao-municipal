@@ -51,10 +51,33 @@
                         <td class="actions">
                             <a class="btn btn-success btn-xs" href="view.html">Visualizar</a>
                             <a class="btn btn-warning btn-xs" href="{{ route('pacienteId', $paciente->id) }}">Editar</a>
-                            <form action="{{ route('deletarPaciente', $paciente->id) }}" method="post">
-                                {{csrf_field()}}
-                                <input type="submit" class="btn btn-danger btn-xs" value="Excluir">
-                            </form>
+
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalExclusaoPaciente{{$paciente->id}}">
+                                Excluir
+                            </button>
+
+                            <div class="modal fade" id="modalExclusaoPaciente{{$paciente->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Exclusão de paciente</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Confirma a exclusão de {{$paciente->nome}} (código: {{$paciente->id}})??
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                            <form action="{{ route('deletarPaciente', $paciente->id) }}" method="post">
+                                                {{csrf_field()}}
+                                                <input type="submit" class="btn btn-danger btn-xs" value="Excluir">
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                     @endforeach
