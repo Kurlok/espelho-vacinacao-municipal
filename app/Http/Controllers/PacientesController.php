@@ -135,4 +135,12 @@ class PacientesController extends Controller
 
         return redirect()->route('pacientes');
     }
+
+    public function deletarPaciente(int $id)
+    {
+        $paciente = Paciente::find($id);
+        $paciente->delete();
+        
+        return redirect()->route('pacientes');
+    }
 }

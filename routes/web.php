@@ -22,7 +22,7 @@ Route::get('/pacientes/{id}', 'PacientesController@getPaciente')->name('paciente
 Route::any('/pacientes/busca', 'PacientesController@buscaPaciente')->name('pacientesBusca');
 Route::post('/pacientes/cadastro/teste', 'PacientesController@cadastrarPaciente')->name('cadastrarPaciente')->middleware('auth');
 Route::post('/pacientes/cadastro/{id}', 'PacientesController@alterarPaciente')->name('alterarPaciente')->middleware('auth');
-
+Route::post('/pacientes/delete/{id}', 'PacientesController@deletarPaciente')->name('deletarPaciente')->middleware('auth');; 
 
 Route::get('/vacinas', 'VacinasController@index')->name('vacinas')->middleware('auth');
 Route::get('/vacinas/cadastro', 'VacinasController@cadastrarVacina')->name('vacinasCadastro')->middleware('auth');
