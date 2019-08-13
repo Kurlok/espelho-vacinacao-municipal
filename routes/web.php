@@ -19,7 +19,7 @@ Route::get('/', 'HomeController@index')->name('/')->middleware('auth');
 Route::get('/pacientes', 'PacientesController@index')->name('pacientes')->middleware('auth');
 Route::get('/pacientes/cadastro', 'PacientesController@telaCadastro')->name('telaCadastro')->middleware('auth');
 Route::get('/pacientes/{id}', 'PacientesController@getPaciente')->name('pacienteId')->middleware('auth');
-Route::get('/pacientes/paginacao', 'HomeController@getUsers')->name('pacientespaginacao')->middleware('auth');
+// Route::get('/pacientes/paginacao', 'HomeController@getUsers')->name('pacientespaginacao')->middleware('auth');
 Route::any('/pacientes/busca', 'PacientesController@buscaPaciente')->name('pacientesBusca');
 Route::post('/pacientes/cadastro/teste', 'PacientesController@cadastrarPaciente')->name('cadastrarPaciente')->middleware('auth');
 

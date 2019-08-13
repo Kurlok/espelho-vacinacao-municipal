@@ -77,6 +77,13 @@ class PacientesController extends Controller
 
     public function cadastrarPaciente(Request $request)
     {
+
+        //Trabalhando com os checkboxes
+        if  ($request->obito == 'on') $obito = 'Sim';
+        else  $obito = 'Não';
+        if  ($request->gestante == 'on') $gestante = 'Sim';
+        else  $gestante = 'Não';
+
         $paciente = new Paciente();
         $paciente->nome = $request->nome;
         $paciente->nome_mae = $request->nome_mae;
@@ -84,15 +91,17 @@ class PacientesController extends Controller
         $paciente->localidade = $request->localidade;
         $paciente->sus = $request->sus;
         $paciente->sexo = $request->sexo;
-        $paciente->gestante = $request->gestante;
-        $paciente->obito = $request->obito;
+        $paciente->gestante = $gestante;
+        $paciente->obito = $obito;
         $paciente->telefone = $request->telefone;
         $paciente->telefone_alternativo = $request->telefone_alternativo;
-        $paciente->telefone_alternativo = $request->observacoes;
+        $paciente->observacoes = $request->observacoes;
+
 
         $paciente->save();
 
-        return redirect()->route('telaCadastro')->with('mensagemAlteracaoDados', 'Dados alterados com sucesso!');
+        return redirect()->route('telaCadastro');
+        //->with('mensagemAlteracaoDados', 'Dados alterados com sucesso!');
 
         // return view(
         //     'pacientes/cadastro',
