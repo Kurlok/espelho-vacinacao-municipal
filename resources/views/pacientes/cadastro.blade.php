@@ -177,7 +177,7 @@
 
                             </div>
                             @if(isset($paciente))
-                            <button type="submit" class="btn btn-warning">Alterar</button>
+                            <button type="submit" class="btn btn-primary">Alterar</button>
 
                             @else
                             <button type="submit" class="btn btn-primary">Cadastrar</button>

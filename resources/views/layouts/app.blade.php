@@ -46,6 +46,8 @@
                 <a href="{{ route('pacientes') }}" class="list-group-item list-group-item-action bg-info text-white">Pacientes</a>
                 <a href="{{ route('vacinas') }}" class="list-group-item list-group-item-action bg-info text-white">Vacinas</a>
                 <a href="#" class="list-group-item list-group-item-action bg-info text-white">Relatórios</a>
+                <a href="#" class="list-group-item list-group-item-action bg-info text-white">Usuários</a>
+
             </div>
         </div>
         @endauth
