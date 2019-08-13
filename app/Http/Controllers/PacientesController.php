@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Paciente;
+use App\Vacina;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
@@ -31,9 +33,13 @@ class PacientesController extends Controller
     public function getPaciente(int $id)
     {
         $paciente = Paciente::find($id);
+        $listaVacinas = Vacina::all();
+
         return view(
             'pacientes/cadastro',
-            ['paciente' => $paciente]
+            ['paciente' => $paciente],
+            ['listaVacinas' => $listaVacinas],
+
         );
     }
 
@@ -77,7 +83,13 @@ class PacientesController extends Controller
 
     public function telaCadastroPaciente()
     {
-        return view('pacientes/cadastro');
+        $listaVacinas = Vacina::all();
+        return view(
+            'pacientes/cadastro',
+            [
+                'listaVacinas' => $listaVacinas,
+            ]
+        );
     }
 
     public function cadastrarPaciente(Request $request)

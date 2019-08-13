@@ -173,8 +173,14 @@
                                     <label for="nome">Pólio</label>
                                     <input type="date" class="form-control" id="polio">
                                 </div>
+                                @foreach($listaVacinas as $vacina)
+                                <div class="form-group col-md-2">
 
+                                <label for="nome">{{$vacina->vacina}} - {{$vacina->dose}}</label>
+                                <input type="date" class="form-control" id="{{$vacina->id}}">
+                                </div>
 
+                                @endforeach
                             </div>
                             @if(isset($paciente))
                             <button type="submit" class="btn btn-primary">Alterar</button>
