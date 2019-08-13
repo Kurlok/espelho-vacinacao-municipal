@@ -31,7 +31,7 @@ class PacientesTableSeeder extends Seeder
     //}
     $faker = Faker::create();
     
-    for ($i = 0; $i < 50; $i++) {
+    for ($i = 0; $i < 100; $i++) {
             DB::table('pacientes')->insert(
                 [
                     'nome' => $faker->name,

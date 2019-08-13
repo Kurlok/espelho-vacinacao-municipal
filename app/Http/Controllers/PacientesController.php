@@ -57,7 +57,12 @@ class PacientesController extends Controller
                 'q' => Input::get('q')
             ));
             if (count($listaPacientes) > 0)
-                return view('pacientes/pacientes', ['listaPacientes' => $listaPacientes]);
+                return view(
+                    'pacientes/pacientes',
+                    [
+                        'listaPacientes' => $listaPacientes
+                    ]
+                );
         } else {
             return redirect()->route('pacientes');
         }
@@ -70,7 +75,7 @@ class PacientesController extends Controller
         return view('pacientes/cadastro');
     }
 
-    public function telaCadastro()
+    public function telaCadastroPaciente()
     {
         return view('pacientes/cadastro');
     }
@@ -100,7 +105,7 @@ class PacientesController extends Controller
 
         $paciente->save();
 
-        return redirect()->route('telaCadastro');
+        return redirect()->route('telaCadastroPaciente');
         //->with('mensagemAlteracaoDados', 'Dados alterados com sucesso!');
 
         // return view(
@@ -140,7 +145,7 @@ class PacientesController extends Controller
     {
         $paciente = Paciente::find($id);
         $paciente->delete();
-        
+
         return redirect()->route('pacientes');
     }
 }

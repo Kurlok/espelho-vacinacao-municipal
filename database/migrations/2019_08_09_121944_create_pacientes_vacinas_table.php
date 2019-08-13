@@ -18,7 +18,8 @@ class CreatePacientesVacinasTable extends Migration
             $table->unsignedBigInteger('fk_vacinas_id');
             $table->string('data_aplicacao');
             $table->foreign('fk_pacientes_id')->references('id')->on('pacientes')->onDelete('cascade');
-            $table->foreign('fk_vacinas_id')->references('id')->on('vacinas');
+            $table->foreign('fk_vacinas_id')->references('id')->on('vacinas')->onDelete('cascade');
+            
         });
     }
 

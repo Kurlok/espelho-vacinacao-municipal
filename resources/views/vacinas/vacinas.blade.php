@@ -21,7 +21,7 @@
             </form>
         </div>
         <div class="col-md-3 ">
-            <a href="{{ route('vacinasCadastro') }}" class="btn btn-primary pull-right h2">Nova Vacina</a>
+            <a href="{{ route('telaCadastroVacina') }}" class="btn btn-primary pull-right h2">Nova Vacina</a>
         </div>
     </div>
 
@@ -46,8 +46,34 @@
 
                         <td class="actions">
                             <a class="btn btn-success btn-xs" href="view.html">Visualizar</a>
-                            <a class="btn btn-warning btn-xs" href="#">Editar</a>
-                            <a class="btn btn-danger btn-xs" href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
+                            <a class="btn btn-warning btn-xs" href="{{ route('vacinaId', $vacina->id) }}">Editar</a>
+
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalExclusaoVacina{{$vacina->id}}">
+                                Excluir
+                            </button>
+
+                            <div class="modal fade" id="modalExclusaoVacina{{$vacina->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Exclusão de vacina</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Confirma a exclusão de {{$vacina->vacina}} (código: {{$vacina->id}})??
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                            <form action="{{ route('deletarVacina', $vacina->id) }}" method="post">
+                                                {{csrf_field()}}
+                                                <input type="submit" class="btn btn-danger btn-xs" value="Excluir">
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                     @endforeach
