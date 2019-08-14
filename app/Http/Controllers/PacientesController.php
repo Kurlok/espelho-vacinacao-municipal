@@ -37,9 +37,9 @@ class PacientesController extends Controller
 
         return view(
             'pacientes/cadastro',
-            ['paciente' => $paciente],
-            ['listaVacinas' => $listaVacinas],
-
+            ['paciente' => $paciente,
+            'listaVacinas' => $listaVacinas
+            ]
         );
     }
 
@@ -84,6 +84,7 @@ class PacientesController extends Controller
     public function telaCadastroPaciente()
     {
         $listaVacinas = Vacina::all();
+
         return view(
             'pacientes/cadastro',
             [
@@ -94,7 +95,6 @@ class PacientesController extends Controller
 
     public function cadastrarPaciente(Request $request)
     {
-
         //Trabalhando com os checkboxes
         if ($request->obito == 'on') $obito = 'Sim';
         else  $obito = 'Não';
@@ -113,10 +113,18 @@ class PacientesController extends Controller
         $paciente->telefone = $request->telefone;
         $paciente->telefone_alternativo = $request->telefone_alternativo;
         $paciente->observacoes = $request->observacoes;
-
-
         $paciente->save();
 
+        $listaVacinasTamanho = Vacina::count();
+        $vacina = new Vacina();
+        for ($i = 0; $i < $listaVacinasTamanho; $i++) {
+            $vacina->id = $request->input("idVacina.$i");
+            $vacina->data_aplicacao = $request->input("dataVacina.$i");
+            Paciente::find($paciente->id)->
+            vacinas()->
+            attach($vacina->id, ['data_aplicacao' => $vacina->data_aplicacao]);
+        }
+        //echo $paciente->id;
         return redirect()->route('telaCadastroPaciente');
         //->with('mensagemAlteracaoDados', 'Dados alterados com sucesso!');
 
@@ -150,6 +158,16 @@ class PacientesController extends Controller
 
         $paciente->save();
 
+        $listaVacinasTamanho = Vacina::count();
+
+        $vacina = new Vacina();
+        for ($i = 0; $i < $listaVacinasTamanho; $i++) {
+            $vacina->id = $request->input("idVacina.$i");
+            $vacina->data_aplicacao = $request->input("dataVacina.$i");
+            Paciente::find($paciente->id)->
+            vacinas()->
+            attach($vacina->id, ['data_aplicacao' => $vacina->data_aplicacao]);
+        }
         return redirect()->route('pacientes');
     }
 

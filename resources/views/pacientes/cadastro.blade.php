@@ -177,9 +177,9 @@
                                 <div class="form-group col-md-2">
 
                                 <label for="nome">{{$vacina->vacina}} - {{$vacina->dose}}</label>
-                                <input type="date" class="form-control" id="{{$vacina->id}}">
+                                <input type="text" class="form-control" id="idVacina[]" name="idVacina[]" value="{{$vacina->id}}" hidden>
+                                <input type="date" class="form-control" id="dataVacina[]" name="dataVacina[]" value="">
                                 </div>
-
                                 @endforeach
                             </div>
                             @if(isset($paciente))
@@ -187,6 +187,7 @@
                             @else
                             <button type="submit" class="btn btn-primary">Cadastrar</button>
                             @endif
+
                         </div>
 
                     </div>
