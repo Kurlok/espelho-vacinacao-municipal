@@ -11,7 +11,7 @@ class PacientesVacinasTableSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 0; $i < 6; $i++) {
+        for ($i = 0; $i < 3; $i++) {
 
             DB::table('pacientes_vacinas')->insert([
                 'fk_vacinas_id' => $i+1,
@@ -20,10 +20,10 @@ class PacientesVacinasTableSeeder extends Seeder
             ]);
         }
 
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 3; $i++) {
             DB::table('pacientes_vacinas')->insert([
-                'fk_vacinas_id' => rand(1, 10),
-                'fk_pacientes_id' => rand(1, 10),
+                'fk_vacinas_id' => rand(1, 3),
+                'fk_pacientes_id' => rand(2, 10),
                 'data_aplicacao' => today(),
             ]);
         }

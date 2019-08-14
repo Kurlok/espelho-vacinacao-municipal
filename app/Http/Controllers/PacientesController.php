@@ -166,7 +166,7 @@ class PacientesController extends Controller
             $vacina->data_aplicacao = $request->input("dataVacina.$i");
             Paciente::find($paciente->id)->
             vacinas()->
-            attach($vacina->id, ['data_aplicacao' => $vacina->data_aplicacao]);
+            updateExistingPivot($vacina->id, ['data_aplicacao' => $vacina->data_aplicacao]);
         }
         return redirect()->route('pacientes');
     }

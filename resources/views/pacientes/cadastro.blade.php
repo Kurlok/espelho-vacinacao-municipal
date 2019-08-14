@@ -169,16 +169,11 @@
                         <div class="card-header bg-warning">{{ __('Vacinas') }}</div>
                         <div class="card-body ">
                             <div class="form-row">
-                                <div class="form-group col-md-2">
-                                    <label for="nome">Pólio</label>
-                                    <input type="date" class="form-control" id="polio">
-                                </div>
                                 @foreach($listaVacinas as $vacina)
                                 <div class="form-group col-md-2">
-
-                                <label for="nome">{{$vacina->vacina}} - {{$vacina->dose}}</label>
-                                <input type="text" class="form-control" id="idVacina[]" name="idVacina[]" value="{{$vacina->id}}" hidden>
-                                <input type="date" class="form-control" id="dataVacina[]" name="dataVacina[]" value="">
+                                    <label for="nome">{{$vacina->vacina}} - {{$vacina->dose}}</label>
+                                    <input type="text" class="form-control" id="idVacina[]" name="idVacina[]" value="{{$vacina->id}}" hidden>
+                                    <input type="date" class="form-control" id="dataVacina[]" name="dataVacina[]" value="">
                                 </div>
                                 @endforeach
                             </div>
