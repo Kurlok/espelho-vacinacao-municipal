@@ -173,7 +173,9 @@
                                 <div class="form-group col-md-2">
                                     <label for="nome">{{$vacina->vacina}} - {{$vacina->dose}}</label>
                                     <input type="text" class="form-control" id="idVacina[]" name="idVacina[]" value="{{$vacina->id}}" hidden>
-                                    <input type="date" class="form-control" id="dataVacina[]" name="dataVacina[]" value="">
+                                    <input type="date" class="form-control" id="dataVacina[]" name="dataVacina[]" value="@if(isset($paciente)){{$paciente->vacinas()->where('fk_vacinas_id', $vacina->id)->firstOrFail()->pivot->data_aplicacao}}@endif">
+                                </div>
+                                <div class="form-group col-md-2">
                                 </div>
                                 @endforeach
                             </div>
@@ -182,7 +184,6 @@
                             @else
                             <button type="submit" class="btn btn-primary">Cadastrar</button>
                             @endif
-
                         </div>
 
                     </div>

@@ -31,8 +31,7 @@ Route::get('/vacinas/cadastro/{id}', 'VacinasController@getVacina')->name('vacin
 Route::any('/vacinas/busca', 'VacinasController@buscaVacina')->name('vacinasBusca');
 Route::post('/vacinas/cadastro/novo', 'VacinasController@cadastrarVacina')->name('cadastrarVacina')->middleware('auth');
 Route::post('/vacinas/cadastro/alterar/{id}', 'VacinasController@alterarVacina')->name('alterarVacina')->middleware('auth');
-Route::post('/vacinas/delete/{id}', 'VacinasController@deletarVacina')->name('deletarVacina')->middleware('auth');; 
-
+Route::post('/vacinas/delete/{id}', 'VacinasController@deletarVacina')->name('deletarVacina')->middleware('auth');
 
 
 Auth::routes(['register' => false]);

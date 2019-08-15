@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Paciente;
 use App\Vacina;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -160,6 +161,13 @@ class VacinasController extends Controller
 
 
         $vacina->save();
+        // $paciente = new Paciente;
+
+        // $listaVacinasTamanho = Vacina::count();
+        // for ($i=1; $i <= $listaVacinasTamanho; $i++){
+        // $paciente = Paciente::find($i);
+        // $paciente->vacinas()->attach($vacina->id, ['data_aplicacao' => null]);
+    // }
 
         return redirect()->route('telaCadastroVacina');
         //->with('mensagemAlteracaoDados', 'Dados alterados com sucesso!');
