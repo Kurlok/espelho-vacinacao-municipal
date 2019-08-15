@@ -16,7 +16,7 @@ class CreatePacientesVacinasTable extends Migration
         Schema::create('pacientes_vacinas', function (Blueprint $table) {
             $table->unsignedBigInteger('fk_pacientes_id');
             $table->unsignedBigInteger('fk_vacinas_id');
-            $table->date('data_aplicacao')->nullable();
+            $table->date('data_aplicacao')->nullable()->default(NULL);
             $table->foreign('fk_pacientes_id')->references('id')->on('pacientes')->onDelete('cascade');
             $table->foreign('fk_vacinas_id')->references('id')->on('vacinas')->onDelete('cascade');
             

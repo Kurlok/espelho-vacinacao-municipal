@@ -161,13 +161,14 @@ class VacinasController extends Controller
 
 
         $vacina->save();
-        // $paciente = new Paciente;
+        $paciente = new Paciente;
+        $paciente = Paciente::all();
 
-        // $listaVacinasTamanho = Vacina::count();
-        // for ($i=1; $i <= $listaVacinasTamanho; $i++){
-        // $paciente = Paciente::find($i);
-        // $paciente->vacinas()->attach($vacina->id, ['data_aplicacao' => null]);
-    // }
+        $listaVacinasTamanho = Vacina::count();
+        foreach($paciente as $pac){
+            $pac->vacinas()->attach($vacina->id, ['data_aplicacao' => null]);
+        }
+    
 
         return redirect()->route('telaCadastroVacina');
         //->with('mensagemAlteracaoDados', 'Dados alterados com sucesso!');

@@ -125,7 +125,7 @@ class PacientesController extends Controller
             attach($vacina->id, ['data_aplicacao' => $vacina->data_aplicacao]);
         }
         //echo $paciente->id;
-        return redirect()->route('telaCadastroPaciente');
+        return redirect()->route('pacientes');
         //->with('mensagemAlteracaoDados', 'Dados alterados com sucesso!');
 
         // return view(

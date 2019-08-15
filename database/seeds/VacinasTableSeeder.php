@@ -11,7 +11,7 @@ class VacinasTableSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 0; $i < 3; $i++) {
+        for ($i = 0; $i < 2; $i++) {
             DB::table('vacinas')->insert([
                 'vacina' => Str::random(10),
                 'dose' => '1ª dose',
