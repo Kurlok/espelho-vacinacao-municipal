@@ -21,5 +21,16 @@ class UsersTableSeeder extends Seeder
             'funcao' => 'Enfermeiro',
 
         ]);
+
+        DB::table('users')->insert([
+            'name' => 'Felipe Não Admin',
+            'email' => 'elias162@hotmail.com    ',
+            'password' => '$2y$10$q0W6UPajaRCMGtmpOSd2susyjz/jg9OXNqr5i1oSslBZ4jYopNH5.',
+            'cpf' => '052.068.439-71',
+            'unidade' => 'Jardim Cristine',
+            'permissao' => 'Simples',
+            'funcao' => 'Enfermeiro',
+
+        ]);
     }
 }
