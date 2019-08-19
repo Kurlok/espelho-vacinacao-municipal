@@ -49,16 +49,21 @@
                         <td>{{ $paciente->sus}}</td>
 
                         <td class="actions">
+                            {{--
                             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalVisualizarPaciente{{$paciente->id}}">
                                 Visualizar
                             </button>
-                            <a class="btn btn-warning btn-xs" href="{{ route('pacienteId', $paciente->id) }}">Editar</a>
+                            --}}
+                            
+                            <a class="btn btn-success btn-xs" href="{{ route('pacienteId', $paciente->id) }}">Visualizar</a>
+                            @if (Auth::user()->permissao == 'Administrador')
 
                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalExclusaoPaciente{{$paciente->id}}">
                                 Excluir
                             </button>
-
-                            <div class="modal fade" id="modalVisualizarPaciente{{$paciente->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            @endif
+                            
+                            {{--<div class="modal fade" id="modalVisualizarPaciente{{$paciente->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -69,23 +74,22 @@
                                         </div>
                                         <div class="modal-body">
                                             Código: {{$paciente->id}}
-                                            <br/>
+                                            <br />
 
                                             Data de nascimento:
 
-                                             <?php 
-                                            $origDate = $paciente->data_nascimento;
-                                            $newDate = date("d-m-Y", strtotime($origDate));
-                                            $date = str_replace('-', '/', $newDate);
-                                            echo $date;
-                                            ?>
+                                            // $origDate = $paciente->data_nascimento;
+                                            // $newDate = date("d-m-Y", strtotime($origDate));
+                                            // $date = str_replace('-', '/', $newDate);
+                                            // echo $date;
+                                            <br/>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>--}}
 
                             <div class="modal fade" id="modalExclusaoPaciente{{$paciente->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">

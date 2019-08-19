@@ -45,8 +45,8 @@
                         <td>{{$vacina->dose}}</td>
 
                         <td class="actions">
-                            <a class="btn btn-success btn-xs" href="view.html">Visualizar</a>
-                            <a class="btn btn-warning btn-xs" href="{{ route('vacinaId', $vacina->id) }}">Editar</a>
+
+                            <a class="btn btn-success btn-xs" href="{{ route('vacinaId', $vacina->id) }}">Visualizar</a>
 
                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalExclusaoVacina{{$vacina->id}}">
                                 Excluir

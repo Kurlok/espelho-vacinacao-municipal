@@ -38,9 +38,11 @@
             <div class="sidebar-heading text-center">{{ config('app.name', 'Laravel') }}</div>
             <div class="list-group list-group-flush">
                 <a href="{{ route('pacientes') }}" class="list-group-item list-group-item-action bg-info text-white">Pacientes</a>
+                @if (Auth::user()->permissao == 'Administrador') 
                 <a href="{{ route('vacinas') }}" class="list-group-item list-group-item-action bg-info text-white">Vacinas</a>
                 <a href="#" class="list-group-item list-group-item-action bg-info text-white">Relatórios</a>
                 <a href="#" class="list-group-item list-group-item-action bg-info text-white">Usuários</a>
+                @endif
 
             </div>
         </div>
@@ -92,11 +94,8 @@
             </nav>
 
             <div class="container-fluid"> 
-            <!-- <h1 class="mt-4">Simple Sidebar</h1>
-    <p>The starting state of the menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will change.</p>
-    <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>. The top navbar is optional, and just for demonstration. Just create an element with the <code>#menu-toggle</code> ID which will toggle the menu when clicked.</p> -->
-            <main class="py-4">
 
+            <main class="py-4">
                 @yield('content')
             </main>
             </div>
