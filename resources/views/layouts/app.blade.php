@@ -40,8 +40,9 @@
                 <a href="{{ route('pacientes') }}" class="list-group-item list-group-item-action bg-info text-white">Pacientes</a>
                 @if (Auth::user()->permissao == 'Administrador') 
                 <a href="{{ route('vacinas') }}" class="list-group-item list-group-item-action bg-info text-white">Vacinas</a>
-                <a href="#" class="list-group-item list-group-item-action bg-info text-white">Relatórios</a>
                 <a href="{{ route('usuarios') }}" class="list-group-item list-group-item-action bg-info text-white">Usuários</a>
+
+                <a href="#" class="list-group-item list-group-item-action bg-info text-white">Relatórios</a>
                 @endif
 
             </div>
