@@ -19,7 +19,7 @@ use App\Paciente;
 Route::get('/', 'HomeController@index')->name('/');
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes(['register' => false]);
+Auth::routes();
 
 Route::middleware(['auth', 'Administrador'])->group(function () {
     Route::get('/vacinas', 'VacinasController@index')->name('vacinas');
@@ -29,6 +29,15 @@ Route::middleware(['auth', 'Administrador'])->group(function () {
     Route::post('/vacinas/cadastro/novo', 'VacinasController@cadastrarVacina')->name('cadastrarVacina');
     Route::post('/vacinas/cadastro/alterar/{id}', 'VacinasController@alterarVacina')->name('alterarVacina');
     Route::post('/vacinas/delete/{id}', 'VacinasController@deletarVacina')->name('deletarVacina');
+
+    Route::get('/usuarios', 'UsuariosController@index')->name('usuarios');
+    Route::get('/usuarios/cadastro', 'UsuariosController@telaCadastroUsuario')->name('telaCadastroUsuario');
+    Route::get('/usuarios/cadastro/{id}', 'UsuariosController@getUsuario')->name('usuarioId');
+    Route::post('/usuarios/delete/{id}', 'UsuariosController@deletarUsuario')->name('deletarUsuario');
+    Route::post('/usuarios/cadastro/novo', 'UsuariosController@cadastrarUsuario')->name('cadastrarUsuario');
+
+    Route::any('/usuarios/busca', 'UsuariosController@buscaUsuario')->name('usuariosBusca');
+
 });
 
 Route::middleware(['auth'])->group(function () {
