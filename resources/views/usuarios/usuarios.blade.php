@@ -5,7 +5,7 @@
 
     <div id="top" class="row">
         <div class="col-md-3">
-            <h2>Vacinas</h2>
+            <h2>Usuários</h2>
         </div>
         <div class="col-md-6 ">
             <form action="/usuarios/busca" method="POST" role="search">
@@ -85,8 +85,8 @@
 
         </div>
     </div>
-    @if(isset($listaVacinas))
-    {{ $listaVacinas->links() }}
+    @if(isset($listaUsuarios))
+    {{ $listaUsuarios->links() }}
     @endif
 </div>
 @endsection

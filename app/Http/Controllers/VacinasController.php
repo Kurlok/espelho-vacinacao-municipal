@@ -141,10 +141,6 @@ class VacinasController extends Controller
         return view('vacinas/vacinas')->withMessage('No Details found. Try to search again !');
     }
 
-    public function visualizaVacina()
-    {
-        return view('vacinas/cadastro');
-    }
 
     public function telaCadastroVacina()
     {
