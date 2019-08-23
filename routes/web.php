@@ -35,6 +35,7 @@ Route::middleware(['auth', 'Administrador'])->group(function () {
     Route::get('/usuarios/cadastro/{id}', 'UsuariosController@getUsuario')->name('usuarioId');
     Route::post('/usuarios/delete/{id}', 'UsuariosController@deletarUsuario')->name('deletarUsuario');
     Route::post('/usuarios/cadastro/novo', 'UsuariosController@cadastrarUsuario')->name('cadastrarUsuario');
+    Route::post('/usuarios/cadastro/alterar/{id}', 'UsuariosController@alterarUsuario')->name('alterarUsuario');
 
     Route::any('/usuarios/busca', 'UsuariosController@buscaUsuario')->name('usuariosBusca');
 

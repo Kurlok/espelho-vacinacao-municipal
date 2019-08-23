@@ -40,10 +40,19 @@ class UsuariosController extends Controller
 
     public function cadastrarUsuario(Request $request)
     {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'senha' => 'required|string|min:6|confirmed',
+            'cpf' => 'required|string|min:14|max:14|unique:users',
+            'unidade' => 'required|string',
+            'permissao' => 'required|string',
+            'funcao' => 'required|string',
+        ]);
 
         $usuario = new User();
         $usuario->name = $request->name;
-        $usuario->password = Hash::make($request->password);
+        $usuario->password = Hash::make($request->senha);
         $usuario->email = $request->email;
         $usuario->cpf = $request->cpf;
         $usuario->unidade = $request->unidade;
@@ -59,9 +68,19 @@ class UsuariosController extends Controller
 
     public function alterarUsuario(Request $request, int $id)
     {
-        $usuario = new User();
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'senha' => 'required|string|min:6|confirmed',
+            'cpf' => 'required|string|min:14|max:14|unique:users',
+            'unidade' => 'required|string',
+            'permissao' => 'required|string',
+            'funcao' => 'required|string',
+        ]);
+        
+        $usuario = User::find($id);
         $usuario->name = $request->name;
-        $usuario->password = Hash::make($request->password);
+        $usuario->password = Hash::make($request->senha);
         $usuario->email = $request->email;
         $usuario->cpf = $request->cpf;
         $usuario->unidade = $request->unidade;
