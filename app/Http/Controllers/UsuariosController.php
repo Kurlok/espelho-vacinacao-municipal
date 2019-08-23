@@ -70,9 +70,7 @@ class UsuariosController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
             'senha' => 'required|string|min:6|confirmed',
-            'cpf' => 'required|string|min:14|max:14|unique:users',
             'unidade' => 'required|string',
             'permissao' => 'required|string',
             'funcao' => 'required|string',
@@ -81,8 +79,6 @@ class UsuariosController extends Controller
         $usuario = User::find($id);
         $usuario->name = $request->name;
         $usuario->password = Hash::make($request->senha);
-        $usuario->email = $request->email;
-        $usuario->cpf = $request->cpf;
         $usuario->unidade = $request->unidade;
         $usuario->permissao = $request->permissao;
         $usuario->funcao = $request->funcao;

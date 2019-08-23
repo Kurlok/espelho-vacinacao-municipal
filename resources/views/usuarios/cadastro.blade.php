@@ -138,8 +138,8 @@
                                 <div class="form-group col-md-4">
                                     <label for="permissao">Permissão</label>
                                     <select class="form-control @error('permissao') is-invalid @enderror" required id="permissao" name="permissao">
-                                        <option value="Administrador">Administrador</option>
-                                        <option value="Comum" selected>Comum</option>
+                                        <option value="Administrador" @if(isset($usuario)) @if($usuario->permissao == 'Administrador') selected @endif @endif>Administrador</option>
+                                        <option value="Comum" @if(isset($usuario)) @if($usuario->permissao != 'Administrador') selected @endif @else selected @endif > Comum</option>
                                     </select>
                                     @error('permissao')
                                     <span class="invalid-feedback" role="alert">
@@ -168,9 +168,11 @@
 
                             <div class="form-group row">
                                 <div class="col">
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('Cadastrar') }}
-                                    </button>
+                                    @if(isset($usuario))
+                                    <button type="submit" class="btn btn-primary">Alterar</button>
+                                    @else
+                                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                                    @endif
                                 </div>
                             </div>
                         </form>
