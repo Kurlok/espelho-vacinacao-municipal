@@ -36,9 +36,14 @@ Route::middleware(['auth', 'Administrador'])->group(function () {
     Route::post('/usuarios/delete/{id}', 'UsuariosController@deletarUsuario')->name('deletarUsuario');
     Route::post('/usuarios/cadastro/novo', 'UsuariosController@cadastrarUsuario')->name('cadastrarUsuario');
     Route::post('/usuarios/cadastro/alterar/{id}', 'UsuariosController@alterarUsuario')->name('alterarUsuario');
-
     Route::any('/usuarios/busca', 'UsuariosController@buscaUsuario')->name('usuariosBusca');
 
+    Route::get('/unidades', 'UnidadesController@index')->name('unidades');
+    Route::get('/unidades/cadastro', 'UnidadesController@telaCadastroUnidade')->name('telaCadastroUnidade');
+    Route::get('/unidades/cadastro/{id}', 'UnidadesController@getUnidade')->name('unidadeId');
+    Route::post('/unidades/delete/{id}', 'UnidadesController@deletarUnidade')->name('deletarUnidade');
+    Route::post('/unidades/cadastro/novo', 'UnidadesController@cadastrarUnidade')->name('cadastrarUnidade');
+    Route::post('/unidades/cadastro/alterar/{id}', 'UnidadesController@alterarUnidade')->name('alterarUnidade');
 });
 
 Route::middleware(['auth'])->group(function () {
