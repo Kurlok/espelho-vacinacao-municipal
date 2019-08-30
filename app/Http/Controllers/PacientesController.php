@@ -95,6 +95,11 @@ class PacientesController extends Controller
 
     public function cadastrarPaciente(Request $request)
     {
+        $validatedData = $request->validate([
+            'nome' => 'required|string|max:255',
+            'sexo' => 'required',
+        ]);
+
         //Trabalhando com os checkboxes
         if ($request->obito == 'on') $obito = 'Sim';
         else  $obito = 'Não';

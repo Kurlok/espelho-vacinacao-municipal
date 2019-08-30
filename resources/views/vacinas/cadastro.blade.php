@@ -24,11 +24,11 @@
                             </div>
                             <div class="form-group col-md-8">
                                 <label for="nome">Vacina</label>
-                                <input type="text" class="form-control" id="vacina" name="vacina" placeholder="Nome da vacina" value="@if(isset($vacina)){{$vacina->vacina}}@endif">
+                                <input type="text" class="form-control" id="vacina" name="vacina" placeholder="Nome da vacina" value="@if(isset($vacina)){{$vacina->vacina}}@else{{old('vacina')}}@endif">
                             </div>
                             <div class="form-group col-md-2">
                                 <label for="sus">Dose</label>
-                                <input type="text" class="form-control" id="dose" name="dose" maxlength="15" value="@if(isset($vacina)){{$vacina->dose}}@endif">
+                                <input type="text" class="form-control" id="dose" name="dose" maxlength="15" value="@if(isset($vacina)){{$vacina->dose}}@else{{old('dose')}}@endif">
                             </div>
 
                         </div>

@@ -150,7 +150,10 @@ class VacinasController extends Controller
 
     public function cadastrarVacina(Request $request)
     {
-
+        $validatedData = $request->validate([
+            'vacina' => 'required|string|max:255',
+            'dose' => 'required|string|max:255',
+        ]);
         $vacina = new Vacina();
         $vacina->vacina = $request->vacina;
         $vacina->dose = $request->dose;
@@ -177,6 +180,10 @@ class VacinasController extends Controller
 
     public function alterarVacina(Request $request, int $id)
     {
+        $validatedData = $request->validate([
+            'vacina' => 'required|string|max:255',
+            'dose' => 'required|string|max:255',
+        ]);
         $vacina = Vacina::find($id);
         $vacina->vacina = $request->vacina;
         $vacina->dose = $request->dose;
