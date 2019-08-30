@@ -14,7 +14,7 @@
             @csrf
 
                 <div class="card">
-                    <div class="card-header bg-warning">{{ __('Vacina') }}</div>
+                    <div class="card-header bg-success text-white">{{ __('Vacina') }}</div>
 
                     <div class="card-body border-secondary">
                         <div class="form-row">

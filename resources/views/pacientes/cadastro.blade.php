@@ -79,7 +79,7 @@
                     @endif
                     @csrf
                     <div class="card">
-                        <div class="card-header bg-warning">{{ __('Dados Pessoais') }}</div>
+                        <div class="card-header bg-success text-white">{{ __('Dados Pessoais') }}</div>
 
                         <div class="card-body border-secondary">
                             <div class="form-row">
@@ -166,7 +166,7 @@
                                 <textarea class="form-control" id="observacoes" name="observacoes" rows="4">@if(isset($paciente)){{$paciente->observacoes}}@else{{old('observacoes')}}@endif</textarea>
                             </div>
                         </div>
-                        <div class="card-header bg-warning">{{ __('Vacinas') }}</div>
+                        <div class="card-header bg-success text-white">{{ __('Vacinas') }}</div>
                         <div class="card-body ">
                             <div class="form-row">
                                 @foreach($listaVacinas as $vacina)
