@@ -11,4 +11,9 @@ class Vacina extends Model
     {
         return $this->belongsToMany('App\Vacina', 'pacientes_vacinas', 'fk_vacinas_id','fk_pacientes_id')->withPivot('data_aplicacao');
     }
+
+    public function unidades()
+    {
+        return $this->belongsToMany('App\Vacina', 'pacientes_vacinas', 'fk_vacinas_id','fk_unidades_id');
+    }
 }

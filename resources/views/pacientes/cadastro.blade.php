@@ -172,8 +172,10 @@
                                 <div class="form-group col-md-2">
                                     <label for="nome">{{$vacina->vacina}} - {{$vacina->dose}}</label>
                                     <input type="text" class="form-control" id="idVacina[]" name="idVacina[]" value="{{$vacina->id}}" hidden>
-                                    <input type="date" class="form-control" id="dataVacina[]" name="dataVacina[]" value="@if(isset($paciente)){{$paciente->vacinas()->where('fk_vacinas_id', $vacina->id)->firstOrFail()->pivot->data_aplicacao}}@else{{old('dataVacina[]')}}@endif">
+                                    <input type="date" class="form-control" id="dataVacina[]" name="dataVacina[]" value="@if(isset($paciente)){{$vacina->pacientes()->where('fk_pacientes_id', $paciente->id)->firstOrFail()->pivot->data_aplicacao}}@else{{old('dataVacina[]')}}@endif">
                                 </div>
+
+                                <?php $vacinaAnterior = $vacina ?>
                                 @endforeach
                             </div>
                             @if(isset($paciente))

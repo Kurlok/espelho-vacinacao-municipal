@@ -18,10 +18,16 @@ class VacinasTableSeeder extends Seeder
         //         'dose' => '1ª dose',
         //     ]);
         // }
-        
+
         //BCG
         DB::table('vacinas')->insert([
             'vacina' => 'BCG',
+            'dose' => '1ª dose',
+        ]);
+
+        //Hepatite B
+        DB::table('vacinas')->insert([
+            'vacina' => 'Hep-A',
             'dose' => '1ª dose',
         ]);
 
@@ -43,7 +49,7 @@ class VacinasTableSeeder extends Seeder
             'dose' => 'Reforço',
         ]);
 
-         //Poliomelite
+        //Poliomelite
         DB::table('vacinas')->insert([
             'vacina' => 'Polio',
             'dose' => '1ª dose',
@@ -52,32 +58,49 @@ class VacinasTableSeeder extends Seeder
             'vacina' => 'Polio',
             'dose' => '2ª dose',
         ]);
-        // DB::table('vacinas')->insert([
-        //     'vacina' => 'Polio',
-        //     'dose' => '3ª dose',
-        // ]);
-        // DB::table('vacinas')->insert([
-        //     'vacina' => 'Polio',
-        //     'dose' => 'Reforço',
-        // ]);
+        DB::table('vacinas')->insert([
+            'vacina' => 'Polio',
+            'dose' => '3ª dose',
+        ]);
+        DB::table('vacinas')->insert([
+            'vacina' => 'Polio',
+            'dose' => '1º Reforço',
+        ]);
+        DB::table('vacinas')->insert([
+            'vacina' => 'Polio',
+            'dose' => '2º Reforço',
+        ]);
+        DB::table('vacinas')->insert([
+            'vacina' => 'Polio',
+            'dose' => '3º Reforço',
+        ]);
 
-        // //Tetra
-        // DB::table('vacinas')->insert([
-        //     'vacina' => 'Tetra',
-        //     'dose' => '1ª dose',
-        // ]);
-        // DB::table('vacinas')->insert([
-        //     'vacina' => 'Tetra',
-        //     'dose' => '2ª dose',
-        // ]);
-        // DB::table('vacinas')->insert([
-        //     'vacina' => 'Tetra',
-        //     'dose' => '3ª dose',
-        // ]);
-        // DB::table('vacinas')->insert([
-        //     'vacina' => 'Polio',
-        //     'dose' => '4ª Dose',
-        // ]);
+        // VORH (Vacina Oral de Rotavírus Humano)
+        DB::table('vacinas')->insert([
+            'vacina' => 'VORH',
+            'dose' => '1ª dose',
+        ]);
+        DB::table('vacinas')->insert([
+            'vacina' => 'VORH',
+            'dose' => '2ª dose',
+        ]);
 
+        // Prevenar
+        DB::table('vacinas')->insert([
+            'vacina' => 'Prev',
+            'dose' => '1ª dose',
+        ]);
+        DB::table('vacinas')->insert([
+            'vacina' => 'Prev',
+            'dose' => '2ª dose',
+        ]);
+        DB::table('vacinas')->insert([
+            'vacina' => 'Prev',
+            'dose' => '3ª dose',
+        ]);
+        DB::table('vacinas')->insert([
+            'vacina' => 'Prev',
+            'dose' => 'Reforço',
+        ]);
     }
 }
