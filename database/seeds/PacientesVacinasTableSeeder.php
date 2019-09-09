@@ -11,8 +11,9 @@ class PacientesVacinasTableSeeder extends Seeder
      */
     public function run()
     {
+        $numVacinas = DB::table('vacinas')->count();
 
-        for ($j = 0; $j < 2; $j++) {
+        for ($j = 0; $j < $numVacinas; $j++) {
 
             for ($i = 0; $i < 6; $i++) {
                 DB::table('pacientes_vacinas')->insert([

@@ -24,11 +24,17 @@ class UnidadesTableSeeder extends Seeder
         ]);
 
         DB::table('unidades')->insert([
-            'nome' => 'ESF Dr Jorge Amin Bacila',
+            'nome' => 'ESF Dr. Jorge Amin Bacila',
             'endereco' => 'Rua Padre Anchieta - S/N',
             'cnes' => '3006069',
         ]);
 
+        DB::table('unidades')->insert([
+            'nome' => 'ESF Faxinal Dos Quartins',
+            'endereco' => 'Faxinal Dos Quartins',
+            'cnes' => '2687259',
+        ]);
+        
         DB::table('unidades')->insert([
             'nome' => 'ESF Guarauninha',
             'endereco' => 'Guarauninha',
@@ -82,7 +88,13 @@ class UnidadesTableSeeder extends Seeder
             'endereco' => 'Padre Fernando Guarda - 208',
             'cnes' => '2687151',
         ]);
-        
+     
+        DB::table('unidades')->insert([
+            'nome' => 'ESF Vilinha',
+            'endereco' => 'Vilinha',
+            'cnes' => '2687208',
+        ]);
+
         DB::table('unidades')->insert([
             'nome' => 'ESF Witmarsum',
             'endereco' => 'Witmarsum',
@@ -99,12 +111,6 @@ class UnidadesTableSeeder extends Seeder
             'nome' => 'Posto de Saúde de Colônia Maciel',
             'endereco' => 'Colônia Maciel',
             'cnes' => '2687194',
-        ]);
-
-        DB::table('unidades')->insert([
-            'nome' => 'Posto de Saúde Poço Grande',
-            'endereco' => 'Poço Grande',
-            'cnes' => '2687267',
         ]);
 
         DB::table('unidades')->insert([
