@@ -28,13 +28,6 @@ class VacinasTableSeeder extends Seeder
 
         //Hepatite B
         DB::table('vacinas')->insert([
-            'vacina' => 'Hep-A',
-            'dose' => 'Dose 1',
-            'status' => 'ativa',
-        ]);
-
-        //Hepatite B
-        DB::table('vacinas')->insert([
             'vacina' => 'Hep-B',
             'dose' => 'Dose 1', 'status' => 'ativa',
         ]);
@@ -86,6 +79,29 @@ class VacinasTableSeeder extends Seeder
             'status' => 'ativa',
         ]);
 
+        
+        // Tetra Viral
+        DB::table('vacinas')->insert([
+            'vacina' => 'Tetra',
+            'dose' => 'Dose 1',
+            'status' => 'ativa',
+        ]);
+        DB::table('vacinas')->insert([
+            'vacina' => 'Tetra',
+            'dose' => 'Dose 2',
+            'status' => 'ativa',
+        ]);
+        DB::table('vacinas')->insert([
+            'vacina' => 'Tetra',
+            'dose' => 'Dose 3',
+            'status' => 'ativa',
+        ]);
+        DB::table('vacinas')->insert([
+            'vacina' => 'Tetra',
+            'dose' => 'Dose 4',
+            'status' => 'ativa',
+        ]);
+
         // VORH (Vacina Oral de Rotavírus Humano)
         DB::table('vacinas')->insert([
             'vacina' => 'VORH',
@@ -98,24 +114,32 @@ class VacinasTableSeeder extends Seeder
             'status' => 'ativa',
         ]);
 
+        //Hepatite A
+        DB::table('vacinas')->insert([
+            'vacina' => 'Hep-A',
+            'dose' => 'Dose 1',
+            'status' => 'ativa',
+        ]);
+
+
         // Prevenar
         DB::table('vacinas')->insert([
-            'vacina' => 'Prev',
+            'vacina' => 'Prevenar',
             'dose' => 'Dose 1',
             'status' => 'ativa',
         ]);
         DB::table('vacinas')->insert([
-            'vacina' => 'Prev',
+            'vacina' => 'Prevenar',
             'dose' => 'Dose 2',
             'status' => 'ativa',
         ]);
         DB::table('vacinas')->insert([
-            'vacina' => 'Prev',
+            'vacina' => 'Prevenar',
             'dose' => 'Dose 3',
             'status' => 'ativa',
         ]);
         DB::table('vacinas')->insert([
-            'vacina' => 'Prev',
+            'vacina' => 'Prevenar',
             'dose' => 'Reforço',
             'status' => 'ativa',
         ]);
@@ -128,7 +152,7 @@ class VacinasTableSeeder extends Seeder
         ]);
         DB::table('vacinas')->insert([
             'vacina' => 'Tríplice Viral',
-            'dose' => 'Reforço',
+            'dose' => 'Dose 2',
             'status' => 'ativa',
         ]);
         DB::table('vacinas')->insert([
@@ -289,6 +313,12 @@ class VacinasTableSeeder extends Seeder
             'status' => 'ativa',
         ]);
 
+        DB::table('vacinas')->insert([
+            'vacina' => 'Mening. Única',
+            'dose' => 'Única',
+            'status' => 'ativa',
+        ]);
+
         //Vacina Inativada Poliomielite - VIP
         DB::table('vacinas')->insert([
             'vacina' => 'VIP',
@@ -377,6 +407,88 @@ class VacinasTableSeeder extends Seeder
             'status' => 'ativa',
         ]);
 
+        //Outras
+        DB::table('vacinas')->insert([
+            'vacina' => 'Outras',
+            'dose' => '01',
+            'status' => 'ativa',
+        ]);
+        DB::table('vacinas')->insert([
+            'vacina' => 'Outras',
+            'dose' => '02',
+            'status' => 'ativa',
+        ]);
+        DB::table('vacinas')->insert([
+            'vacina' => 'Outras',
+            'dose' => '03',
+            'status' => 'ativa',
+        ]);
+        DB::table('vacinas')->insert([
+            'vacina' => 'Outras',
+            'dose' => '04',
+            'status' => 'ativa',
+        ]);
+        DB::table('vacinas')->insert([
+            'vacina' => 'Outras',
+            'dose' => '05',
+            'status' => 'ativa',
+        ]);
+        DB::table('vacinas')->insert([
+            'vacina' => 'Outras',
+            'dose' => '06',
+            'status' => 'ativa',
+        ]);
+        DB::table('vacinas')->insert([
+            'vacina' => 'Outras',
+            'dose' => '07',
+            'status' => 'ativa',
+        ]);
+        DB::table('vacinas')->insert([
+            'vacina' => 'Outras',
+            'dose' => '08',
+            'status' => 'ativa',
+        ]);
+        DB::table('vacinas')->insert([
+            'vacina' => 'Outras',
+            'dose' => '09',
+            'status' => 'ativa',
+        ]);
+        DB::table('vacinas')->insert([
+            'vacina' => 'Outras',
+            'dose' => '10',
+            'status' => 'ativa',
+        ]);
+        DB::table('vacinas')->insert([
+            'vacina' => 'Outras',
+            'dose' => '11',
+            'status' => 'ativa',
+        ]);
+        DB::table('vacinas')->insert([
+            'vacina' => 'Outras',
+            'dose' => '12',
+            'status' => 'ativa',
+        ]);
+        DB::table('vacinas')->insert([
+            'vacina' => 'Outras',
+            'dose' => '13',
+            'status' => 'ativa',
+        ]);
+        DB::table('vacinas')->insert([
+            'vacina' => 'Outras',
+            'dose' => '14',
+            'status' => 'ativa',
+        ]);
+        DB::table('vacinas')->insert([
+            'vacina' => 'Outras',
+            'dose' => '15',
+            'status' => 'ativa',
+        ]);
+        DB::table('vacinas')->insert([
+            'vacina' => 'Outras',
+            'dose' => '16',
+            'status' => 'ativa',
+        ]);
+
         //Antirrábica
         DB::table('vacinas')->insert([
             'vacina' => 'Antirrábica',
@@ -420,99 +532,6 @@ class VacinasTableSeeder extends Seeder
         DB::table('vacinas')->insert([
             'vacina' => 'Pneumo. 23',
             'dose' => 'Dose 2',
-            'status' => 'ativa',
-        ]);
-
-        //Outras
-
-        DB::table('vacinas')->insert([
-            'vacina' => 'Outras', 
-            'dose' => '01',
-            'status' => 'ativa',
-        ]);
-        DB::table('vacinas')->insert([
-            'vacina' => 'Outras', 
-            'dose' => '02',
-            'status' => 'ativa',
-        ]);
-        DB::table('vacinas')->insert([
-            'vacina' => 'Outras', 
-            'dose' => '03',
-            'status' => 'ativa',
-        ]);
-        DB::table('vacinas')->insert([
-            'vacina' => 'Outras',
-             'dose' => '04',
-            'status' => 'ativa',
-        ]);
-        DB::table('vacinas')->insert([
-            'vacina' => 'Outras', 
-            'dose' => '05',
-            'status' => 'ativa',
-        ]);
-        DB::table('vacinas')->insert([
-            'vacina' => 'Outras', 
-            'dose' => '06',
-            'status' => 'ativa',
-        ]);
-        DB::table('vacinas')->insert([
-            'vacina' => 'Outras', 
-            'dose' => '07',
-            'status' => 'ativa',
-        ]);
-        DB::table('vacinas')->insert([
-            'vacina' => 'Outras', 
-            'dose' => '08',
-            'status' => 'ativa',
-        ]);
-        DB::table('vacinas')->insert([
-            'vacina' => 'Outras', 
-            'dose' => '09',
-            'status' => 'ativa',
-        ]);
-        DB::table('vacinas')->insert([
-            'vacina' => 'Outras', 
-            'dose' => '10',
-            'status' => 'ativa',
-        ]);
-        DB::table('vacinas')->insert([
-            'vacina' => 'Outras', 
-            'dose' => '11',
-            'status' => 'ativa',
-        ]);
-        DB::table('vacinas')->insert([
-            'vacina' => 'Outras', 
-            'dose' => '12',
-            'status' => 'ativa',
-        ]);
-        DB::table('vacinas')->insert([
-            'vacina' => 'Outras', 
-            'dose' => '13',
-            'status' => 'ativa',
-        ]);
-        DB::table('vacinas')->insert([
-            'vacina' => 'Outras', 
-            'dose' => '14',
-            'status' => 'ativa',
-        ]);
-        DB::table('vacinas')->insert([
-            'vacina' => 'Outras', 
-            'dose' => '15',
-            'status' => 'ativa',
-        ]);
-        DB::table('vacinas')->insert([
-            'vacina' => 'Outras', 
-            'dose' => '16',
-            'status' => 'ativa',
-        ]);
-        DB::table('vacinas')->insert([
-            'vacina' => 'Outras', 
-            'dose' => '17',
-            'status' => 'ativa',
-        ]);
-        DB::table('vacinas')->insert([
-            'vacina' => 'Outras', 
-            'dose' => '18',
             'status' => 'ativa',
         ]);
     }

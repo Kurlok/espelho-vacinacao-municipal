@@ -117,11 +117,11 @@
                                     <label for="sexo">Sexo</label>
                                     <div class="form-group">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="sexo" id="masculino" value="MASCULINO" @if(isset($paciente)) @if($paciente->sexo ==='MASCULINO') checked @endif @elseif(old('sexo')=='MASCULINO' ) checked @endif>
+                                            <input class="form-check-input" type="radio" name="sexo" id="masculino" value="Masculino" @if(isset($paciente)) @if($paciente->sexo ==='Masculino') checked @endif @elseif(old('sexo')=='Masculino' ) checked @endif>
                                             <label class="form-check-label" for="masculino">Masculino</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="sexo" id="feminino" value="FEMININO" @if(isset($paciente)) @if($paciente->sexo ==='FEMININO') checked @endif @elseif(old('sexo')=='FEMININO' ) checked @endif>
+                                            <input class="form-check-input" type="radio" name="sexo" id="feminino" value="Feminino" @if(isset($paciente)) @if($paciente->sexo ==='Feminino') checked @endif @elseif(old('sexo')=='Feminino' ) checked @endif>
                                             <label class="form-check-label" for="feminino">Feminino</label>
                                         </div>
                                     </div>
@@ -130,7 +130,7 @@
                                     <label for="gestante">Gestante</label>
                                     <div class="form-group">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" id="gestante" name="gestante" @if(isset($paciente)) @if($paciente->gestante=='VERDADEIRO') checked @endif @elseif(old('gestante')=='VERDADEIRO' ) checked @endif>
+                                            <input class="form-check-input" type="checkbox" id="gestante" name="gestante" @if(isset($paciente)) @if($paciente->gestante=='Verdadeiro') checked @endif @elseif(old('gestante')=='Verdadeiro' ) checked @endif>
                                         </div>
                                     </div>
                                 </div>
@@ -138,7 +138,7 @@
                                     <label for="obito">Óbito</label>
                                     <div class="form-group">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" id="obito" name="obito" @if(isset($paciente)) @if($paciente->obito=='VERDADEIRO') checked @endif @elseif(old('obito')=='VERDADEIRO' ) checked @endif>
+                                            <input class="form-check-input" type="checkbox" id="obito" name="obito" @if(isset($paciente)) @if($paciente->obito=='Verdadeiro') checked @endif @elseif(old('obito')=='Verdadeiro' ) checked @endif>
                                         </div>
                                     </div>
                                 </div>

@@ -103,10 +103,10 @@ class PacientesController extends Controller
         ]);
 
         //Trabalhando com os checkboxes
-        if ($request->obito == 'on') $obito = 'VERDADEIRO';
-        else  $obito = 'FALSO';
-        if ($request->gestante == 'on') $gestante = 'VERDADEIRO';
-        else  $gestante = 'FALSO';
+        if ($request->obito == 'on') $obito = 'Verdadeiro';
+        else  $obito = 'Falso';
+        if ($request->gestante == 'on') $gestante = 'Verdadeiro';
+        else  $gestante = 'Falso';
 
         $paciente = new Paciente();
         $paciente->nome = $request->nome;
@@ -145,10 +145,10 @@ class PacientesController extends Controller
     {
 
         //Trabalhando com os checkboxes
-        if ($request->obito == 'on') $obito = 'VERDADEIRO';
-        else  $obito = 'FALSO';
-        if ($request->gestante == 'on') $gestante = 'VERDADEIRO';
-        else  $gestante = 'FALSO';
+        if ($request->obito == 'on') $obito = 'Verdadeiro';
+        else  $obito = 'Falso';
+        if ($request->gestante == 'on') $gestante = 'Verdadeiro';
+        else  $gestante = 'Falso';
 
         $paciente = Paciente::find($id);
         $paciente->nome = $request->nome;
