@@ -166,18 +166,32 @@
                             </div>
                         </div>
                         <div class="card-header bg-success text-white">{{ __('Vacinas') }}</div>
-                        <div class="card-body ">
+                        <div class="card-body">
+
+
+
+
                             <div class="form-row">
                                 @foreach($listaVacinas as $vacina)
+                                @if(isset($vacinaAnterior))
+                                @if(($vacinaAnterior->vacina) != ($vacina->vacina))
+                            </div>
+                            <div class="form-row">
+
+                                @endif
+                                @endif
                                 <div class="form-group col-md-2">
-                                    <label for="nome">{{$vacina->vacina}} - {{$vacina->dose}}</label>
+                                    <label for="dataVacina[]">{{$vacina->vacina}} - {{$vacina->dose}}</label>
                                     <input type="text" class="form-control" id="idVacina[]" name="idVacina[]" value="{{$vacina->id}}" hidden>
                                     <input type="date" class="form-control" id="dataVacina[]" name="dataVacina[]" value="@if(isset($paciente)){{$vacina->pacientes()->where('fk_pacientes_id', $paciente->id)->firstOrFail()->pivot->data_aplicacao}}@else{{old('dataVacina[]')}}@endif">
                                 </div>
-
-                                <?php $vacinaAnterior = $vacina ?>
+                             
+                                <?php
+                                $vacinaAnterior = $vacina;
+                                ?>
                                 @endforeach
-                            </div>
+
+</div>
                             @if(isset($paciente))
                             <button type="submit" class="btn btn-primary">Alterar</button>
                             @else

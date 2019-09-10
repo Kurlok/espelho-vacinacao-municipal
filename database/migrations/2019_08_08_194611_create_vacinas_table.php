@@ -17,6 +17,7 @@ class CreateVacinasTable extends Migration
             $table->bigIncrements('id');
             $table->string('vacina');
             $table->string('dose');
+            $table->string('status');
             $table->timestamps();
         });
     }

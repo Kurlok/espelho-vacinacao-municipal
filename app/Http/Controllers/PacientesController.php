@@ -33,7 +33,7 @@ class PacientesController extends Controller
     public function getPaciente(int $id)
     {
         $paciente = Paciente::find($id);
-        $listaVacinas = Vacina::all();
+        $listaVacinas = Vacina::all()->sortBy('vacina');
 
         return view(
             'pacientes/cadastro',
@@ -83,7 +83,7 @@ class PacientesController extends Controller
 
     public function telaCadastroPaciente()
     {
-        $listaVacinas = Vacina::all();
+        $listaVacinas = Vacina::all()->sortBy('vacina');
 
         return view(
             'pacientes/cadastro',
