@@ -22,7 +22,7 @@
 }
 
 #sidebar-wrapper .sidebar-heading {
-  padding: 0.77rem 1.25rem;
+  padding: 0.72rem 1.25rem;
   font-size: 1.2rem;
   background-color: #fff;
 }
@@ -58,6 +58,12 @@
     margin-left: -15rem;
     background-color: #1d643b;
 
+  }
+
+  #sidebar-wrapper .sidebar-heading {
+    padding: 0.77rem 1.25rem;
+    font-size: 1.2rem;
+    background-color: #fff;
   }
 }
 
