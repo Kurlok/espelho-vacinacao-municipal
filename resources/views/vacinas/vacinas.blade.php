@@ -5,7 +5,7 @@
 
     <div id="top" class="row">
         <div class="col-md-3">
-            <h2>Vacinas</h2>
+            <h2><i class="fas fa-syringe"></i> Vacinas</h2>
         </div>
         <div class="col-md-6 ">
             <form action="/vacinas/busca" method="POST" role="search">

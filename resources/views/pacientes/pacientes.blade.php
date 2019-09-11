@@ -5,7 +5,7 @@
 
     <div id="top" class="row">
         <div class="col-md-3">
-            <h2>Pacientes</h2>
+            <h2><i class="fas fa-address-card"></i> Pacientes</h2>
         </div>
         <div class="col-md-6 ">
             <form action="/pacientes/busca" method="POST" role="search">
@@ -55,11 +55,11 @@
                             </button>
                             --}}
                             
-                            <a class="btn btn-success btn-xs" href="{{ route('pacienteId', $paciente->id) }}">Visualizar</a>
+                            <a class="btn btn-success btn-xs" href="{{ route('pacienteId', $paciente->id) }}"><i class="far fa-eye"></i> Visualizar</a>
                             @if (Auth::user()->permissao == 'Administrador')
 
                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalExclusaoPaciente{{$paciente->id}}">
-                                Excluir
+                            <i class="fas fa-trash"></i> Excluir
                             </button>
                             @endif
                             

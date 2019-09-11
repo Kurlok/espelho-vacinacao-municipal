@@ -5,7 +5,7 @@
 
     <div id="top" class="row">
         <div class="col-md-3">
-            <h2>Unidades</h2>
+            <h2><i class="fas fa-hospital"></i> Unidades</h2>
         </div>
         <div class="col-md-6 ">
             <form action="/unidades/busca" method="POST" role="search">

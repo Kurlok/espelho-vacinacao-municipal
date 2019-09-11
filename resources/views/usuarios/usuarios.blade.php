@@ -5,7 +5,7 @@
 
     <div id="top" class="row">
         <div class="col-md-3">
-            <h2>Usuários</h2>
+            <h2><i class="fas fa-users"></i> Usuários</h2>
         </div>
         <div class="col-md-6 ">
             <form action="/usuarios/busca" method="POST" role="search">
