@@ -20,6 +20,7 @@ class PacientesVacinasTableSeeder extends Seeder
                     'fk_vacinas_id' => $j+1,
                     'fk_pacientes_id' => $i+1,
                     'data_aplicacao' => today(),
+                    'descricao_outras' => "Gripal$j",
                 ]);
             }
         }

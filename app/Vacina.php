@@ -9,7 +9,7 @@ class Vacina extends Model
     protected $table = 'vacinas';
     public function pacientes()
     {
-        return $this->belongsToMany('App\Vacina', 'pacientes_vacinas', 'fk_vacinas_id','fk_pacientes_id')->withPivot('data_aplicacao');
+        return $this->belongsToMany('App\Vacina', 'pacientes_vacinas', 'fk_vacinas_id','fk_pacientes_id')->withPivot('data_aplicacao','descricao_outras');
     }
 
     public function unidades()
