@@ -127,6 +127,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group col-md-4">
+                                    {{--
                                     <label for="unidade">Unidade</label>
                                     <input id="unidade" type="unidade" class="form-control @error('unidade') is-invalid @enderror" name="unidade" value="@if(isset($usuario)){{$usuario->unidade}}@else{{old('unidade')}}@endif" required autocomplete="unidade">
                                     @error('unidade')
@@ -134,6 +135,15 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
+                                    --}}
+                                    <label for="unidade">Unidade</label>
+
+                                    <select class="form-control" id="unidade" name="unidade">
+                                        <option disabled selected>Unidade</option>
+                                        @foreach($listaUnidades as $unidade)
+                                        <option value="{{$unidade->nome}}">{{$unidade->nome}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="permissao">Permissão</label>

@@ -123,6 +123,7 @@ class VacinasController extends Controller
         if ($q != "") {
             $listaVacinas = Vacina::where('vacina', 'LIKE', '%' . $q . '%')
                 ->orWhere('dose', 'LIKE', '%' . $q . '%')
+                ->orWhere('status', 'LIKE', '%' . $q . '%')
                 ->paginate(15)->setPath('/vacinas/busca');
             $pagination = $listaVacinas->appends(array(
                 'q' => Input::get('q')
@@ -197,6 +198,19 @@ class VacinasController extends Controller
     {
         $vacina = Vacina::find($id);
         $vacina->delete();
+
+        return redirect()->route('vacinas');
+    }
+
+    public function alteraStatusVacina(int $id)
+    {
+        $vacina = Vacina::find($id);
+        if ($vacina->status = "Ativo")
+        $vacina->status = "Inativo";
+        else
+        $vacina->status = "Ativo";
+
+        $vacina->save();
 
         return redirect()->route('vacinas');
     }

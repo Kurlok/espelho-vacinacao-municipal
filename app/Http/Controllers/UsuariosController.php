@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Unidade;
 use Illuminate\Support\Facades\Hash;
 
 class UsuariosController extends Controller
@@ -26,16 +27,23 @@ class UsuariosController extends Controller
     public function getUsuario(int $id)
     {
         $usuario = User::find($id);
+        $listaUnidades = Unidade::all();
+
         return view(
             'usuarios/cadastro',
-            ['usuario' => $usuario]
+            ['usuario' => $usuario,
+            'listaUnidades' => $listaUnidades,
+
+            ]
         );
     }
 
     public function telaCadastroUsuario()
     {
-        
-        return view('usuarios/cadastro');
+        $listaUnidades = Unidade::all();
+        return view('usuarios/cadastro', [
+            'listaUnidades' => $listaUnidades,
+        ]);
     }
 
     public function cadastrarUsuario(Request $request)

@@ -35,7 +35,8 @@ class PacientesController extends Controller
     public function getPaciente(int $id)
     {
         $paciente = Paciente::find($id);
-        $listaVacinas = Vacina::all()
+        $listaVacinas = Vacina::where('status', 'Ativo')
+            ->get()
             ->sortBy(function ($item) {
                 return $item->vacina . '#' . $item->dose;
             });
@@ -140,9 +141,9 @@ class PacientesController extends Controller
             $vacina->data_aplicacao = $request->input("dataVacina.$i");
             $descricao_outras = $request->input("descricaoOutras.$i");
             Paciente::find($paciente->id)->vacinas()->attach($vacina->id, [
-                    'data_aplicacao' => $vacina->data_aplicacao,
-                    'descricao_outras' => $descricao_outras,
-                ]);
+                'data_aplicacao' => $vacina->data_aplicacao,
+                'descricao_outras' => $descricao_outras,
+            ]);
         }
         //echo $paciente->id;
         return redirect()->route('pacientes');
@@ -186,9 +187,9 @@ class PacientesController extends Controller
             $vacina->data_aplicacao = $request->input("dataVacina.$i");
             $descricao_outras = $request->input("descricaoOutras.$i");
             Paciente::find($paciente->id)->vacinas()->updateExistingPivot($vacina->id, [
-                    'data_aplicacao' => $vacina->data_aplicacao,
-                    'descricao_outras' => $descricao_outras
-                ]);
+                'data_aplicacao' => $vacina->data_aplicacao,
+                'descricao_outras' => $descricao_outras
+            ]);
         }
         return redirect()->route('pacientes');
     }

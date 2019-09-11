@@ -33,42 +33,46 @@
                         <th>Código</th>
                         <th>Vacina</th>
                         <th>Dose</th>
+                        <th>Situação</th>
+
                         <th class="actions">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     @if(isset($listaVacinas))
                     @foreach ($listaVacinas as $vacina)
-                    <tr>
+                    <tr class="@if($vacina->status == 'Inativo') text-danger @endif">
                         <td>{{$vacina->id}}</td>
                         <td>{{$vacina->vacina}}</td>
                         <td>{{$vacina->dose}}</td>
+                        <td>{{$vacina->status}}</td>
 
                         <td class="actions">
 
                             <a class="btn btn-success btn-xs" href="{{ route('vacinaId', $vacina->id) }}">Visualizar</a>
-
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalExclusaoVacina{{$vacina->id}}">
-                                Excluir
+                            @if($vacina->status == 'Ativo')
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalDesativacaoVacina{{$vacina->id}}">
+                                Desativar
                             </button>
-
-                            <div class="modal fade" id="modalExclusaoVacina{{$vacina->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            @endif
+                            <div class="modal fade" id="modalDesativacaoVacina{{$vacina->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLongTitle">Exclusão de vacina</h5>
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Desativação de vacina</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            Confirma a exclusão de {{$vacina->vacina}} (código: {{$vacina->id}})??
+                                            Confirma a desativação de {{$vacina->vacina}} (código: {{$vacina->id}})??
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                            <form action="{{ route('deletarVacina', $vacina->id) }}" method="post">
+                                            <form action="{{ route('alteraStatus', $vacina->id) }}" method="post">
                                                 {{csrf_field()}}
-                                                <input type="submit" class="btn btn-danger btn-xs" value="Excluir">
+                                                
+                                                <input type="submit" class="btn btn-danger btn-xs" value="Desativar">
                                             </form>
                                         </div>
                                     </div>

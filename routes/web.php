@@ -28,7 +28,8 @@ Route::middleware(['auth', 'Administrador'])->group(function () {
     Route::any('/vacinas/busca', 'VacinasController@buscaVacina')->name('vacinasBusca');
     Route::post('/vacinas/cadastro/novo', 'VacinasController@cadastrarVacina')->name('cadastrarVacina');
     Route::post('/vacinas/cadastro/alterar/{id}', 'VacinasController@alterarVacina')->name('alterarVacina');
-    Route::post('/vacinas/delete/{id}', 'VacinasController@deletarVacina')->name('deletarVacina');
+    //Route::post('/vacinas/delete/{id}', 'VacinasController@deletarVacina')->name('deletarVacina');
+    Route::post('/vacinas/desativar/{id}', 'VacinasController@alteraStatusVacina')->name('alteraStatus');
 
     Route::get('/usuarios', 'UsuariosController@index')->name('usuarios');
     Route::get('/usuarios/cadastro', 'UsuariosController@telaCadastroUsuario')->name('telaCadastroUsuario');
