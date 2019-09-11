@@ -185,16 +185,18 @@
                                     <input type="text" class="form-control" id="idVacina[]" name="idVacina[]" value="{{$vacina->id}}" hidden>
                                     @if($vacina->vacina == "Outras")
                                     <input type="text" class="form-control" id="descricaoOutras[]" name="descricaoOutras[]" value="@if(isset($paciente)){{$vacina->pacientes()->where('fk_pacientes_id', $paciente->id)->firstOrFail()->pivot->descricao_outras}}@else{{old('descricaoOutras[]')}}@endif">
+                                    @else
+                                    <input type="text" class="form-control" id="descricaoOutras[]" name="descricaoOutras[]" value="@if(isset($paciente)){{$vacina->pacientes()->where('fk_pacientes_id', $paciente->id)->firstOrFail()->pivot->descricao_outras}}@else{{old('descricaoOutras[]')}}@endif" hidden>
                                     @endif
                                     <input type="date" class="form-control" id="dataVacina[]" name="dataVacina[]" value="@if(isset($paciente)){{$vacina->pacientes()->where('fk_pacientes_id', $paciente->id)->firstOrFail()->pivot->data_aplicacao}}@else{{old('dataVacina[]')}}@endif">
                                 </div>
-                             
+
                                 <?php
                                 $vacinaAnterior = $vacina;
                                 ?>
                                 @endforeach
 
-</div>
+                            </div>
                             @if(isset($paciente))
                             <button type="submit" class="btn btn-primary">Alterar</button>
                             @else

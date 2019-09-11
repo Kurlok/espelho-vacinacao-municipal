@@ -157,7 +157,7 @@ class VacinasController extends Controller
         $vacina = new Vacina();
         $vacina->vacina = $request->vacina;
         $vacina->dose = $request->dose;
-
+        $vacina->status = 'Ativa';  
 
         $vacina->save();
         $paciente = new Paciente;

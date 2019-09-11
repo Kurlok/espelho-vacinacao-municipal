@@ -127,9 +127,13 @@ class PacientesController extends Controller
         for ($i = 0; $i < $listaVacinasTamanho; $i++) {
             $vacina->id = $request->input("idVacina.$i");
             $vacina->data_aplicacao = $request->input("dataVacina.$i");
+            $descricao_outras = $request->input("descricaoOutras.$i");
             Paciente::find($paciente->id)->
             vacinas()->
-            attach($vacina->id, ['data_aplicacao' => $vacina->data_aplicacao]);
+            attach($vacina->id, [
+                'data_aplicacao' => $vacina->data_aplicacao, 
+                'descricao_outras' => $descricao_outras,
+                ]);
         }
         //echo $paciente->id;
         return redirect()->route('pacientes');
@@ -171,9 +175,14 @@ class PacientesController extends Controller
         for ($i = 0; $i < $listaVacinasTamanho; $i++) {
             $vacina->id = $request->input("idVacina.$i");
             $vacina->data_aplicacao = $request->input("dataVacina.$i");
+            $descricao_outras = $request->input("descricaoOutras.$i");
             Paciente::find($paciente->id)->
             vacinas()->
-            updateExistingPivot($vacina->id, ['data_aplicacao' => $vacina->data_aplicacao]);
+            updateExistingPivot($vacina->id, [
+            'data_aplicacao' => $vacina->data_aplicacao,
+            'descricao_outras' => $descricao_outras
+            ]);
+
         }
         return redirect()->route('pacientes');
     }
