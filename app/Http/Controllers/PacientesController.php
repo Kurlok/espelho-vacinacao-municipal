@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Paciente;
+use App\Unidade;
 use App\Vacina;
 
 use Illuminate\Http\Request;
@@ -34,12 +35,17 @@ class PacientesController extends Controller
     {
         $paciente = Paciente::find($id);
         $listaVacinas = Vacina::all()
-        ->sortBy(function($item){ return $item->vacina.'#'.$item->dose; });
+            ->sortBy(function ($item) {
+                return $item->vacina . '#' . $item->dose;
+            });
+        $listaUnidades = Unidade::all();
 
         return view(
             'pacientes/cadastro',
-            ['paciente' => $paciente,
-            'listaVacinas' => $listaVacinas
+            [
+                'paciente' => $paciente,
+                'listaVacinas' => $listaVacinas,
+                'listaUnidades' => $listaUnidades,
             ]
         );
     }
@@ -85,12 +91,16 @@ class PacientesController extends Controller
     public function telaCadastroPaciente()
     {
         $listaVacinas = Vacina::all()
-        ->sortBy(function($item){ return $item->vacina.'#'.$item->dose; });
+            ->sortBy(function ($item) {
+                return $item->vacina . '#' . $item->dose;
+            });
+        $listaUnidades = Unidade::all();
 
         return view(
             'pacientes/cadastro',
             [
                 'listaVacinas' => $listaVacinas,
+                'listaUnidades' => $listaUnidades,
             ]
         );
     }
@@ -128,11 +138,9 @@ class PacientesController extends Controller
             $vacina->id = $request->input("idVacina.$i");
             $vacina->data_aplicacao = $request->input("dataVacina.$i");
             $descricao_outras = $request->input("descricaoOutras.$i");
-            Paciente::find($paciente->id)->
-            vacinas()->
-            attach($vacina->id, [
-                'data_aplicacao' => $vacina->data_aplicacao, 
-                'descricao_outras' => $descricao_outras,
+            Paciente::find($paciente->id)->vacinas()->attach($vacina->id, [
+                    'data_aplicacao' => $vacina->data_aplicacao,
+                    'descricao_outras' => $descricao_outras,
                 ]);
         }
         //echo $paciente->id;
@@ -176,13 +184,10 @@ class PacientesController extends Controller
             $vacina->id = $request->input("idVacina.$i");
             $vacina->data_aplicacao = $request->input("dataVacina.$i");
             $descricao_outras = $request->input("descricaoOutras.$i");
-            Paciente::find($paciente->id)->
-            vacinas()->
-            updateExistingPivot($vacina->id, [
-            'data_aplicacao' => $vacina->data_aplicacao,
-            'descricao_outras' => $descricao_outras
-            ]);
-
+            Paciente::find($paciente->id)->vacinas()->updateExistingPivot($vacina->id, [
+                    'data_aplicacao' => $vacina->data_aplicacao,
+                    'descricao_outras' => $descricao_outras
+                ]);
         }
         return redirect()->route('pacientes');
     }
