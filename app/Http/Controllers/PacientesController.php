@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Paciente;
 use App\Unidade;
 use App\Vacina;
+use App\Rules\PalavrasMinimas;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -108,7 +109,7 @@ class PacientesController extends Controller
     public function cadastrarPaciente(Request $request)
     {
         $validatedData = $request->validate([
-            'nome' => 'required|string|max:255',
+            'nome' => ['required', 'string', 'max:255', new PalavrasMinimas],
             'sexo' => 'required',
         ]);
 

@@ -94,7 +94,13 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="nome">Nome completo</label>
-                                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Nome completo" value="@if(isset($paciente)){{$paciente->nome}}@else{{old('nome')}}@endif">
+                                    <input type="text" class="form-control @error('nome') is-invalid @enderror" name="nome" id="nome" placeholder="Nome completo" value="@if(isset($paciente)){{$paciente->nome}}@else{{old('nome')}}@endif">
+
+                                    @error('nome')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group col-md-2">
                                     <label for="sus">N.º SUS</label>

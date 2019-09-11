@@ -26,6 +26,7 @@
 
     <!-- Icons -->
     <link href="{{ asset('css/all.css') }}" rel="stylesheet">
+    <link rel="icon" href="{{ asset('img/iconeVacinaColorido.png') }}">
 
 </head>
 
@@ -38,10 +39,12 @@
             <div class="sidebar-heading text-center">{{ config('app.name', 'Laravel') }}</div>
             <div class="list-group list-group-flush">
                 <a href="{{ route('pacientes') }}" class="list-group-item list-group-item-action bg-info text-white">Pacientes</a>
-                @if (Auth::user()->permissao == 'Administrador') 
+                @if (Auth::user()->permissao == 'Administrador')
                 <a href="{{ route('vacinas') }}" class="list-group-item list-group-item-action bg-info text-white">Vacinas</a>
-                <a href="{{ route('unidades') }}" class="list-group-item list-group-item-action bg-info text-white">Unidades</a>
+                @if (Route::has('unidades'))
 
+                <a href="{{ route('unidades') }}" class="list-group-item list-group-item-action bg-info text-white">Unidades</a>
+                @endif
                 <a href="{{ route('usuarios') }}" class="list-group-item list-group-item-action bg-info text-white">Usuários</a>
 
                 <a href="#" class="list-group-item list-group-item-action bg-info text-white">Relatórios</a>
@@ -92,11 +95,11 @@
                 </div>
             </nav>
 
-            <div class="container-fluid"> 
+            <div class="container-fluid">
 
-            <main class="py-4">
-                @yield('content')
-            </main>
+                <main class="py-4">
+                    @yield('content')
+                </main>
             </div>
         </div>
         <!-- /#page-content-wrapper -->
