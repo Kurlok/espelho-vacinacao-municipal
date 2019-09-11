@@ -5,32 +5,35 @@
     <div class="row justify-content-center">
 
         <div class="col-md-12">
-        @if(isset($vacina))
-            <form method="POST" action="{{route('alterarVacina', $vacina->id)}}">
+        @if(isset($unidade))
+            <form method="POST" action="{{route('alterarUnidade', $unidade->id)}}">
                 @else
-                <form method="POST" action="{{route('cadastrarVacina')}}">
+                <form method="POST" action="{{route('cadastrarUnidade')}}">
                     @endif
 
             @csrf
 
                 <div class="card">
-                    <div class="card-header bg-success text-white">{{ __('Vacina') }}</div>
+                    <div class="card-header bg-success text-white">{{ __('Unidade') }}</div>
 
                     <div class="card-body border-secondary">
                         <div class="form-row">
                             <div class="form-group col-md-2">
                                 <label for="id">Código</label>
-                                <input type="text" class="form-control" id="id" value="@if(isset($vacina)){{$vacina->id}}@endif" disabled>
+                                <input type="text" class="form-control" id="id" value="@if(isset($unidade)){{$unidade->id}}@endif" disabled>
                             </div>
-                            <div class="form-group col-md-8">
-                                <label for="nome">Vacina</label>
-                                <input type="text" class="form-control" id="vacina" name="vacina" placeholder="Nome da vacina" value="@if(isset($vacina)){{$vacina->vacina}}@else{{old('vacina')}}@endif">
+                            <div class="form-group col-md-4">
+                                <label for="nome">Nome</label>
+                                <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome da unidade" value="@if(isset($unidade)){{$unidade->nome}}@else{{old('nome')}}@endif">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="endereco">Endereço</label>
+                                <input type="text" class="form-control" id="endereco" name="endereco" maxlength="255" value="@if(isset($unidade)){{$unidade->endereco}}@else{{old('dose')}}@endif">
                             </div>
                             <div class="form-group col-md-2">
-                                <label for="sus">Dose</label>
-                                <input type="text" class="form-control" id="dose" name="dose" maxlength="15" value="@if(isset($vacina)){{$vacina->dose}}@else{{old('dose')}}@endif">
+                                <label for="id">CNES</label>
+                                <input type="text" class="form-control" id="id" value="@if(isset($unidade)){{$unidade->cnes}}@endif">
                             </div>
-
                         </div>
                         @if(isset($vacina))
                             <button type="submit" class="btn btn-primary">Alterar</button>

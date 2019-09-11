@@ -21,7 +21,7 @@
             </form>
         </div>
         <div class="col-md-3 ">
-            <a href="{{ route('telaCadastroUnidade') }}" class="btn btn-primary pull-right h2">Nova Unidade</a>
+            <a href="{{ route('telaCadastroUnidade') }}" class="btn btn-primary pull-right h2"><i class="fas fa-plus"></i> Nova Unidade</a>
         </div>
     </div>
 
@@ -48,10 +48,10 @@
 
                         <td class="actions">
 
-                            <a class="btn btn-success btn-xs" href="{{ route('unidadeId', $unidade->id) }}">Visualizar</a>
+                            <a class="btn btn-success btn-xs" href="{{ route('unidadeId', $unidade->id) }}"><i class="far fa-eye"></i> Visualizar</a>
 
                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalExclusaoUnidade{{$unidade->id}}">
-                                Excluir
+                            <i class="fas fa-trash"></i> Excluir
                             </button>
 
                             <div class="modal fade" id="modalExclusaoUnidade{{$unidade->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

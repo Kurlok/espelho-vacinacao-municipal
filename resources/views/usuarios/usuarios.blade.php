@@ -21,7 +21,7 @@
             </form>
         </div>
         <div class="col-md-3 ">
-            <a href="{{ route('telaCadastroUsuario') }}" class="btn btn-primary pull-right h2">Novo Usuário</a>
+            <a href="{{ route('telaCadastroUsuario') }}" class="btn btn-primary pull-right h2"><i class="fas fa-plus"></i> Novo Usuário</a>
         </div>
     </div>
 
@@ -48,10 +48,10 @@
 
                         <td class="actions">
 
-                            <a class="btn btn-success btn-xs" href="{{ route('usuarioId', $usuario->id) }}">Visualizar</a>
+                            <a class="btn btn-success btn-xs" href="{{ route('usuarioId', $usuario->id) }}"><i class="far fa-eye"></i> Visualizar</a>
 
                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalExclusaoUsuario{{$usuario->id}}">
-                                Excluir
+                            <i class="fas fa-trash"></i> Excluir
                             </button>
 
                             <div class="modal fade" id="modalExclusaoUsuario{{$usuario->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

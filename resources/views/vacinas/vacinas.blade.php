@@ -21,7 +21,7 @@
             </form>
         </div>
         <div class="col-md-3 ">
-            <a href="{{ route('telaCadastroVacina') }}" class="btn btn-primary pull-right h2">Nova Vacina</a>
+            <a href="{{ route('telaCadastroVacina') }}" class="btn btn-primary pull-right h2"><i class="fas fa-plus"></i> Nova Vacina</a>
         </div>
     </div>
 
@@ -48,11 +48,11 @@
                         <td>{{$vacina->status}}</td>
 
                         <td class="actions">
+                        @if($vacina->status == 'Ativo')
 
-                            <a class="btn btn-success btn-xs" href="{{ route('vacinaId', $vacina->id) }}">Visualizar</a>
-                            @if($vacina->status == 'Ativo')
+                            <a class="btn btn-success btn-xs" href="{{ route('vacinaId', $vacina->id) }}"><i class="far fa-eye"></i> Visualizar</a>
                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalDesativacaoVacina{{$vacina->id}}">
-                                Desativar
+                            <i class="fas fa-ban"></i> Desativar
                             </button>
                             @endif
                             <div class="modal fade" id="modalDesativacaoVacina{{$vacina->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
