@@ -202,14 +202,21 @@ class VacinasController extends Controller
         return redirect()->route('vacinas');
     }
 
-    public function alteraStatusVacina(int $id)
+    public function desativarVacina(int $id)
     {
         $vacina = Vacina::find($id);
         if ($vacina->status = 'Ativo')
         $vacina->status = 'Inativo';
-        else
-        $vacina->status = 'Ativo';
+        $vacina->save();
 
+        return redirect()->route('vacinas');
+    }
+
+    public function ativarVacina(int $id)
+    {
+        $vacina = Vacina::find($id);
+        if ($vacina->status = 'Inativo')
+        $vacina->status = 'Ativo';
         $vacina->save();
 
         return redirect()->route('vacinas');

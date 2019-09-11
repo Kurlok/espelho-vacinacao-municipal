@@ -54,6 +54,13 @@
                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalDesativacaoVacina{{$vacina->id}}">
                                 <i class="fas fa-ban"></i> Desativar
                             </button>
+                            @else
+                            <form action="{{ route('ativarVacina', $vacina->id) }}" method="post">
+                                {{csrf_field()}}
+                                <button type="submit" class="btn btn-secondary btn-xs">
+                                    <i class="fas fa-power-off"></i> Reativar
+                                </button>
+                            </form>
                             @endif
                             <div class="modal fade" id="modalDesativacaoVacina{{$vacina->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -69,7 +76,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                            <form action="{{ route('alteraStatus', $vacina->id) }}" method="post">
+                                            <form action="{{ route('desativarVacina', $vacina->id) }}" method="post">
                                                 {{csrf_field()}}
 
                                                 <input type="submit" class="btn btn-danger btn-xs" value="Desativar">
