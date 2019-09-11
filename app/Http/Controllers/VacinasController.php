@@ -205,10 +205,10 @@ class VacinasController extends Controller
     public function alteraStatusVacina(int $id)
     {
         $vacina = Vacina::find($id);
-        if ($vacina->status = "Ativo")
-        $vacina->status = "Inativo";
+        if ($vacina->status = 'Ativo')
+        $vacina->status = 'Inativo';
         else
-        $vacina->status = "Ativo";
+        $vacina->status = 'Ativo';
 
         $vacina->save();
 
