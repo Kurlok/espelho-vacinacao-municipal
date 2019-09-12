@@ -102,30 +102,30 @@ class UnidadesTableSeeder extends Seeder
         ]);
 
         DB::table('unidades')->insert([
-            'nome' => 'Posto de Saúde de Boqueirão',
+            'nome' => 'UBS Boqueirão',
             'endereco' => 'Boqueirão',
             'cnes' => '2687224',
         ]);
 
         DB::table('unidades')->insert([
-            'nome' => 'Posto de Saúde de Colônia Maciel',
+            'nome' => 'UBS Colônia Maciel',
             'endereco' => 'Colônia Maciel',
             'cnes' => '2687194',
         ]);
 
         DB::table('unidades')->insert([
-            'nome' => 'Posto de Saúde de Poço Grande',
+            'nome' => 'UBS Poço Grande',
             'endereco' => 'Poço Grande',
             'cnes' => '2687267',
         ]);
         DB::table('unidades')->insert([
-            'nome' => 'Posto de Saúde de Quero-Quero',
+            'nome' => 'UBS Quero-Quero',
             'endereco' => 'Quero-Quero',
             'cnes' => '2687283',
         ]);
 
         DB::table('unidades')->insert([
-            'nome' => 'Posto de Saúde de Santa Bárbara',
+            'nome' => 'UBS Santa Bárbara',
             'endereco' => 'Santa Bárbara',
             'cnes' => '2687240',
         ]);

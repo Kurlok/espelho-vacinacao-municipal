@@ -32,8 +32,9 @@ class UsuariosController extends Controller
 
         return view(
             'usuarios/cadastro',
-            ['usuario' => $usuario,
-            'listaUnidades' => $listaUnidades,
+            [
+                'usuario' => $usuario,
+                'listaUnidades' => $listaUnidades,
 
             ]
         );
@@ -42,6 +43,7 @@ class UsuariosController extends Controller
     public function telaCadastroUsuario()
     {
         $listaUnidades = Unidade::all();
+
         return view('usuarios/cadastro', [
             'listaUnidades' => $listaUnidades,
         ]);
@@ -53,13 +55,17 @@ class UsuariosController extends Controller
         $usuario = [
             auth()->user(),
         ];
-
-        return view('usuarios/redefinirsenha', 
-        [
-            'usuario' => auth()->user(),
-        ]);
+        if (Auth()->user()->senha_redefinida == null) {
+            return view(
+                'usuarios/redefinirsenha',
+                [
+                    'usuario' => auth()->user(),
+                ]
+            );
+        } 
+        else return redirect()->route('/');
     }
-     
+
     public function cadastrarUsuario(Request $request)
     {
         $validatedData = $request->validate([
@@ -85,7 +91,6 @@ class UsuariosController extends Controller
         $usuario->save();
 
         return redirect()->route('usuarios');
-
     }
 
     public function alterarUsuario(Request $request, int $id)
@@ -97,7 +102,7 @@ class UsuariosController extends Controller
             'permissao' => 'required|string',
             'funcao' => 'required|string',
         ]);
-        
+
         $usuario = User::find($id);
         $usuario->name = $request->name;
         //$usuario->password = Hash::make($request->senha);
@@ -115,7 +120,7 @@ class UsuariosController extends Controller
         $validatedData = $request->validate([
             'senha' => 'required|string|min:6|confirmed',
         ]);
-        
+
         $usuario = User::find($id);
         $usuario->password = Hash::make($request->senha);
         $usuario->senha_redefinida = Carbon::now();
@@ -139,8 +144,8 @@ class UsuariosController extends Controller
 
         //Conversão da data
         //$dataBr = $q;
-       // $date = str_replace('/', '-', $dataBr);
-       // $dataSql = date("Y-m-d", strtotime($date));
+        // $date = str_replace('/', '-', $dataBr);
+        // $dataSql = date("Y-m-d", strtotime($date));
 
         //Busca
         if ($q != "") {

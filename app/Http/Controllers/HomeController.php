@@ -23,12 +23,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if ((Auth::user()->senha_redefinida == null)) {
-            return redirect()->route('telaRedefinirSenha');
-         }
-         else{
+  
             return redirect()->route('pacientes');
-        }
+    
 
          
     }
