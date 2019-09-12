@@ -51,7 +51,7 @@ class UsuariosController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'senha' => 'required|string|min:6|confirmed',
+            //'senha' => 'required|string|min:6|confirmed',
             'cpf' => 'required|string|min:14|max:14|unique:users',
             'unidade' => 'required|string',
             'permissao' => 'required|string',
@@ -60,7 +60,7 @@ class UsuariosController extends Controller
 
         $usuario = new User();
         $usuario->name = $request->name;
-        $usuario->password = Hash::make($request->senha);
+        $usuario->password = Hash::make('123456'); //Senha padrão na criação do usuário
         $usuario->email = $request->email;
         $usuario->cpf = $request->cpf;
         $usuario->unidade = $request->unidade;

@@ -159,6 +159,7 @@
                                 </div>
                             </div>
 
+{{--
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="senha">{{ __('Senha') }}</label>
@@ -174,7 +175,7 @@
                                     <input id="senha-confirm" type="password" class="form-control" name="senha_confirmation" required autocomplete="new-senha">
                                 </div>
                             </div>
-
+--}}
 
                             <div class="form-group row">
                                 <div class="col">
