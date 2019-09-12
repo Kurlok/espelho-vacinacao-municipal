@@ -92,7 +92,7 @@ class UsuariosController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'senha' => 'required|string|min:6|confirmed',
+            //'senha' => 'required|string|min:6|confirmed',
             'unidade' => 'required|string',
             'permissao' => 'required|string',
             'funcao' => 'required|string',

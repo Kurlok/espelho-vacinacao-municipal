@@ -8,7 +8,7 @@
                 <div class="card-header bg-success text-white">{{ __('Usuário') }}</div>
 
                 <div class="card-body">
-                <p class="text-justify">Olá {{$usuario['name']}} ({{$usuario['email']}}), por favor redefina a sua senha. A senha deve possuir pelo menos 6 caracteres.</p>
+                <p class="text-justify">Olá {{$usuario['name']}} ({{$usuario['email']}}), por favor redefina a sua senha para continuar. A senha deve possuir pelo menos 6 caracteres.</p>
 
                     @if(isset($usuario))
                     <form method="POST" action="{{route('redefinirSenha', $usuario->id)}}">

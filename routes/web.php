@@ -21,7 +21,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 
-Route::middleware(['auth', 'Administrador'])->group(function () {
+Route::middleware(['auth', 'Administrador', 'SenhaRedefinida'])->group(function () {
     Route::get('/vacinas', 'VacinasController@index')->name('vacinas');
     Route::get('/vacinas/cadastro', 'VacinasController@telaCadastroVacina')->name('telaCadastroVacina');
     Route::get('/vacinas/cadastro/{id}', 'VacinasController@getVacina')->name('vacinaId');
@@ -39,8 +39,6 @@ Route::middleware(['auth', 'Administrador'])->group(function () {
     Route::post('/usuarios/cadastro/novo', 'UsuariosController@cadastrarUsuario')->name('cadastrarUsuario');
     Route::post('/usuarios/cadastro/alterar/{id}', 'UsuariosController@alterarUsuario')->name('alterarUsuario');
     Route::any('/usuarios/busca', 'UsuariosController@buscaUsuario')->name('usuariosBusca');
-    Route::get('/usuarios/redefinir', 'UsuariosController@telaRedefinirSenha')->name('telaRedefinirSenha');
-    Route::post('/usuarios/redefinir/altera/{id}', 'UsuariosController@redefinirSenha')->name('redefinirSenha');
 
     Route::get('/unidades', 'UnidadesController@index')->name('unidades');
     Route::get('/unidades/cadastro', 'UnidadesController@telaCadastroUnidade')->name('telaCadastroUnidade');
@@ -50,7 +48,7 @@ Route::middleware(['auth', 'Administrador'])->group(function () {
     Route::post('/unidades/cadastro/alterar/{id}', 'UnidadesController@alterarUnidade')->name('alterarUnidade');
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'SenhaRedefinida'])->group(function () {
     Route::get('/pacientes', 'PacientesController@index')->name('pacientes');
     Route::get('/pacientes/cadastro', 'PacientesController@telaCadastroPaciente')->name('telaCadastroPaciente');
     Route::get('/pacientes/cadastro/{id}', 'PacientesController@getPaciente')->name('pacienteId');
@@ -60,6 +58,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/pacientes/delete/{id}', 'PacientesController@deletarPaciente')->name('deletarPaciente');
 });
 
+Route::middleware(['auth'])->group(function () {
 
+Route::get('/usuarios/redefinir', 'UsuariosController@telaRedefinirSenha')->name('telaRedefinirSenha');
+Route::post('/usuarios/redefinir/altera/{id}', 'UsuariosController@redefinirSenha')->name('redefinirSenha');
 
-
+});
