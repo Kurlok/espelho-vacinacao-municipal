@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Unidade;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Carbon;
 
 class UsuariosController extends Controller
 {
@@ -46,6 +47,19 @@ class UsuariosController extends Controller
         ]);
     }
 
+    public function telaRedefinirSenha()
+    {
+        $listaUnidades = Unidade::all();
+        $usuario = [
+            auth()->user(),
+        ];
+
+        return view('usuarios/redefinirsenha', 
+        [
+            'usuario' => auth()->user(),
+        ]);
+    }
+     
     public function cadastrarUsuario(Request $request)
     {
         $validatedData = $request->validate([
@@ -86,10 +100,25 @@ class UsuariosController extends Controller
         
         $usuario = User::find($id);
         $usuario->name = $request->name;
-        $usuario->password = Hash::make($request->senha);
+        //$usuario->password = Hash::make($request->senha);
         $usuario->unidade = $request->unidade;
         $usuario->permissao = $request->permissao;
         $usuario->funcao = $request->funcao;
+
+        $usuario->save();
+
+        return redirect()->route('usuarios');
+    }
+
+    public function redefinirSenha(Request $request, int $id)
+    {
+        $validatedData = $request->validate([
+            'senha' => 'required|string|min:6|confirmed',
+        ]);
+        
+        $usuario = User::find($id);
+        $usuario->password = Hash::make($request->senha);
+        $usuario->senha_redefinida = Carbon::now();
 
         $usuario->save();
 

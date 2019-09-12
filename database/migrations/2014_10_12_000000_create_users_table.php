@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('unidade');
             $table->string('permissao');
             $table->string('funcao');
+            $table->string('senha_redefinida')->nullable();
 
         });
     }

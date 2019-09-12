@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,13 +23,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // if ((Auth::user()->password_change_at == null)) {
-        //     return redirect(route('change-password'));
-        //  }
-        //  else{
- 
+        if ((Auth::user()->senha_redefinida == null)) {
+            return redirect()->route('telaRedefinirSenha');
+         }
+         else{
             return redirect()->route('pacientes');
-        // }
+        }
 
          
     }

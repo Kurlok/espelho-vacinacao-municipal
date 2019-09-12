@@ -39,6 +39,8 @@ Route::middleware(['auth', 'Administrador'])->group(function () {
     Route::post('/usuarios/cadastro/novo', 'UsuariosController@cadastrarUsuario')->name('cadastrarUsuario');
     Route::post('/usuarios/cadastro/alterar/{id}', 'UsuariosController@alterarUsuario')->name('alterarUsuario');
     Route::any('/usuarios/busca', 'UsuariosController@buscaUsuario')->name('usuariosBusca');
+    Route::get('/usuarios/redefinir', 'UsuariosController@telaRedefinirSenha')->name('telaRedefinirSenha');
+    Route::post('/usuarios/redefinir/altera/{id}', 'UsuariosController@redefinirSenha')->name('redefinirSenha');
 
     Route::get('/unidades', 'UnidadesController@index')->name('unidades');
     Route::get('/unidades/cadastro', 'UnidadesController@telaCadastroUnidade')->name('telaCadastroUnidade');
