@@ -12,8 +12,7 @@
         "fideloper/proxy": "^4.0",
         "igorescobar/jquery-mask-plugin": "^1.14",
         "laravel/framework": "6.*",
-        "laravel/tinker": "^1.0",
-        "nnnick/chartjs": "^2.8"
+        "laravel/tinker": "^1.0"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
