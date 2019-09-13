@@ -48,6 +48,8 @@ Route::middleware(['auth', 'Administrador', 'SenhaRedefinida'])->group(function 
     Route::post('/unidades/cadastro/alterar/{id}', 'UnidadesController@alterarUnidade')->name('alterarUnidade');
     Route::any('/unidades/busca', 'UnidadesController@buscaUnidade')->name('unidadesBusca');
 
+    Route::get('/relatorios', 'RelatoriosController@index')->name('relatorios');
+
 });
 
 Route::middleware(['auth', 'SenhaRedefinida'])->group(function () {
