@@ -53,7 +53,7 @@ class UnidadesController extends Controller
 
         //Busca
         if ($q != "") {
-            $listaUnidades = Unidade::where('unidade', 'LIKE', '%' . $q . '%')
+            $listaUnidades = Unidade::where('nome', 'LIKE', '%' . $q . '%')
                 ->orWhere('endereco', 'LIKE', '%' . $q . '%')
                 ->orWhere('cnes', 'LIKE', '%' . $q . '%')
 
