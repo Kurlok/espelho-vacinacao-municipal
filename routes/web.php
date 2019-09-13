@@ -46,6 +46,8 @@ Route::middleware(['auth', 'Administrador', 'SenhaRedefinida'])->group(function 
     Route::post('/unidades/delete/{id}', 'UnidadesController@deletarUnidade')->name('deletarUnidade');
     Route::post('/unidades/cadastro/novo', 'UnidadesController@cadastrarUnidade')->name('cadastrarUnidade');
     Route::post('/unidades/cadastro/alterar/{id}', 'UnidadesController@alterarUnidade')->name('alterarUnidade');
+    Route::any('/unidades/busca', 'UnidadesController@buscaUnidade')->name('unidadesBusca');
+
 });
 
 Route::middleware(['auth', 'SenhaRedefinida'])->group(function () {

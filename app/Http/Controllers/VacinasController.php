@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Paciente;
 use App\Vacina;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
 
 class VacinasController extends Controller
 {
@@ -110,9 +109,11 @@ class VacinasController extends Controller
         );
     }
 
-    public function buscaVacina()
+    public function buscaVacina(Request $request)
     {
-        $q = Input::get('q');
+       // $q = Input::get('q');
+       //$q = $request->input('q');
+        $q = $request->input('q');
 
         //Conversão da data
         //$dataBr = $q;
@@ -126,7 +127,7 @@ class VacinasController extends Controller
                 ->orWhere('status', 'LIKE', '%' . $q . '%')
                 ->paginate(15)->setPath('/vacinas/busca');
             $pagination = $listaVacinas->appends(array(
-                'q' => Input::get('q')
+                'q' => $q
             ));
             if (count($listaVacinas) > 0)
                 return view(

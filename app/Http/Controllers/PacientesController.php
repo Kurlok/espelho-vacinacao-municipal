@@ -9,7 +9,6 @@ use App\Rules\PalavrasMinimas;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
 
 class PacientesController extends Controller
@@ -52,9 +51,10 @@ class PacientesController extends Controller
         );
     }
 
-    public function buscaPaciente()
+    public function buscaPaciente(Request $request)
     {
-        $q = Input::get('q');
+        //$q = Input::get('q');
+        $q = $request->input('q');
 
         //Conversão da data
         $dataBr = $q;
@@ -69,7 +69,7 @@ class PacientesController extends Controller
                 ->orWhere('sus', 'LIKE', '%' . $q . '%')
                 ->paginate(15)->setPath('/pacientes/busca');
             $pagination = $listaPacientes->appends(array(
-                'q' => Input::get('q')
+                'q' => $q
             ));
             if (count($listaPacientes) > 0)
                 return view(

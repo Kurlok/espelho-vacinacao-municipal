@@ -42,9 +42,9 @@ class UnidadesController extends Controller
         );
     }
 
-    public function buscaUnidade()
+    public function buscaUnidade(Request $request)
     {
-        $q = Input::get('q');
+        $q = $request->input('q');
 
         //Conversão da data
         //$dataBr = $q;
@@ -54,10 +54,12 @@ class UnidadesController extends Controller
         //Busca
         if ($q != "") {
             $listaUnidades = Unidade::where('unidade', 'LIKE', '%' . $q . '%')
-                ->orWhere('dose', 'LIKE', '%' . $q . '%')
+                ->orWhere('endereco', 'LIKE', '%' . $q . '%')
+                ->orWhere('cnes', 'LIKE', '%' . $q . '%')
+
                 ->paginate(15)->setPath('/unidades/busca');
             $pagination = $listaUnidades->appends(array(
-                'q' => Input::get('q')
+                'q' => $q
             ));
             if (count($listaUnidades) > 0)
                 return view(

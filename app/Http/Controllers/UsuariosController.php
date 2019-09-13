@@ -138,10 +138,10 @@ class UsuariosController extends Controller
         return redirect()->route('usuarios');
     }
 
-    public function buscaVacina()
+    public function buscaUsuario(Request $request)
     {
-        $q = Input::get('q');
-
+        //$q = Input::get('q');
+        $q = $request->input('q');
         //Conversão da data
         //$dataBr = $q;
         // $date = str_replace('/', '-', $dataBr);
@@ -154,7 +154,7 @@ class UsuariosController extends Controller
                 ->orWhere('funcao', 'LIKE', '%' . $q . '%')
                 ->paginate(15)->setPath('/vacinas/busca');
             $pagination = $listaUsuarios->appends(array(
-                'q' => Input::get('q')
+                'q' => $q
             ));
             if (count($listaUsuarios) > 0)
                 return view(
