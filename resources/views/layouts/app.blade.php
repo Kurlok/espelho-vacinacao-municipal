@@ -47,7 +47,10 @@
                 @endif
                 <a href="{{ route('usuarios') }}" class="list-group-item list-group-item-action bg-info text-white"><i class="fas fa-users"></i> Usuários</a>
 
-                <a href="{{ route('relatorios') }}" class="list-group-item list-group-item-action bg-info text-white"><i class="fas fa-chart-bar"></i> Relatórios</a>
+                <a href="{{ route('graficos') }}" class="list-group-item list-group-item-action bg-info text-white"><i class="fas fa-chart-bar"></i> Gráficos</a>
+
+                <a href="{{ route('relatorios') }}" class="list-group-item list-group-item-action bg-info text-white"><i class="fas fa-file-export"></i> Relatórios</a>
+
                 @endif
 
             </div>

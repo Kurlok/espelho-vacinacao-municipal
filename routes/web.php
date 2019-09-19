@@ -49,6 +49,7 @@ Route::middleware(['auth', 'Administrador', 'SenhaRedefinida'])->group(function 
     Route::any('/unidades/busca', 'UnidadesController@buscaUnidade')->name('unidadesBusca');
 
     Route::get('/relatorios', 'RelatoriosController@index')->name('relatorios');
+    Route::get('/graficos', 'GraficosController@index')->name('graficos');
 
 });
 
