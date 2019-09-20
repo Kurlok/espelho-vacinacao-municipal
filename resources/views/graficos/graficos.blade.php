@@ -1,5 +1,7 @@
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
+
 @endpush
 
 @extends('layouts.app')
@@ -12,78 +14,76 @@
         </div>
     </div>
     <form action="/usuarios/busca" method="POST" role="search">
-    {{ csrf_field() }}
-    <div class="col-md-12 ">
+        {{ csrf_field() }}
+            <div class="form-group row">
+            <legend class="col-form-label col-md-1" style="padding-top: 5px">Período:</legend>
+                    <div class="col-md-2" style="padding-top: 5px">
+                        <div class="form-check form-check-inline ">
+                            <input class="form-check-input " style="padding-top: 50%" type="radio" name="periodoRadios" id="radioMensal" value="mensal">
+                            <label class="form-check-label" for="radioMensal">Mensal</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="periodoRadios" id="radioAnual" value="anual">
+                            <label class="form-check-label" for="radioAnual">Anual</label>
+                        </div>
+                    </div>
+                <div class="col-md-2">
+                    <select class="form-control" id="mes" name="mes">
+                        <option disabled selected>Mês</option>
+                        <option value="01">Janeiro</option>
+                        <option value="02">Fevereiro</option>
+                        <option value="03">Março</option>
+                        <option value="04">Abril</option>
+                        <option value="05">Maio</option>
+                        <option value="06">Junho</option>
+                        <option value="07">Julho</option>
+                        <option value="08">Agosto</option>
+                        <option value="09">Setembro</option>
+                        <option value="10">Outubro</option>
+                        <option value="11">Novembro</option>
+                        <option value="12">Dezembro</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <select class="form-control" id="ano" name="ano">
+                        <option disabled selected>Ano</option>
+                        @for ($ano = Carbon\Carbon::now()->year; $ano >= 1970; $ano--)
+                        <option value="{{$ano}}">{{$ano}}</option>
+                        @endfor
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <select class="form-control" id="unidade" name="unidade">
+                        <option disabled selected>Unidade</option>
+                        <option value="">Todas</option>
 
-        <div class="form-group row">
+                        @foreach($listaUnidades as $unidade)
+                        <option value="{{$unidade->id}}">{{$unidade->nome}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select class="form-control" id="vacina" name="vacina">
+                        <option disabled selected>Vacina</option>
+                        @foreach($listaVacinas as $vacina)
+                        <option value="{{$vacina->id}}">{{$vacina->vacina}} - {{$vacina->dose}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                
+                <div class="colform-group">
+                    <button type="button" class="btn btn-primary">Gerar</button>
+                    <button type="button" class="btn btn-success">Adicionar Vacina</button>
+                    <button type="button" class="btn btn-danger">Remover Vacina</button>
+                </div>
+            </div>
 
-            <div class="col-md-3">
-                <label for="vacina1">Vacina</label>
-                <select class="form-control" id="vacina1" name="vacina1">
-                    <option disabled selected>Selecione a vacina</option>
-                    @foreach($listaVacina as $vacina)
-                    <option value="{{$vacina->id}}">{{$vacina->vacina}} - {{$vacina->dose}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="col-md-3">
-                <label for="vacina2">Vacina</label>
-                <select class="form-control" id="vacina2" name="vacina2">
-                    <option disabled selected>Selecione a vacina</option>
-                    @foreach($listaVacina as $vacina)
-                    <option value="{{$vacina->id}}">{{$vacina->vacina}} - {{$vacina->dose}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="col-md-3">
-                <label for="vacina3">Vacina</label>
-                <select class="form-control" id="vacina3" name="vacina3">
-                    <option disabled selected>Selecione a vacina</option>
-                    @foreach($listaVacina as $vacina)
-                    <option value="{{$vacina->id}}">{{$vacina->vacina}} - {{$vacina->dose}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="col-md-3">
-                <label for="vacina4">Vacina</label>
-                <select class="form-control" id="vacina4" name="vacina4">
-                    <option disabled selected>Selecione a vacina</option>
-                    @foreach($listaVacina as $vacina)
-                    <option value="{{$vacina->id}}">{{$vacina->vacina}} - {{$vacina->dose}}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-        <div class="form-group row">
 
-            <div class="col-md-4">
-                <label for="dataInicial">Data Inicial</label>
-                <input type="date" class="form-control" id="dataInicial" name="dataInicial">
-            </div>
-            <div class="col-md-4">
-                <label for="dataFinal">Data Final</label>
-                <input type="date" class="form-control" id="dataFinal" name="dataFinal">
-            </div>
-        </div>
-    </div>
-    <div class="form-group col-md-12 ">
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-            <label class="form-check-label" for="inlineRadio2">Por mês</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-            <label class="form-check-label" for="inlineRadio2">Por ano</label>
-        </div>
-    </div>
+    </form>
 
-    <div class="col-md-3 ">
-
-        <a href="{{ route('telaCadastroUsuario') }}" class="btn btn-primary pull-right h2"> Gerar</a>
-    </div>
-</form>
-
-    <canvas id="myChart" width="50vh" height="20vh"></canvas>
+    <canvas id="myBarChart" width="50vh" height="20vh"></canvas>
     <canvas id="myDoughnutChart" width="50vh" height="20vh"></canvas>
 
     <script>
@@ -129,7 +129,7 @@
                     borderColor: "orange",
                     borderWidth: 1,
                     data: [6, 9, 7, 3, 10, 7, 4, 6]
-                }
+                },
             ]
         };
 
@@ -199,7 +199,6 @@
                 }
             ],
 
-            // These labels appear in the legend and in the tooltips when hovering different arcs
             labels: [
                 'Masculino',
                 'Feminino',
@@ -214,7 +213,8 @@
 
             },
             title: {
-                text: "Sexo"
+                text: "Sexo",
+                display: true
             },
             tooltips: {
                 callbacks: {
@@ -228,8 +228,26 @@
             circumference: 1 * Math.PI
         }
 
+
+        $('#button').click(function() {
+            // You create the new dataset `Vendas` with new data and color to differentiate
+            var newDataset = {
+                label: "Vendas",
+                backgroundColor: 'rgba(99, 255, 132, 0.2)',
+                borderColor: 'rgba(99, 255, 132, 1)',
+                borderWidth: 1,
+                data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120],
+            }
+
+            // You add the newly created dataset to the list of `data`
+            barChartData.datasets.push(newDataset);
+
+            // You update the chart to take into account the new dataset
+            myBarChart.update();
+        });
+
         window.onload = function() {
-            var ctx = document.getElementById("myChart").getContext("2d");
+            var ctx = document.getElementById("myBarChart").getContext("2d");
             window.myBar = new Chart(ctx, {
                 type: "bar",
                 data: barChartData,
@@ -237,6 +255,7 @@
             });
 
             var ctx2 = document.getElementById("myDoughnutChart").getContext("2d");
+
             var myDoughnutChart = new Chart(ctx2, {
                 type: 'doughnut',
                 data: dataDoughnut,
@@ -244,7 +263,10 @@
             });
         };
 
-        // new Chart(document.getElementById("myChart"), {
+
+
+
+        // new Chart(document.getElementById("myBarChart"), {
         //     type: 'bar',
         //     data: {
         //         labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],

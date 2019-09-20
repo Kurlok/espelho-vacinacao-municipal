@@ -2,17 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Unidade;
 use Illuminate\Http\Request;
 use App\Vacina;
 class GraficosController extends Controller
 {
     public function index()
     {
-        $listaVacina = Vacina::all();
+        $listaVacinas = Vacina::all();
+        $listaUnidades = Unidade::all();
+
         return view(
             'graficos/graficos',
             [
-                'listaVacina' => $listaVacina,
+                'listaVacinas' => $listaVacinas,
+                'listaUnidades' => $listaUnidades,
+
             ]
         );
     }
