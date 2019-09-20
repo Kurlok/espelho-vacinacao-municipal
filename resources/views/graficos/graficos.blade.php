@@ -15,70 +15,70 @@
     </div>
     <form action="/usuarios/busca" method="POST" role="search">
         {{ csrf_field() }}
-            <div class="form-group row">
+        <div class="form-group row">
             <legend class="col-form-label col-md-1" style="padding-top: 5px">Período:</legend>
-                    <div class="col-md-2" style="padding-top: 5px">
-                        <div class="form-check form-check-inline ">
-                            <input class="form-check-input " style="padding-top: 50%" type="radio" name="periodoRadios" id="radioMensal" value="mensal">
-                            <label class="form-check-label" for="radioMensal">Mensal</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="periodoRadios" id="radioAnual" value="anual">
-                            <label class="form-check-label" for="radioAnual">Anual</label>
-                        </div>
-                    </div>
-                <div class="col-md-2">
-                    <select class="form-control" id="mes" name="mes">
-                        <option disabled selected>Mês</option>
-                        <option value="01">Janeiro</option>
-                        <option value="02">Fevereiro</option>
-                        <option value="03">Março</option>
-                        <option value="04">Abril</option>
-                        <option value="05">Maio</option>
-                        <option value="06">Junho</option>
-                        <option value="07">Julho</option>
-                        <option value="08">Agosto</option>
-                        <option value="09">Setembro</option>
-                        <option value="10">Outubro</option>
-                        <option value="11">Novembro</option>
-                        <option value="12">Dezembro</option>
-                    </select>
+            <div class="col-md-2" style="padding-top: 5px">
+                <div class="form-check form-check-inline ">
+                    <input class="form-check-input " style="padding-top: 50%" type="radio" name="periodoRadios" id="radioMensal" value="mensal">
+                    <label class="form-check-label" for="radioMensal">Mensal</label>
                 </div>
-                <div class="col-md-2">
-                    <select class="form-control" id="ano" name="ano">
-                        <option disabled selected>Ano</option>
-                        @for ($ano = Carbon\Carbon::now()->year; $ano >= 1970; $ano--)
-                        <option value="{{$ano}}">{{$ano}}</option>
-                        @endfor
-                    </select>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="periodoRadios" id="radioAnual" value="anual">
+                    <label class="form-check-label" for="radioAnual">Anual</label>
                 </div>
-                <div class="col-md-2">
-                    <select class="form-control" id="unidade" name="unidade">
-                        <option disabled selected>Unidade</option>
-                        <option value="">Todas</option>
+            </div>
+            <div class="col-md-2">
+                <select class="form-control" id="mes" name="mes">
+                    <option disabled selected>Mês</option>
+                    <option value="01">Janeiro</option>
+                    <option value="02">Fevereiro</option>
+                    <option value="03">Março</option>
+                    <option value="04">Abril</option>
+                    <option value="05">Maio</option>
+                    <option value="06">Junho</option>
+                    <option value="07">Julho</option>
+                    <option value="08">Agosto</option>
+                    <option value="09">Setembro</option>
+                    <option value="10">Outubro</option>
+                    <option value="11">Novembro</option>
+                    <option value="12">Dezembro</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <select class="form-control" id="ano" name="ano">
+                    <option disabled selected>Ano</option>
+                    @for ($ano = Carbon\Carbon::now()->year; $ano >= 1970; $ano--)
+                    <option value="{{$ano}}">{{$ano}}</option>
+                    @endfor
+                </select>
+            </div>
+            <div class="col-md-2">
+                <select class="form-control" id="unidade" name="unidade">
+                    <option disabled selected>Unidade</option>
+                    <option value="">Todas</option>
 
-                        @foreach($listaUnidades as $unidade)
-                        <option value="{{$unidade->id}}">{{$unidade->nome}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <select class="form-control" id="vacina" name="vacina">
-                        <option disabled selected>Vacina</option>
-                        @foreach($listaVacinas as $vacina)
-                        <option value="{{$vacina->id}}">{{$vacina->vacina}} - {{$vacina->dose}}</option>
-                        @endforeach
-                    </select>
-                </div>
+                    @foreach($listaUnidades as $unidade)
+                    <option value="{{$unidade->id}}">{{$unidade->nome}}</option>
+                    @endforeach
+                </select>
             </div>
-            <div class="form-group">
-                
-                <div class="colform-group">
-                    <button type="button" class="btn btn-primary">Gerar</button>
-                    <button type="button" class="btn btn-success">Adicionar Vacina</button>
-                    <button type="button" class="btn btn-danger">Remover Vacina</button>
-                </div>
+            <div class="col-md-3">
+                <select class="form-control" id="vacina" name="vacina">
+                    <option disabled selected>Vacina</option>
+                    @foreach($listaVacinas as $vacina)
+                    <option value="{{$vacina->id}}">{{$vacina->vacina}} - {{$vacina->dose}}</option>
+                    @endforeach
+                </select>
             </div>
+        </div>
+        <div class="form-group">
+
+            <div class="colform-group">
+                <button type="button" class="btn btn-primary">Gerar</button>
+                <button type="button" class="btn btn-success" id="adicionarVacina">Adicionar Vacina</button>
+                <button type="button" class="btn btn-danger" id="removerVacina">Remover Vacina</button>
+            </div>
+        </div>
 
 
     </form>
@@ -102,35 +102,6 @@
                 "Novembro",
                 "Dezembro"
             ],
-            datasets: [{
-                    label: "Hepatite B - Dose 1",
-                    backgroundColor: "pink",
-                    borderColor: "red",
-                    borderWidth: 1,
-                    data: [3, 5, 6, 7, 3, 5, 6, 7]
-                },
-                {
-                    label: "Hepatite B - Dose 2",
-                    backgroundColor: "lightblue",
-                    borderColor: "blue",
-                    borderWidth: 1,
-                    data: [4, 7, 3, 6, 10, 7, 4, 6]
-                },
-                {
-                    label: "Hepatite B - Dose 3",
-                    backgroundColor: "lightgreen",
-                    borderColor: "green",
-                    borderWidth: 1,
-                    data: [10, 7, 4, 6, 9, 7, 3, 10]
-                },
-                {
-                    label: "Hepatite B - Reforço 1",
-                    backgroundColor: "yellow",
-                    borderColor: "orange",
-                    borderWidth: 1,
-                    data: [6, 9, 7, 3, 10, 7, 4, 6]
-                },
-            ]
         };
 
         var chartOptions = {
@@ -151,54 +122,7 @@
             }
         }
 
-
-
         dataDoughnut = {
-            datasets: [{
-                    label: "Hepatite B (Dose 1)",
-                    backgroundColor: [
-                        'lightblue',
-                        'pink',
-
-                    ],
-
-                    data: [10, 20],
-                },
-                {
-                    backgroundColor: [
-                        'lightblue',
-                        'pink',
-
-                    ],
-
-                    label: "Hepatite B (Dose 2)",
-
-                    data: [6, 4]
-                },
-                {
-                    backgroundColor: [
-                        'lightblue',
-                        'pink',
-
-                    ],
-
-                    label: "Hepatite B (Dose 3)",
-
-                    data: [27, 44]
-                },
-                {
-                    backgroundColor: [
-                        'lightblue',
-                        'pink',
-
-                    ],
-
-                    label: "Hepatite B (Reforço 1)",
-
-                    data: [50, 67]
-                }
-            ],
-
             labels: [
                 'Masculino',
                 'Feminino',
@@ -228,64 +152,96 @@
             circumference: 1 * Math.PI
         }
 
+        var ctx = document.getElementById("myBarChart").getContext("2d");
+        var myBarChart = new Chart(ctx, {
+            type: "bar",
+            data: barChartData,
+            options: chartOptions
+        });
 
-        $('#button').click(function() {
+        var ctx2 = document.getElementById("myDoughnutChart").getContext("2d");
+        var myDoughnutChart = new Chart(ctx2, {
+            type: 'doughnut',
+            data: dataDoughnut,
+            options: optionsDoughnut
+        });
+
+        $('#adicionarVacina').click(function() {
             // You create the new dataset `Vendas` with new data and color to differentiate
             var newDataset = {
                 label: "Vendas",
-                backgroundColor: 'rgba(99, 255, 132, 0.2)',
-                borderColor: 'rgba(99, 255, 132, 1)',
-                borderWidth: 1,
+                backgroundColor: getRandomColor(),
+                //borderColor: getRandomColor(),
+                //borderWidth: 2,
                 data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120],
             }
 
-            // You add the newly created dataset to the list of `data`
             barChartData.datasets.push(newDataset);
+            dataDoughnut.datasets.push(newDataset);
 
-            // You update the chart to take into account the new dataset
             myBarChart.update();
+            myDoughnutChart.update();
         });
 
-        window.onload = function() {
-            var ctx = document.getElementById("myBarChart").getContext("2d");
-            window.myBar = new Chart(ctx, {
-                type: "bar",
-                data: barChartData,
-                options: chartOptions
-            });
 
-            var ctx2 = document.getElementById("myDoughnutChart").getContext("2d");
+        $('#removerVacina').click(function() {
+            barChartData.datasets.pop();
+            dataDoughnut.datasets.pop();
+            myBarChart.update();
+            myDoughnutChart.update();
+        });
 
-            var myDoughnutChart = new Chart(ctx2, {
-                type: 'doughnut',
-                data: dataDoughnut,
-                options: optionsDoughnut
-            });
-        };
+        $('#radioMensal').click(function() {
+            myBarChart.data.datasets = [];
+            myDoughnutChart.data.datasets = [];
 
+            myBarChart.data.labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+                "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
+                "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"
+            ];
+            myBarChart.update();
+            myDoughnutChart.update();
 
+        });
 
+        $('#radioAnual').click(function() {
+            myBarChart.data.datasets = [];
+            myDoughnutChart.data.datasets = [];
 
-        // new Chart(document.getElementById("myBarChart"), {
-        //     type: 'bar',
-        //     data: {
-        //         labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
-        //         datasets: [{
-        //             label: "Population (millions)",
-        //             backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
-        //             data: [2478, 5267, 734, 784, 433]
-        //         }]
-        //     },
-        //     options: {
-        //         legend: {
-        //             display: false
-        //         },
-        //         title: {
-        //             display: true,
-        //             text: 'Predicted world population (millions) in 2050'
-        //         }
-        //     }
-        // });
+            myBarChart.data.labels = [
+                "Janeiro",
+                "Fevereiro",
+                "Março",
+                "Abril",
+                "Maio",
+                "Junho",
+                "Julho",
+                "Agosto",
+                "Setembro",
+                "Outubro",
+                "Novembro",
+                "Dezembro"
+            ];
+            myBarChart.update();
+            myDoughnutChart.update();
+
+        });
+
+        function getRandomRgba() {
+            var o = Math.round,
+                r = Math.random,
+                s = 255;
+            return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ')';
+        }
+
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
     </script>
 
 </div>
