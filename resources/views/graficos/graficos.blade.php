@@ -167,6 +167,12 @@
         });
 
         $('#adicionarVacina').click(function() {
+
+            $("#LoadMe").show();
+            var idCargo = e.target.value;
+                                var url = ('titulos/idCargo').replace('idCargo', idCargo);
+                                
+
             // You create the new dataset `Vendas` with new data and color to differentiate
             var newDataset = {
                 label: "Vendas",
@@ -178,6 +184,8 @@
 
             barChartData.datasets.push(newDataset);
             dataDoughnut.datasets.push(newDataset);
+
+
 
             myBarChart.update();
             myDoughnutChart.update();
@@ -242,7 +250,42 @@
             }
             return color;
         }
+
+        comboMeses = document.getElementById('mes');
+        comboMeses.onchange = function(e) {
+            myBarChart.data.datasets = [];
+            myDoughnutChart.data.datasets = [];
+            myBarChart.update();
+            myDoughnutChart.update();
+        }
+        comboAnos = document.getElementById('ano');
+        comboAnos.onchange = function(e) {
+            myBarChart.data.datasets = [];
+            myDoughnutChart.data.datasets = [];
+            myBarChart.update();
+            myDoughnutChart.update();
+        }
     </script>
+
+<div class="carregando" id="loading">
+    <!-- <div class="loader"></div> -->
+
+</div>
+
+<script>
+    $(function() {
+        var loading = $("#loading");
+        $(document).ajaxStart(function() {
+            loading.show();
+        });
+
+        $(document).ajaxStop(function() {
+            loading.hide();
+        });
+
+
+    });
+</script>
 
 </div>
 

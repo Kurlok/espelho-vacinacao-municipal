@@ -72,3 +72,54 @@ input{
   height:24px;
   font-size: 10px;
   }
+
+  .carregando {
+    display:    none;
+    position:   fixed;
+
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+    url('/img/loading.gif')
+
+    50% 50%
+                no-repeat;
+}
+
+/* .loader {
+    position: fixed;
+
+    width: 80px;
+    height: 80px;
+    border: 10px solid rgba(0, 0, 0, .3);
+    border-radius: 50%;
+    border-top-color: #000;
+    animation: spin 1s ease-in-out infinite;
+    -webkit-animation: spin 1s ease-in-out infinite;
+  }
+  
+  @keyframes spin {
+    to {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+  
+  @-webkit-keyframes spin {
+    to {
+      -webkit-transform: rotate(360deg);
+    }
+  } */
+  
+/* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+body.loading .carregando {
+    overflow: hidden;   
+}
+
+/* Anytime the body has the loading class, our
+   modal element will be visible */
+body.loading .carregando {
+    display: block;
+}
