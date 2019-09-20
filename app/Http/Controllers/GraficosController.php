@@ -28,13 +28,21 @@ class GraficosController extends Controller
     {
         if ($idUnidade != "todas") {
             $totalDeVacinas = DB::table('pacientes_vacinas')
-            ->where([
-                ['fk_unidades_id', '=', $idUnidade],
-                ['fk_vacinas_id', '=',  $idVacina],
-            ])
-            ->whereYear('data_aplicacao', $ano)
-            ->whereMonth('data_aplicacao', $mes)
-            ->count();
+                ->where([
+                    ['fk_unidades_id', '=', $idUnidade],
+                    ['fk_vacinas_id', '=',  $idVacina],
+                ])
+                ->whereYear('data_aplicacao', $ano)
+                ->whereMonth('data_aplicacao', $mes)
+                ->count();
+        } else {
+            $totalDeVacinas = DB::table('pacientes_vacinas')
+                ->where([
+                    ['fk_vacinas_id', '=',  $idVacina],
+                ])
+                ->whereYear('data_aplicacao', $ano)
+                ->whereMonth('data_aplicacao', $mes)
+                ->count();
         }
 
         return json_encode($totalDeVacinas);
