@@ -1,6 +1,5 @@
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-<script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
 
 @endpush
 
@@ -13,8 +12,6 @@
             <h2><i class="fas fa-chart-bar"></i> Gráficos</a></h2>
         </div>
     </div>
-    <form action="/usuarios/busca" method="POST" role="search">
-        {{ csrf_field() }}
         <div class="form-group row">
             <legend class="col-form-label col-md-1" style="padding-top: 5px">Período:</legend>
             <div class="col-md-2" style="padding-top: 5px">
@@ -55,7 +52,7 @@
             <div class="col-md-2">
                 <select class="form-control" id="unidade" name="unidade">
                     <option disabled selected>Unidade</option>
-                    <option value="">Todas</option>
+                    <option value="todas">Todas</option>
 
                     @foreach($listaUnidades as $unidade)
                     <option value="{{$unidade->id}}">{{$unidade->nome}}</option>
@@ -81,11 +78,9 @@
         </div>
 
 
-    </form>
 
     <canvas id="myBarChart" width="50vh" height="20vh"></canvas>
     <canvas id="myDoughnutChart" width="50vh" height="20vh"></canvas>
-
     <script>
         var barChartData = {
             labels: [
@@ -167,11 +162,28 @@
         });
 
         $('#adicionarVacina').click(function() {
+            // $("#LoadMe").show();
+            var mes = document.getElementById("mes").value;
+            var ano = document.getElementById("ano").value;
+            var idVacina = document.getElementById("vacina").value;
+            var idUnidade = document.getElementById("unidade").value;
 
-            $("#LoadMe").show();
-            var idCargo = e.target.value;
-                                var url = ('titulos/idCargo').replace('idCargo', idCargo);
-                                
+            var url = ('graficos/idVacina/idUnidade/ano/mes').replace('idVacina', idVacina);
+            url = url.replace('idUnidade', idUnidade);
+            url = url.replace('ano', ano);
+            url = url.replace('mes', mes);
+
+            console.log(url);
+            $.ajax({
+                type: 'POST',
+                url: url,
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(response) {
+                    console.log(response);
+                }
+            });
 
             // You create the new dataset `Vendas` with new data and color to differentiate
             var newDataset = {
@@ -267,25 +279,23 @@
         }
     </script>
 
-<div class="carregando" id="loading">
-    <!-- <div class="loader"></div> -->
+    <div class="carregando" id="loading">
+        <!-- <div class="loader"></div> -->
 
-</div>
+    </div>
 
-<script>
-    $(function() {
-        var loading = $("#loading");
-        $(document).ajaxStart(function() {
-            loading.show();
+    <script>
+        $(function() {
+            var loading = $("#loading");
+            $(document).ajaxStart(function() {
+                loading.show();
+            });
+
+            $(document).ajaxStop(function() {
+                loading.hide();
+            });
         });
-
-        $(document).ajaxStop(function() {
-            loading.hide();
-        });
-
-
-    });
-</script>
+    </script>
 
 </div>
 
