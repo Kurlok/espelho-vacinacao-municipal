@@ -24,7 +24,7 @@ class GraficosController extends Controller
         );
     }
 
-    public function getAplicacoesVacinas($idUnidade, $idVacina, $ano, $mes)
+    public function getAplicacoesVacinas($idVacina, $idUnidade, $ano, $mes)
     {
         if ($idUnidade != "todas") {
             $totalDeVacinas = DB::table('pacientes_vacinas')
@@ -44,7 +44,7 @@ class GraficosController extends Controller
                 ->whereMonth('data_aplicacao', $mes)
                 ->count();
         }
-
         return json_encode($totalDeVacinas);
+
     }
 }

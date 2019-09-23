@@ -9,6 +9,6 @@ class Paciente extends Model
     protected $table = 'pacientes';
     public function vacinas()
     {
-        return $this->belongsToMany('App\Paciente', 'pacientes_vacinas', 'fk_pacientes_id', 'fk_vacinas_id')->withPivot('data_aplicacao');
+        return $this->belongsToMany('App\Paciente', 'pacientes_vacinas', 'fk_pacientes_id', 'fk_vacinas_id')->withPivot(['data_aplicacao', 'fk_unidades_id']);
     }
 }

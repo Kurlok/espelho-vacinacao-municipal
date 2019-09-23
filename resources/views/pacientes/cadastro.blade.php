@@ -178,6 +178,7 @@
 
 
                             <div class="form-row">
+
                                 @foreach($listaVacinas as $vacina)
                                 @if(isset($vacinaAnterior))
                                 @if(($vacinaAnterior->vacina) != ($vacina->vacina))
@@ -195,10 +196,11 @@
                                     <input type="text" class="form-control" id="descricaoOutras[]" name="descricaoOutras[]" value="@if(isset($paciente)){{$vacina->pacientes()->where('fk_pacientes_id', $paciente->id)->firstOrFail()->pivot->descricao_outras}}@else{{old('descricaoOutras[]')}}@endif" hidden>
                                     @endif
                                     <input type="date" class="form-control" id="dataVacina[]" name="dataVacina[]" value="@if(isset($paciente)){{$vacina->pacientes()->where('fk_pacientes_id', $paciente->id)->firstOrFail()->pivot->data_aplicacao}}@else{{old('dataVacina[]')}}@endif">
-                                    <select class="form-control" id="unidade" name="unidade">
-                                        <option disabled selected>Unidade</option>
+                                    <select class="form-control" id="unidadeVacina[]" name="unidadeVacina[]">
+                                        
+                                        <option value=''>Unidade</option>
                                         @foreach($listaUnidades as $unidade)
-                                        <option value="{{$unidade->id}}">{{$unidade->nome}}</option>
+                                        <option value="{{$unidade->id}}" @if(isset($paciente)) @if(($vacina->pacientes()->where('fk_pacientes_id', $paciente->id)->firstOrFail()->pivot->fk_unidades_id) == $unidade->id) selected @endif @endif >{{$unidade->nome}}</option>
                                         @endforeach
                                     </select>
                                 </div>
