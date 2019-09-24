@@ -52,30 +52,8 @@ class GraficosController extends Controller
                         ->count();
                 }
                 array_push($arrayPeriodo, $numVacinas);
-                //Procura a quantidade de pacientes do sexo para o mês
-                $numVacinasMasculino = 0;
-                $numVacinasFeminino = 0;
-                $numVacinasSexo = [];
-                if ($idUnidade != "todas") {
-                    $pacientesPeriodo = DB::table('pacientes_vacinas')
-                        ->where([
-                            ['fk_unidades_id', '=', $idUnidade],
-                            ['fk_vacinas_id', '=',  $idVacina],
-                        ])
-                        ->whereYear('data_aplicacao', $ano)
-                        ->whereMonth('data_aplicacao', $mes)
-                        ->get();
-                } else {
-                    $pacientesPeriodo = DB::table('pacientes_vacinas')
-                        ->where([
-                            ['fk_vacinas_id', '=',  $idVacina],
-                        ])
-                        ->whereYear('data_aplicacao', $ano)
-                        ->whereMonth('data_aplicacao', $mes)
-                        ->get();
-                }
             }
-            //Procura a quantidade de pacientes do sexo para o mês
+            //Procura a quantidade de pacientes do sexo para o ano
             $numVacinasMasculino = 0;
             $numVacinasFeminino = 0;
             $numVacinasSexo = [];

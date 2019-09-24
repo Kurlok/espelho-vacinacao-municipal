@@ -12,70 +12,70 @@
             <h2><i class="fas fa-chart-bar"></i> Gráficos</a></h2>
         </div>
     </div>
-        <div class="form-group row">
-            <legend class="col-form-label col-md-1" style="padding-top: 5px">Período:</legend>
-            <div class="col-md-2" style="padding-top: 5px">
-                <div class="form-check form-check-inline ">
-                    <input class="form-check-input " style="padding-top: 50%" type="radio" name="periodoRadios" id="radioMensal" value="mensal">
-                    <label class="form-check-label" for="radioMensal">Mensal</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="periodoRadios" id="radioAnual" value="anual">
-                    <label class="form-check-label" for="radioAnual">Anual</label>
-                </div>
+    <div class="form-group row">
+        <legend class="col-form-label col-md-1" style="padding-top: 5px">Período:</legend>
+        <div class="col-md-2" style="padding-top: 5px">
+            <div class="form-check form-check-inline ">
+                <input class="form-check-input " style="padding-top: 50%" type="radio" name="periodoRadios" id="radioMensal" value="mensal">
+                <label class="form-check-label" for="radioMensal">Mensal</label>
             </div>
-            <div class="col-md-2">
-                <select class="form-control" id="mes" name="mes">
-                    <option disabled selected>Mês</option>
-                    <option value="01">Janeiro</option>
-                    <option value="02">Fevereiro</option>
-                    <option value="03">Março</option>
-                    <option value="04">Abril</option>
-                    <option value="05">Maio</option>
-                    <option value="06">Junho</option>
-                    <option value="07">Julho</option>
-                    <option value="08">Agosto</option>
-                    <option value="09">Setembro</option>
-                    <option value="10">Outubro</option>
-                    <option value="11">Novembro</option>
-                    <option value="12">Dezembro</option>
-                </select>
-            </div>
-            <div class="col-md-2">
-                <select class="form-control" id="ano" name="ano">
-                    <option disabled selected>Ano</option>
-                    @for ($ano = Carbon\Carbon::now()->year; $ano >= 1970; $ano--)
-                    <option value="{{$ano}}">{{$ano}}</option>
-                    @endfor
-                </select>
-            </div>
-            <div class="col-md-2">
-                <select class="form-control" id="unidade" name="unidade">
-                    <option disabled selected>Unidade</option>
-                    <option value="todas">Todas</option>
-
-                    @foreach($listaUnidades as $unidade)
-                    <option value="{{$unidade->id}}">{{$unidade->nome}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="col-md-3">
-                <select class="form-control" id="vacina" name="vacina">
-                    <option disabled selected>Vacina</option>
-                    @foreach($listaVacinas as $vacina)
-                    <option value="{{$vacina->id}}">{{$vacina->vacina}} - {{$vacina->dose}}</option>
-                    @endforeach
-                </select>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="periodoRadios" id="radioAnual" value="anual">
+                <label class="form-check-label" for="radioAnual">Anual</label>
             </div>
         </div>
-        <div class="form-group">
-
-            <div class="colform-group">
-                <button type="button" class="btn btn-success" id="adicionarVacina">Adicionar Vacina</button>
-                
-                <button type="button" class="btn btn-danger" id="removerVacina">Remover Vacina</button>
-            </div>
+        <div class="col-md-2">
+            <select class="form-control" id="mes" name="mes">
+                <option disabled selected>Mês</option>
+                <option value="01">Janeiro</option>
+                <option value="02">Fevereiro</option>
+                <option value="03">Março</option>
+                <option value="04">Abril</option>
+                <option value="05">Maio</option>
+                <option value="06">Junho</option>
+                <option value="07">Julho</option>
+                <option value="08">Agosto</option>
+                <option value="09">Setembro</option>
+                <option value="10">Outubro</option>
+                <option value="11">Novembro</option>
+                <option value="12">Dezembro</option>
+            </select>
         </div>
+        <div class="col-md-2">
+            <select class="form-control" id="ano" name="ano">
+                <option disabled selected>Ano</option>
+                @for ($ano = Carbon\Carbon::now()->year; $ano >= 1970; $ano--)
+                <option value="{{$ano}}">{{$ano}}</option>
+                @endfor
+            </select>
+        </div>
+        <div class="col-md-2">
+            <select class="form-control" id="unidade" name="unidade">
+                <option disabled selected>Unidade</option>
+                <option value="todas">Todas</option>
+
+                @foreach($listaUnidades as $unidade)
+                <option value="{{$unidade->id}}">{{$unidade->nome}}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col-md-3">
+            <select class="form-control" id="vacina" name="vacina">
+                <option disabled selected>Vacina</option>
+                @foreach($listaVacinas as $vacina)
+                <option value="{{$vacina->id}}">{{$vacina->vacina}} - {{$vacina->dose}}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+
+        <div class="colform-group">
+            <button type="button" class="btn btn-success" id="adicionarVacina">Adicionar Vacina</button>
+
+            <button type="button" class="btn btn-danger" id="removerVacina">Remover Vacina</button>
+        </div>
+    </div>
 
 
 
@@ -169,10 +169,10 @@
             var idUnidade = document.getElementById("unidade").value;
             var periodo;
 
-            if($('#radioMensal').is(':checked')) {
+            if ($('#radioMensal').is(':checked')) {
                 periodo = document.getElementById("radioMensal").value;
             }
-            if($('#radioAnual').is(':checked')){
+            if ($('#radioAnual').is(':checked')) {
                 periodo = document.getElementById("radioAnual").value;
             }
 
@@ -181,35 +181,61 @@
             url = url.replace('ano', ano);
             url = url.replace('mes', mes);
             url = url.replace('periodo', periodo);
+            //console.log(url);
 
-            console.log(url);
             $.ajax({
                 type: 'POST',
                 url: url,
                 success: function(response) {
-                    console.log(response);
+                    resposta = JSON.parse(response)
+                    console.log(resposta);
+                    vacina = document.getElementById("vacina");
+                    unidade = document.getElementById("unidade");
+                    if(document.getElementById('radioMensal').checked) {
+                        labelBarChart = vacina.options[vacina.selectedIndex].text + " (" + unidade.options[unidade.selectedIndex].text + ")";
+                        myBarChart.options.title.text = "Vacinas em " + document.getElementById('mes').value + "/" + document.getElementById('ano').value;
+
+                    }
+                    else {
+                        labelBarChart = vacina.options[vacina.selectedIndex].text + " (" + unidade.options[unidade.selectedIndex].text + ")";
+                        myBarChart.options.title.text = "Vacinas em " + document.getElementById('ano').value;
+
+                    }
+                    
+
+                    var novoDatasetBarChart = {
+                        label: labelBarChart,
+                        backgroundColor: getRandomColor(),
+                        //borderColor: getRandomColor(),
+                        //borderWidth: 2,
+                        data: resposta[0],
+                    }
+
+                    var novoDatasetDoughnutChart = {
+                        label: labelBarChart,
+                        backgroundColor: [
+                            'lightblue',
+                            'pink'
+                        ],
+                        //borderColor: getRandomColor(),
+                        //borderWidth: 2,
+                        data: resposta[1]
+                    }
+                    barChartData.datasets.push(novoDatasetBarChart);
+                    dataDoughnut.datasets.push(novoDatasetDoughnutChart);
+
+                    myBarChart.update();
+                    myDoughnutChart.update();
+
                 },
                 error: function(response) {
                     console.log(response);
                 }
             });
 
-            // You create the new dataset `Vendas` with new data and color to differentiate
-            var newDataset = {
-                label: "Vendas",
-                backgroundColor: getRandomColor(),
-                //borderColor: getRandomColor(),
-                //borderWidth: 2,
-                data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120],
-            }
-
-            barChartData.datasets.push(newDataset);
-            dataDoughnut.datasets.push(newDataset);
 
 
 
-            myBarChart.update();
-            myDoughnutChart.update();
         });
 
 
