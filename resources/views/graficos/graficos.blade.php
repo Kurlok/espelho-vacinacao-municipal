@@ -71,8 +71,8 @@
         <div class="form-group">
 
             <div class="colform-group">
-                <button type="button" class="btn btn-primary">Gerar</button>
                 <button type="button" class="btn btn-success" id="adicionarVacina">Adicionar Vacina</button>
+                
                 <button type="button" class="btn btn-danger" id="removerVacina">Remover Vacina</button>
             </div>
         </div>
@@ -167,11 +167,20 @@
             var ano = document.getElementById("ano").value;
             var idVacina = document.getElementById("vacina").value;
             var idUnidade = document.getElementById("unidade").value;
+            var periodo;
 
-            var url = ('graficos/idVacina/idUnidade/ano/mes').replace('idVacina', idVacina);
+            if($('#radioMensal').is(':checked')) {
+                periodo = document.getElementById("radioMensal").value;
+            }
+            if($('#radioAnual').is(':checked')){
+                periodo = document.getElementById("radioAnual").value;
+            }
+
+            var url = ('graficos/idVacina/idUnidade/ano/mes/periodo').replace('idVacina', idVacina);
             url = url.replace('idUnidade', idUnidade);
             url = url.replace('ano', ano);
             url = url.replace('mes', mes);
+            url = url.replace('periodo', periodo);
 
             console.log(url);
             $.ajax({

@@ -50,7 +50,7 @@ Route::middleware(['auth', 'Administrador', 'SenhaRedefinida'])->group(function 
 
     Route::get('/relatorios', 'RelatoriosController@index')->name('relatorios');
     Route::get('/graficos', 'GraficosController@index')->name('graficos');
-    Route::post('/graficos/{idVacina}/{idUnidade}/{ano}/{mes}', 'GraficosController@getAplicacoesVacinas');
+    Route::post('/graficos/{idVacina}/{idUnidade}/{ano}/{mes}/{periodo}', 'GraficosController@getAplicacoesVacinas');
 
 
 
