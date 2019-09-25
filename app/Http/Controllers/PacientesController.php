@@ -10,6 +10,7 @@ use App\Rules\PalavrasMinimas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class PacientesController extends Controller
 {
@@ -132,20 +133,26 @@ class PacientesController extends Controller
         $paciente->telefone = $request->telefone;
         $paciente->telefone_alternativo = $request->telefone_alternativo;
         $paciente->observacoes = $request->observacoes;
+        $paciente->fk_users_id = Auth::id();
+
         $paciente->save();
 
         $listaVacinasTamanho = Vacina::count();
         $vacina = new Vacina();
         for ($i = 0; $i < $listaVacinasTamanho; $i++) {
             $vacina->id = $request->input("idVacina.$i");
-            $vacina->data_aplicacao = $request->input("dataVacina.$i");
+            $data_aplicacao = $request->input("dataVacina.$i");
             $descricao_outras = $request->input("descricaoOutras.$i");
             $idUnidade = $request->input("unidadeVacina.$i");
-            Paciente::find($paciente->id)->vacinas()->attach($vacina->id, [
-                'data_aplicacao' => $vacina->data_aplicacao,
-                'descricao_outras' => $descricao_outras,
-                'fk_unidades_id' => $idUnidade
-            ]);
+            if ($data_aplicacao != null) {
+                Paciente::find($paciente->id)->vacinas()->attach($vacina->id, [
+                    'data_aplicacao' => $vacina->data_aplicacao,
+                    'descricao_outras' => $descricao_outras,
+                    'fk_unidades_id' => $idUnidade,
+                    'fk_users_id' => Auth::id()
+
+                ]);
+            }
         }
         //echo $paciente->id;
         return redirect()->route('pacientes');
@@ -178,6 +185,7 @@ class PacientesController extends Controller
         $paciente->telefone = $request->telefone;
         $paciente->telefone_alternativo = $request->telefone_alternativo;
         $paciente->observacoes = $request->observacoes;
+        $paciente->fk_users_id = Auth::id();
 
         $paciente->save();
 
@@ -192,7 +200,8 @@ class PacientesController extends Controller
             Paciente::find($paciente->id)->vacinas()->updateExistingPivot($vacina->id, [
                 'data_aplicacao' => $vacina->data_aplicacao,
                 'descricao_outras' => $descricao_outras,
-                'fk_unidades_id' => $idUnidade
+                'fk_unidades_id' => $idUnidade,
+                'fk_users_id' => Auth::id()
             ]);
         }
         return redirect()->route('pacientes');
