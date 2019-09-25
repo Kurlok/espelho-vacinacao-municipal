@@ -134,27 +134,29 @@ class PacientesController extends Controller
         $paciente->telefone_alternativo = $request->telefone_alternativo;
         $paciente->observacoes = $request->observacoes;
         $paciente->fk_users_id = Auth::id();
-
         $paciente->save();
 
         $listaVacinasTamanho = Vacina::count();
         $vacina = new Vacina();
+        $pacienteCadastrado = Paciente::find($paciente->id);
         for ($i = 0; $i < $listaVacinasTamanho; $i++) {
             $vacina->id = $request->input("idVacina.$i");
             $data_aplicacao = $request->input("dataVacina.$i");
             $descricao_outras = $request->input("descricaoOutras.$i");
             $idUnidade = $request->input("unidadeVacina.$i");
+            $pacienteCadastrado->vacinas()->attach($vacina->id, [
+                'data_aplicacao' => $data_aplicacao,
+                'descricao_outras' => $descricao_outras,
+                'fk_unidades_id' => $idUnidade
+            ]);
+
             if ($data_aplicacao != null) {
-                Paciente::find($paciente->id)->vacinas()->attach($vacina->id, [
-                    'data_aplicacao' => $vacina->data_aplicacao,
+                $pacienteCadastrado->vacinas()->updateExistingPivot($vacina->id, [
+                    'data_aplicacao' => $data_aplicacao,
                     'descricao_outras' => $descricao_outras,
                     'fk_unidades_id' => $idUnidade,
-                ]);
-            }
-            if (($data_aplicacao >= '2019-09-20') || ('fk_unidades_id' != null)){
-                Paciente::find($paciente->id)->vacinas()->updateExistingPivot($vacina->id, [
                     'fk_users_id' => Auth::id()
-                ]);          
+                ]);
             }
         }
         //echo $paciente->id;
@@ -188,24 +190,25 @@ class PacientesController extends Controller
         $paciente->telefone = $request->telefone;
         $paciente->telefone_alternativo = $request->telefone_alternativo;
         $paciente->observacoes = $request->observacoes;
-        $paciente->fk_users_id = Auth::id();
-
         $paciente->save();
 
         $listaVacinasTamanho = Vacina::count();
+        $pacienteCadastrado = Paciente::find($paciente->id);
 
         $vacina = new Vacina();
         for ($i = 0; $i < $listaVacinasTamanho; $i++) {
             $vacina->id = $request->input("idVacina.$i");
-            $vacina->data_aplicacao = $request->input("dataVacina.$i");
+            $data_aplicacao = $request->input("dataVacina.$i");
             $descricao_outras = $request->input("descricaoOutras.$i");
             $idUnidade = $request->input("unidadeVacina.$i");
-            Paciente::find($paciente->id)->vacinas()->updateExistingPivot($vacina->id, [
-                'data_aplicacao' => $vacina->data_aplicacao,
-                'descricao_outras' => $descricao_outras,
-                'fk_unidades_id' => $idUnidade,
-                'fk_users_id' => Auth::id()
-            ]);
+            //if ($data_aplicacao != null) {
+                $pacienteCadastrado->vacinas()->updateExistingPivot($vacina->id, [
+                    'data_aplicacao' => $data_aplicacao,
+                    'descricao_outras' => $descricao_outras,
+                    'fk_unidades_id' => $idUnidade,
+           //         'fk_users_id' => Auth::id()
+                ]);
+         //   }
         }
         return redirect()->route('pacientes');
     }
