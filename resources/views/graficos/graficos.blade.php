@@ -253,6 +253,10 @@
                 "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
                 "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"
             ];
+            labelBarChart = vacina.options[vacina.selectedIndex].text + " (" + unidade.options[unidade.selectedIndex].text + ")";
+            myBarChart.options.title.text = "Vacinas (" + document.getElementById('mes').value + "/" + document.getElementById('ano').value + ")";
+            myDoughnutChart.options.title.text = "Sexo (" + document.getElementById('mes').value + "/" + document.getElementById('ano').value + ")";
+
             myBarChart.update();
             myDoughnutChart.update();
 
@@ -275,6 +279,9 @@
                 "Novembro",
                 "Dezembro"
             ];
+            labelBarChart = vacina.options[vacina.selectedIndex].text + " (" + unidade.options[unidade.selectedIndex].text + ")";
+            myBarChart.options.title.text = "Vacinas (" + document.getElementById('ano').value + ")";
+            myDoughnutChart.options.title.text = "Sexo (" + document.getElementById('ano').value + ")";
             myBarChart.update();
             myDoughnutChart.update();
         });
@@ -299,6 +306,16 @@
         comboMeses.onchange = function(e) {
             myBarChart.data.datasets = [];
             myDoughnutChart.data.datasets = [];
+            if (document.getElementById('radioMensal').checked) {
+                labelBarChart = vacina.options[vacina.selectedIndex].text + " (" + unidade.options[unidade.selectedIndex].text + ")";
+                myBarChart.options.title.text = "Vacinas (" + document.getElementById('mes').value + "/" + document.getElementById('ano').value + ")";
+                myDoughnutChart.options.title.text = "Sexo (" + document.getElementById('mes').value + "/" + document.getElementById('ano').value + ")";
+
+            } else if (document.getElementById('radioAnual').checked) {
+                labelBarChart = vacina.options[vacina.selectedIndex].text + " (" + unidade.options[unidade.selectedIndex].text + ")";
+                myBarChart.options.title.text = "Vacinas (" + document.getElementById('ano').value + ")";
+                myDoughnutChart.options.title.text = "Sexo (" + document.getElementById('ano').value + ")";
+            }
             myBarChart.update();
             myDoughnutChart.update();
         }
@@ -306,6 +323,16 @@
         comboAnos.onchange = function(e) {
             myBarChart.data.datasets = [];
             myDoughnutChart.data.datasets = [];
+            if (document.getElementById('radioMensal').checked) {
+                labelBarChart = vacina.options[vacina.selectedIndex].text + " (" + unidade.options[unidade.selectedIndex].text + ")";
+                myBarChart.options.title.text = "Vacinas (" + document.getElementById('mes').value + "/" + document.getElementById('ano').value + ")";
+                myDoughnutChart.options.title.text = "Sexo (" + document.getElementById('mes').value + "/" + document.getElementById('ano').value + ")";
+
+            } else if (document.getElementById('radioAnual').checked) {
+                labelBarChart = vacina.options[vacina.selectedIndex].text + " (" + unidade.options[unidade.selectedIndex].text + ")";
+                myBarChart.options.title.text = "Vacinas (" + document.getElementById('ano').value + ")";
+                myDoughnutChart.options.title.text = "Sexo (" + document.getElementById('ano').value + ")";
+            }
             myBarChart.update();
             myDoughnutChart.update();
         }
