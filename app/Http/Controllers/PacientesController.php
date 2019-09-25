@@ -149,9 +149,12 @@ class PacientesController extends Controller
                     'data_aplicacao' => $vacina->data_aplicacao,
                     'descricao_outras' => $descricao_outras,
                     'fk_unidades_id' => $idUnidade,
-                    'fk_users_id' => Auth::id()
-
                 ]);
+            }
+            if (($data_aplicacao >= '2019-09-20') || ('fk_unidades_id' != null)){
+                Paciente::find($paciente->id)->vacinas()->updateExistingPivot($vacina->id, [
+                    'fk_users_id' => Auth::id()
+                ]);          
             }
         }
         //echo $paciente->id;
