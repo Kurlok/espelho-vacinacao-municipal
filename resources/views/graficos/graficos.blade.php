@@ -176,68 +176,68 @@
                 periodo = document.getElementById("radioAnual").value;
             }
 
-            var url = ('graficos/idVacina/idUnidade/ano/mes/periodo').replace('idVacina', idVacina);
-            url = url.replace('idUnidade', idUnidade);
-            url = url.replace('ano', ano);
-            url = url.replace('mes', mes);
-            url = url.replace('periodo', periodo);
-            //console.log(url);
+            if ((periodo == null) || (mes == 'Mês') || (ano == 'Ano') || (idVacina == 'Vacina') || (idUnidade == 'Unidade')) {
+                alert("Prencha todos os dados antes de continuar.");
+            } else {
+                var url = ('graficos/idVacina/idUnidade/ano/mes/periodo').replace('idVacina', idVacina);
+                url = url.replace('idUnidade', idUnidade);
+                url = url.replace('ano', ano);
+                url = url.replace('mes', mes);
+                url = url.replace('periodo', periodo);
 
-            $.ajax({
-                type: 'POST',
-                url: url,
-                success: function(response) {
-                    resposta = JSON.parse(response)
-                    console.log(resposta);
-                    vacina = document.getElementById("vacina");
-                    unidade = document.getElementById("unidade");
-                    if(document.getElementById('radioMensal').checked) {
-                        labelBarChart = vacina.options[vacina.selectedIndex].text + " (" + unidade.options[unidade.selectedIndex].text + ")";
-                        myBarChart.options.title.text = "Vacinas em " + document.getElementById('mes').value + "/" + document.getElementById('ano').value;
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    success: function(response) {
+                        resposta = JSON.parse(response)
+                        console.log(resposta);
+                        vacina = document.getElementById("vacina");
+                        unidade = document.getElementById("unidade");
+                        if (document.getElementById('radioMensal').checked) {
+                            labelBarChart = vacina.options[vacina.selectedIndex].text + " (" + unidade.options[unidade.selectedIndex].text + ")";
+                            myBarChart.options.title.text = "Vacinas (" + document.getElementById('mes').value + "/" + document.getElementById('ano').value + ")";
+                            myDoughnutChart.options.title.text = "Sexo (" + document.getElementById('mes').value + "/" + document.getElementById('ano').value + ")";
 
+                        } else {
+                            labelBarChart = vacina.options[vacina.selectedIndex].text + " (" + unidade.options[unidade.selectedIndex].text + ")";
+                            myBarChart.options.title.text = "Vacinas (" + document.getElementById('ano').value + ")";
+                            myDoughnutChart.options.title.text = "Sexo (" + document.getElementById('ano').value + ")";
+                        }
+
+
+                        var novoDatasetBarChart = {
+                            label: labelBarChart,
+                            backgroundColor: getRandomColor(),
+                            //borderColor: getRandomColor(),
+                            //borderWidth: 2,
+                            data: resposta[0],
+                        }
+
+                        var novoDatasetDoughnutChart = {
+                            label: labelBarChart,
+                            backgroundColor: [
+                                'lightblue',
+                                'pink'
+                            ],
+                            //borderColor: getRandomColor(),
+                            //borderWidth: 2,
+                            data: resposta[1]
+                        }
+
+                        barChartData.datasets.push(novoDatasetBarChart);
+                        dataDoughnut.datasets.push(novoDatasetDoughnutChart);
+
+                        myBarChart.update();
+                        myDoughnutChart.update();
+
+                    },
+                    error: function(response) {
+                        console.log(response);
                     }
-                    else {
-                        labelBarChart = vacina.options[vacina.selectedIndex].text + " (" + unidade.options[unidade.selectedIndex].text + ")";
-                        myBarChart.options.title.text = "Vacinas em " + document.getElementById('ano').value;
-
-                    }
-                    
-
-                    var novoDatasetBarChart = {
-                        label: labelBarChart,
-                        backgroundColor: getRandomColor(),
-                        //borderColor: getRandomColor(),
-                        //borderWidth: 2,
-                        data: resposta[0],
-                    }
-
-                    var novoDatasetDoughnutChart = {
-                        label: labelBarChart,
-                        backgroundColor: [
-                            'lightblue',
-                            'pink'
-                        ],
-                        //borderColor: getRandomColor(),
-                        //borderWidth: 2,
-                        data: resposta[1]
-                    }
-                    barChartData.datasets.push(novoDatasetBarChart);
-                    dataDoughnut.datasets.push(novoDatasetDoughnutChart);
-
-                    myBarChart.update();
-                    myDoughnutChart.update();
-
-                },
-                error: function(response) {
-                    console.log(response);
-                }
-            });
-
-
-
+                });
+            }
 
         });
-
 
         $('#removerVacina').click(function() {
             barChartData.datasets.pop();
@@ -249,7 +249,6 @@
         $('#radioMensal').click(function() {
             myBarChart.data.datasets = [];
             myDoughnutChart.data.datasets = [];
-
             myBarChart.data.labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
                 "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
                 "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"
@@ -262,7 +261,6 @@
         $('#radioAnual').click(function() {
             myBarChart.data.datasets = [];
             myDoughnutChart.data.datasets = [];
-
             myBarChart.data.labels = [
                 "Janeiro",
                 "Fevereiro",
@@ -279,7 +277,6 @@
             ];
             myBarChart.update();
             myDoughnutChart.update();
-
         });
 
         function getRandomRgba() {
@@ -315,8 +312,6 @@
     </script>
 
     <div class="carregando" id="loading">
-        <!-- <div class="loader"></div> -->
-
     </div>
 
     <script>
@@ -333,6 +328,5 @@
     </script>
 
 </div>
-
 
 @endsection
