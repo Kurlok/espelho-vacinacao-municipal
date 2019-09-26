@@ -191,18 +191,29 @@
                                     <label for="dataVacina[]">{{$vacina->vacina}} - {{$vacina->dose}}</label>
                                     <input type="text" class="form-control" id="idVacina[]" name="idVacina[]" value="{{$vacina->id}}" hidden>
                                     @if($vacina->vacina == "Outras")
-                                    <input type="text" class="form-control" id="descricaoOutras[]" name="descricaoOutras[]" value="@if(isset($paciente)){{$vacina->pacientes()->where('fk_pacientes_id', $paciente->id)->firstOrFail()->pivot->descricao_outras}}@else{{old('descricaoOutras[]')}}@endif">
+                                    <input type="text" class="form-control" id="descricaoOutras[]" name="descricaoOutras[]" value="@if(isset($paciente)){{$vacina->pacientes()->where('fk_pacientes_id', $paciente->id)->firstOrFail()->pivot->descricao_outras}}@else{{old('descricaoOutras[]')}}@endif" @if(isset($paciente)) @if(($vacina->pacientes()->where('fk_pacientes_id', $paciente->id)->firstOrFail()->pivot->fk_users_id != Illuminate\Support\Facades\Auth::id()) || (Illuminate\Support\Facades\Auth::user()->permissao != 'Administrador')) readonly @endif @endif>
                                     @else
-                                    <input type="text" class="form-control" id="descricaoOutras[]" name="descricaoOutras[]" value="@if(isset($paciente)){{$vacina->pacientes()->where('fk_pacientes_id', $paciente->id)->firstOrFail()->pivot->descricao_outras}}@else{{old('descricaoOutras[]')}}@endif" hidden>
+                                    <input type="text" class="form-control" id="descricaoOutras[]" name="descricaoOutras[]" value="@if(isset($paciente)){{$vacina->pacientes()->where('fk_pacientes_id', $paciente->id)->firstOrFail()->pivot->descricao_outras}}@else{{old('descricaoOutras[]')}}@endif" hidden @if(isset($paciente)) @if(($vacina->pacientes()->where('fk_pacientes_id', $paciente->id)->firstOrFail()->pivot->fk_users_id != Illuminate\Support\Facades\Auth::id()) || (Illuminate\Support\Facades\Auth::user()->permissao != 'Administrador')) readonly @endif @endif>
                                     @endif
-                                    <input type="date" class="form-control" id="dataVacina[]" name="dataVacina[]" value="@if(isset($paciente)){{$vacina->pacientes()->where('fk_pacientes_id', $paciente->id)->firstOrFail()->pivot->data_aplicacao}}@else{{old('dataVacina[]')}}@endif">
-                                    <select class="form-control" id="unidadeVacina[]" name="unidadeVacina[]">
+                                    <input type="date" class="form-control" id="dataVacina[]" name="dataVacina[]" value="@if(isset($paciente)){{$vacina->pacientes()->where('fk_pacientes_id', $paciente->id)->firstOrFail()->pivot->data_aplicacao}}@else{{old('dataVacina[]')}}@endif" @if(isset($paciente)) @if(($vacina->pacientes()->where('fk_pacientes_id', $paciente->id)->firstOrFail()->pivot->fk_users_id != Illuminate\Support\Facades\Auth::id()) || (Illuminate\Support\Facades\Auth::user()->permissao != 'Administrador')) readonly @endif @endif>
+                                    <select class="form-control" id="unidadeVacina[]" name="unidadeVacina[]" @if(isset($paciente)) @if(($vacina->pacientes()->where('fk_pacientes_id', $paciente->id)->firstOrFail()->pivot->fk_users_id != Illuminate\Support\Facades\Auth::id()) || (Illuminate\Support\Facades\Auth::user()->permissao != 'Administrador')) hidden @endif @endif>
                                         
                                         <option value=''>Unidade</option>
                                         @foreach($listaUnidades as $unidade)
                                         <option value="{{$unidade->id}}" @if(isset($paciente)) @if(($vacina->pacientes()->where('fk_pacientes_id', $paciente->id)->firstOrFail()->pivot->fk_unidades_id) == $unidade->id) selected @endif @endif >{{$unidade->nome}}</option>
                                         @endforeach
                                     </select>
+                                    @if(isset($paciente)) 
+                                    @if($vacina->pacientes()->where('fk_pacientes_id', $paciente->id)->firstOrFail()->pivot->fk_users_id != Illuminate\Support\Facades\Auth::id())
+                                    <select class="form-control" id="unidadeVacinaDisabled[]" name="unidadeVacinaDisabled[]" disabled >
+                                        
+                                        <option value=''>Unidade</option>
+                                        @foreach($listaUnidades as $unidade)
+                                        <option value="{{$unidade->id}}" @if(isset($paciente)) @if(($vacina->pacientes()->where('fk_pacientes_id', $paciente->id)->firstOrFail()->pivot->fk_unidades_id) == $unidade->id) selected @endif @endif >{{$unidade->nome}}</option>
+                                        @endforeach
+                                    </select>
+                                    @endif
+                                    @endif
                                 </div>
 
                                 <?php

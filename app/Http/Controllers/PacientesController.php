@@ -138,20 +138,21 @@ class PacientesController extends Controller
 
         $listaVacinasTamanho = Vacina::count();
         $vacina = new Vacina();
-        $pacienteCadastrado = Paciente::find($paciente->id);
+        $pacienteCadastradoVacinas = Paciente::find($paciente->id)->vacinas();
         for ($i = 0; $i < $listaVacinasTamanho; $i++) {
             $vacina->id = $request->input("idVacina.$i");
             $data_aplicacao = $request->input("dataVacina.$i");
             $descricao_outras = $request->input("descricaoOutras.$i");
             $idUnidade = $request->input("unidadeVacina.$i");
-            $pacienteCadastrado->vacinas()->attach($vacina->id, [
+            
+            $pacienteCadastradoVacinas->attach($vacina->id, [
                 'data_aplicacao' => $data_aplicacao,
                 'descricao_outras' => $descricao_outras,
                 'fk_unidades_id' => $idUnidade
             ]);
 
             if ($data_aplicacao != null) {
-                $pacienteCadastrado->vacinas()->updateExistingPivot($vacina->id, [
+                $pacienteCadastradoVacinas->updateExistingPivot($vacina->id, [
                     'data_aplicacao' => $data_aplicacao,
                     'descricao_outras' => $descricao_outras,
                     'fk_unidades_id' => $idUnidade,
@@ -193,23 +194,27 @@ class PacientesController extends Controller
         $paciente->save();
 
         $listaVacinasTamanho = Vacina::count();
-        $pacienteCadastrado = Paciente::find($paciente->id);
+        $pacienteCadastradoVacinas = Paciente::with('vacinas')->find($paciente->id)->vacinas();
 
         $vacina = new Vacina();
+        $arrayId = [];
         for ($i = 0; $i < $listaVacinasTamanho; $i++) {
             $vacina->id = $request->input("idVacina.$i");
             $data_aplicacao = $request->input("dataVacina.$i");
             $descricao_outras = $request->input("descricaoOutras.$i");
             $idUnidade = $request->input("unidadeVacina.$i");
-            //if ($data_aplicacao != null) {
-                $pacienteCadastrado->vacinas()->updateExistingPivot($vacina->id, [
+             if ($pacienteCadastradoVacinas->first()->pivot->data_aplicacao != $data_aplicacao) {
+                $pacienteCadastradoVacinas->updateExistingPivot($vacina->id, [
                     'data_aplicacao' => $data_aplicacao,
                     'descricao_outras' => $descricao_outras,
                     'fk_unidades_id' => $idUnidade,
-           //         'fk_users_id' => Auth::id()
+                    'fk_users_id' => Auth::id()
                 ]);
-         //   }
+            }
+            array_push($arrayId, $vacina->id);
         }
+       //return $pacienteCadastradoVacinas->where('fk_vacinas_id', $vacina->id)->first()->pivot->data_aplicacao;
+//return $vacina->id;
         return redirect()->route('pacientes');
     }
 
