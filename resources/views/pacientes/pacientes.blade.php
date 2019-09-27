@@ -56,8 +56,7 @@
                             --}}
                             
                             <a class="btn btn-success btn-xs" href="{{ route('pacienteId', $paciente->id) }}"><i class="far fa-eye"></i> Visualizar</a>
-                            @if (Auth::user()->permissao == 'Administrador')
-
+                            @if(($paciente->fk_users_id == Illuminate\Support\Facades\Auth::id()) || (Auth::user()->permissao == 'Administrador'))   
                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalExclusaoPaciente{{$paciente->id}}">
                             <i class="fas fa-trash"></i> Excluir
                             </button>

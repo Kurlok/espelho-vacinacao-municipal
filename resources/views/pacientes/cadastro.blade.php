@@ -94,7 +94,7 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="nome">Nome completo</label>
-                                    <input type="text" class="form-control @error('nome') is-invalid @enderror" name="nome" id="nome" placeholder="Nome completo" value="@if(isset($paciente)){{$paciente->nome}}@else{{old('nome')}}@endif">
+                                    <input type="text" class="form-control @error('nome') is-invalid @enderror" name="nome" id="nome" placeholder="Nome completo" value="@if(isset($paciente)){{$paciente->nome}}@else{{old('nome')}}@endif" @if(isset($paciente)) @if(($paciente->fk_users_id != Illuminate\Support\Facades\Auth::id()) || (Illuminate\Support\Facades\Auth::user()->permissao != 'Administrador')) readonly @endif @endif> 
 
                                     @error('nome')
                                     <span class="invalid-feedback" role="alert">
@@ -116,7 +116,7 @@
                                 </div>
                                 <div class="form-group col-md-2">
                                     <label for="data_nascimento">Nascimento</label>
-                                    <input type="date" class="form-control" id="data_nascimento" name="data_nascimento" value="@if(isset($paciente)){{$paciente->data_nascimento}}@else{{old('data_nascimento')}}@endif">
+                                    <input type="date" class="form-control" id="data_nascimento" name="data_nascimento" value="@if(isset($paciente)){{$paciente->data_nascimento}}@else{{old('data_nascimento')}}@endif" @if(isset($paciente)) @if(($paciente->fk_users_id != Illuminate\Support\Facades\Auth::id()) || (Illuminate\Support\Facades\Auth::user()->permissao != 'Administrador')) readonly @endif @endif>
                                 </div>
 
                                 <div class="col-md-2 ">
