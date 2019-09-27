@@ -20,7 +20,6 @@ class GraficosController extends Controller
             [
                 'listaVacinas' => $listaVacinas,
                 'listaUnidades' => $listaUnidades,
-
             ]
         );
     }
@@ -34,6 +33,7 @@ class GraficosController extends Controller
             $numVacinas = 0;
             for ($numMes = 1; $numMes <= 12; $numMes++) { //Busca o número de vacinas para cada mês para a unidade específica
                 if ($idUnidade != "todas") {
+                    if ($idVacina != "todas") {
                     $numVacinas = DB::table('pacientes_vacinas')
                         ->where([
                             ['fk_unidades_id', '=', $idUnidade],
@@ -42,7 +42,18 @@ class GraficosController extends Controller
                         ->whereYear('data_aplicacao', $ano)
                         ->whereMonth('data_aplicacao', $numMes)
                         ->count();
+                    }
+                    else {
+                        $numVacinas = DB::table('pacientes_vacinas')
+                        ->where([
+                            ['fk_unidades_id', '=', $idUnidade],
+                        ])
+                        ->whereYear('data_aplicacao', $ano)
+                        ->whereMonth('data_aplicacao', $numMes)
+                        ->count();
+                    }
                 } else { //Busca o número de vacinas para cada mês para todas as unidades
+                    if ($idVacina != "todas") {
                     $numVacinas = DB::table('pacientes_vacinas')
                         ->where([
                             ['fk_vacinas_id', '=',  $idVacina],
@@ -50,6 +61,13 @@ class GraficosController extends Controller
                         ->whereYear('data_aplicacao', $ano)
                         ->whereMonth('data_aplicacao', $numMes)
                         ->count();
+                    }
+                    else {
+                        $numVacinas = DB::table('pacientes_vacinas')
+                        ->whereYear('data_aplicacao', $ano)
+                        ->whereMonth('data_aplicacao', $numMes)
+                        ->count();                        
+                    }
                 }
                 array_push($arrayPeriodo, $numVacinas);
             }
@@ -58,6 +76,7 @@ class GraficosController extends Controller
             $numVacinasFeminino = 0;
             $numVacinasSexo = [];
             if ($idUnidade != "todas") {
+                if ($idVacina != "todas") {
                 $pacientesPeriodo = DB::table('pacientes_vacinas')
                     ->where([
                         ['fk_unidades_id', '=', $idUnidade],
@@ -65,36 +84,71 @@ class GraficosController extends Controller
                     ])
                     ->whereYear('data_aplicacao', $ano)
                     ->get();
+                }
+                else {
+                    $pacientesPeriodo = DB::table('pacientes_vacinas')
+                    ->where([
+                        ['fk_unidades_id', '=', $idUnidade],
+                    ])
+                    ->whereYear('data_aplicacao', $ano)
+                    ->get();                   
+                }
             } else {
+                if ($idVacina != "todas") {
                 $pacientesPeriodo = DB::table('pacientes_vacinas')
                     ->where([
                         ['fk_vacinas_id', '=',  $idVacina],
                     ])
                     ->whereYear('data_aplicacao', $ano)
                     ->get();
+                } else {
+                    $pacientesPeriodo = DB::table('pacientes_vacinas')
+                    ->whereYear('data_aplicacao', $ano)
+                    ->get();
+                }
+
             }
         } else { //Procura dados para todos os dias do mês inteiro
             $numVacinas = 0;
             for ($numDia = 1; $numDia <= 31; $numDia++) {
                 if ($idUnidade != "todas") { //Busca o número de vacinas para cada dia do mês para a unidade específica
-                    $numVacinas = DB::table('pacientes_vacinas')
-                        ->where([
-                            ['fk_unidades_id', '=', $idUnidade],
-                            ['fk_vacinas_id', '=',  $idVacina],
-                        ])
-                        ->whereYear('data_aplicacao', $ano)
-                        ->whereMonth('data_aplicacao', $mes)
-                        ->whereDay('data_aplicacao', $numDia)
-                        ->count();
+                    if ($idVacina != "todas") {
+                        $numVacinas = DB::table('pacientes_vacinas')
+                            ->where([
+                                ['fk_unidades_id', '=', $idUnidade],
+                                ['fk_vacinas_id', '=',  $idVacina],
+                            ])
+                            ->whereYear('data_aplicacao', $ano)
+                            ->whereMonth('data_aplicacao', $mes)
+                            ->whereDay('data_aplicacao', $numDia)
+                            ->count();
+                    } else {
+                        $numVacinas = DB::table('pacientes_vacinas')
+                            ->where([
+                                ['fk_unidades_id', '=', $idUnidade],
+                            ])
+                            ->whereYear('data_aplicacao', $ano)
+                            ->whereMonth('data_aplicacao', $mes)
+                            ->whereDay('data_aplicacao', $numDia)
+                            ->count();
+                    }
                 } else { //Busca o número de vacinas para cada dia do mês para todas as unidades
-                    $numVacinas = DB::table('pacientes_vacinas')
-                        ->where([
-                            ['fk_vacinas_id', '=',  $idVacina],
-                        ])
-                        ->whereYear('data_aplicacao', $ano)
-                        ->whereMonth('data_aplicacao', $mes)
-                        ->whereDay('data_aplicacao', $numDia)
-                        ->count();
+                    if ($idVacina != "todas") {
+                        $numVacinas = DB::table('pacientes_vacinas')
+                            ->where([
+                                ['fk_vacinas_id', '=',  $idVacina],
+                            ])
+                            ->whereYear('data_aplicacao', $ano)
+                            ->whereMonth('data_aplicacao', $mes)
+                            ->whereDay('data_aplicacao', $numDia)
+                            ->count();
+                    } else {
+                        $numVacinas = DB::table('pacientes_vacinas')
+                            ->whereYear('data_aplicacao', $ano)
+                            ->whereMonth('data_aplicacao', $mes)
+                            ->whereDay('data_aplicacao', $numDia)
+                            ->count();
+                    }
                 }
                 array_push($arrayPeriodo, $numVacinas);
             }
@@ -103,6 +157,7 @@ class GraficosController extends Controller
             $numVacinasFeminino = 0;
             $numVacinasSexo = [];
             if ($idUnidade != "todas") {
+                if ($idVacina != "todas") {
                 $pacientesPeriodo = DB::table('pacientes_vacinas')
                     ->where([
                         ['fk_unidades_id', '=', $idUnidade],
@@ -111,7 +166,20 @@ class GraficosController extends Controller
                     ->whereYear('data_aplicacao', $ano)
                     ->whereMonth('data_aplicacao', $mes)
                     ->get();
+                }
+                else {
+                    $pacientesPeriodo = DB::table('pacientes_vacinas')
+                    ->where([
+                        ['fk_unidades_id', '=', $idUnidade],
+                    ])
+                    ->whereYear('data_aplicacao', $ano)
+                    ->whereMonth('data_aplicacao', $mes)
+                    ->get();    
+                    
+                }
             } else {
+                if ($idVacina != "todas") {
+
                 $pacientesPeriodo = DB::table('pacientes_vacinas')
                     ->where([
                         ['fk_vacinas_id', '=',  $idVacina],
@@ -119,6 +187,12 @@ class GraficosController extends Controller
                     ->whereYear('data_aplicacao', $ano)
                     ->whereMonth('data_aplicacao', $mes)
                     ->get();
+                } else {
+                    $pacientesPeriodo = DB::table('pacientes_vacinas')
+                    ->whereYear('data_aplicacao', $ano)
+                    ->whereMonth('data_aplicacao', $mes)
+                    ->get();    
+                }
             }
         };
 
@@ -135,7 +209,7 @@ class GraficosController extends Controller
                 }
             }
         }
-        
+
         array_push($numVacinasSexo, $numVacinasMasculino);
         array_push($numVacinasSexo, $numVacinasFeminino);
 
@@ -145,6 +219,4 @@ class GraficosController extends Controller
 
         return json_encode($arrayFinal);
     }
-
-
 }

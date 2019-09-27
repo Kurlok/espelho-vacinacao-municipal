@@ -62,6 +62,7 @@
         <div class="col-md-3">
             <select class="form-control" id="vacina" name="vacina">
                 <option disabled selected>Vacina</option>
+                <option value="todas">Todas</option>
                 @foreach($listaVacinas as $vacina)
                 <option value="{{$vacina->id}}">{{$vacina->vacina}} - {{$vacina->dose}}</option>
                 @endforeach
@@ -72,12 +73,9 @@
 
         <div class="colform-group">
             <button type="button" class="btn btn-success" id="adicionarVacina">Adicionar Vacina</button>
-
             <button type="button" class="btn btn-danger" id="removerVacina">Remover Vacina</button>
         </div>
     </div>
-
-
 
     <canvas id="myBarChart" width="50vh" height="20vh"></canvas>
     <canvas id="myDoughnutChart" width="50vh" height="20vh"></canvas>
