@@ -56,11 +56,11 @@
                             --}}
                             
                             <a class="btn btn-success btn-xs" href="{{ route('pacienteId', $paciente->id) }}"><i class="far fa-eye"></i> Visualizar</a>
-                            @if(($paciente->fk_users_id == Illuminate\Support\Facades\Auth::id()) || (Auth::user()->permissao == 'Administrador'))   
+                           {{-- @if(($paciente->fk_users_id == Illuminate\Support\Facades\Auth::id()) || (Auth::user()->permissao == 'Administrador'))   --}
                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalExclusaoPaciente{{$paciente->id}}">
                             <i class="fas fa-trash"></i> Excluir
                             </button>
-                            @endif
+                            {{-- @endif --}}
                             
                             {{--<div class="modal fade" id="modalVisualizarPaciente{{$paciente->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
