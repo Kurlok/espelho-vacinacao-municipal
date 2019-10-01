@@ -48,10 +48,12 @@ Route::middleware(['auth', 'Administrador', 'SenhaRedefinida'])->group(function 
     Route::post('/unidades/cadastro/alterar/{id}', 'UnidadesController@alterarUnidade')->name('alterarUnidade');
     Route::any('/unidades/busca', 'UnidadesController@buscaUnidade')->name('unidadesBusca');
 
-    Route::get('/relatorios', 'RelatoriosController@index')->name('relatorios');
     Route::get('/graficos', 'GraficosController@index')->name('graficos');
     Route::post('/graficos/{idVacina}/{idUnidade}/{ano}/{mes}/{periodo}', 'GraficosController@getAplicacoesVacinas');
 
+    Route::get('/relatorios', 'RelatoriosController@index')->name('relatorios');
+    Route::get('/relatorios/vacinas/todas', 'RelatoriosController@exportarVacinas');
+    Route::get('/relatorios/usuarios/todos', 'RelatoriosController@exportarUsuarios');
 
 
 });

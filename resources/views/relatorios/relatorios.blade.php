@@ -21,17 +21,23 @@
                 <tbody>
                     <tr>
                         <td>Todas as vacinas</td>
-
-
                         <td class="actions">
-
-                            <form action="" method="post">
-                                {{csrf_field()}}
+                            <form action="relatorios/vacinas/todas" method="get">
                                 <button type="submit" class="btn btn-success btn-xs">
                                     <i class="far fa-file-excel"></i> Excel
                                 </button>
-                            </form>
-                           
+                            </form>  
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Todos os usuários</td>
+                        <td class="actions">
+                            <form action="relatorios/usuarios/todos" method="get">
+                                <button type="submit" class="btn btn-success btn-xs">
+                                    <i class="far fa-file-excel"></i> Excel
+                                </button>
+                            </form>  
                         </td>
                     </tr>
 
