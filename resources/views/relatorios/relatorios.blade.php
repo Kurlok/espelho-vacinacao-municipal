@@ -41,6 +41,17 @@
                         </td>
                     </tr>
 
+                    <tr>
+                        <td>Todas as unidades</td>
+                        <td class="actions">
+                            <form action="relatorios/unidades/todas" method="get">
+                                <button type="submit" class="btn btn-success btn-xs">
+                                    <i class="far fa-file-excel"></i> Excel
+                                </button>
+                            </form>  
+                        </td>
+                    </tr>
+
                 </tbody>
             </table>
 
