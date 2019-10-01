@@ -68,9 +68,9 @@
 
 @section('content')
 <div class="container">
-    <?php 
+    <?php
     $usuarioLogado = Illuminate\Support\Facades\Auth::user();
-    
+
 
     ?>
     <div class="row justify-content-center">

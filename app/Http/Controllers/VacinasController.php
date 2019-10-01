@@ -156,10 +156,11 @@ class VacinasController extends Controller
             'vacina' => 'required|string|max:255',
             'dose' => 'required|string|max:255',
         ]);
+        
         $vacina = new Vacina();
         $vacina->vacina = $request->vacina;
         $vacina->dose = $request->dose;
-        $vacina->status = 'Ativa';  
+        $vacina->status = 'Ativo';  
 
         $vacina->save();
         $paciente = new Paciente;

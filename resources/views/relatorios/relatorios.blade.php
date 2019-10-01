@@ -7,55 +7,58 @@
             <h2><i class="fas fa-file-export"></i> Relatórios</a></h2>
         </div>
     </div>
-
-    <div id="list" class="row">
-        <div class="table-responsive col-md-12">
-            <table class="table table-striped" cellspacing="0" cellpadding="0">
-                <thead>
-                    <tr>
-                        <th class="col-md-10">Exportar</th>
-
-                        <th class="actions col-md-2">Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Todas as vacinas</td>
-                        <td class="actions">
-                            <form action="relatorios/vacinas/todas" method="get">
-                                <button type="submit" class="btn btn-success btn-xs">
-                                    <i class="far fa-file-excel"></i> Excel
-                                </button>
-                            </form>  
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>Todos os usuários</td>
-                        <td class="actions">
-                            <form action="relatorios/usuarios/todos" method="get">
-                                <button type="submit" class="btn btn-success btn-xs">
-                                    <i class="far fa-file-excel"></i> Excel
-                                </button>
-                            </form>  
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>Todas as unidades</td>
-                        <td class="actions">
-                            <form action="relatorios/unidades/todas" method="get">
-                                <button type="submit" class="btn btn-success btn-xs">
-                                    <i class="far fa-file-excel"></i> Excel
-                                </button>
-                            </form>  
-                        </td>
-                    </tr>
-
-                </tbody>
-            </table>
-
+    <div class="card">
+        <form method="get" name="formTodas" id="formTodas">
+            <div class="card-header bg-success text-white">Todos os dados</div>
+            <div class="card-body border-secondary">
+                <div class="form-row">
+                    <div class="form-group col-md-10">
+                        <select class="form-control" id="comboTodas" name="comboTodas">
+                            <option value="todosPacientes" selected>Todos os pacientes</option>
+                            <option value="todasUnidades">Todas as unidades</option>
+                            <option value="todosUsuarios">Todos os usuários</option>
+                            <option value="todasVacinas">Todas as vacinas</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <button type="submit" class="btn btn-primary btn-xs" name="buttonTodas" id="buttonTodas">
+                            <i class="far fa-file-excel"></i> Excel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="card-header bg-success text-white">Pacientes (Data de Nascimento)</div>
+        <div class="card-body">
+            <form method="get" name="formTodas" id="formTodas">
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="dataInicial">Nascimento Inicial</label>
+                        <input type="date" class="form-control" id="dataInicial" name="dataInicial">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="dataFinal">Nascimento Final</label>
+                        <input type="date" class="form-control" id="dataFinal" name="dataFinal">
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
+    <script>
+        comboTodas = document.getElementById('comboTodas');
+        formTodas = document.getElementById('formTodas');
+        buttonTodas = document.getElementById('buttonTodas');
+        comboTodas.onchange = function(e) {
+            if (comboTodas.value == 'todosPacientes') {
+                formTodas.action = "relatorios/pacientes/todos";
+            } else if (comboTodas.value == 'todasUnidades') {
+                formTodas.action = "relatorios/unidades/todas";
+            } else if (comboTodas.value == 'todosUsuarios') {
+                formTodas.action = "relatorios/usuarios/todos";
+            } else if (comboTodas.value == 'todasVacinas') {
+                formTodas.action = "relatorios/vacinas/todas";
+            }
+        }
+    </script>
 </div>
 @endsection
