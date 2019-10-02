@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\DataNascimentoPacientesExport;
 use App\Exports\TodasUnidadesExport;
 use App\Vacina;
+use App\Unidade;
 use Illuminate\Http\Request;
 use App\Exports\TodasVacinasExport;
 use App\Exports\TodosPacientesExport;
@@ -15,8 +16,15 @@ class RelatoriosController extends Controller
 {
     public function index()
     {
+        $listaVacinas = Vacina::all();
+        $listaUnidades = Unidade::all();
+
         return view(
-            'relatorios/relatorios'
+            'relatorios/relatorios',
+            [
+                'listaVacinas' => $listaVacinas,
+                'listaUnidades' => $listaUnidades,
+            ]
         );
     }
 
@@ -40,8 +48,11 @@ class RelatoriosController extends Controller
         return Excel::download(new TodosPacientesExport(), 'Espelho de vacinação - Todos os Pacientes.xlsx');
     }
 
-    public function exportarPacientesDataNascimento($dataInicial, $dataFinal)
-    {
+    public function exportarPacientesDataNascimento(Request $request)
+    {   
+        $dataInicial = $request->nascimentoInicial;
+        $dataFinal = $request->nascimentoFinal;
+
         return Excel::download(new DataNascimentoPacientesExport($dataInicial, $dataFinal), 'Espelho de vacinação - Pacientes por data de nascimento.xlsx');
     }
 }

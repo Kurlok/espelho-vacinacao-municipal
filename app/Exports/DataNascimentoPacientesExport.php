@@ -10,10 +10,20 @@ use Illuminate\Support\Facades\DB;
 
 class DataNascimentoPacientesExport implements FromCollection, WithHeadings, ShouldAutoSize
 {
-    public function collection($dataInicial, $dataFinal)
+
+    protected $nascimentoInicial;
+    protected $nascimentoFinal;
+
+    public function __construct($dataInicial, $dataFinal)
     {
-        return Paciente::whereDate('data_nascimento', '>=', $dataInicial)
-        ->whereDate('data_nascimento', '<=', $dataFinal) 
+        $this->nascimentoInicial = $dataInicial;
+        $this->nascimentoFinal = $dataFinal; 
+    }
+
+    public function collection()
+    {
+        return Paciente::whereDate('data_nascimento', '>=', $this->nascimentoInicial)
+        ->whereDate('data_nascimento', '<=', $this->nascimentoFinal) 
         ->get();
     }
 
