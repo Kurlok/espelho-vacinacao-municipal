@@ -57,6 +57,7 @@ Route::middleware(['auth', 'Administrador', 'SenhaRedefinida'])->group(function 
     Route::get('/relatorios/usuarios/todos', 'RelatoriosController@exportarUsuarios');
     Route::get('/relatorios/pacientes/todos', 'RelatoriosController@exportarPacientes');
     Route::get('/relatorios/pacientes/nascimento', 'RelatoriosController@exportarPacientesDataNascimento')->name('relatorioPacienteNascimento');
+    Route::get('/relatorios/vacinas/especificada', 'RelatoriosController@exportarVacinaEspecifica')->name('relatorioVacinaEspecificada');
 
 });
 

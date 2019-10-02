@@ -6,7 +6,6 @@ use App\Paciente;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
-use Illuminate\Support\Facades\DB;
 
 class DataNascimentoPacientesExport implements FromCollection, WithHeadings, ShouldAutoSize
 {

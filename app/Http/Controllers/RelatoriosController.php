@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\DataNascimentoPacientesExport;
-use App\Exports\TodasUnidadesExport;
 use App\Vacina;
 use App\Unidade;
+use App\User;
+
 use Illuminate\Http\Request;
+use App\Exports\TodasUnidadesExport;
 use App\Exports\TodasVacinasExport;
 use App\Exports\TodosPacientesExport;
 use App\Exports\TodosUsuariosExport;
+use App\Exports\DataNascimentoPacientesExport;
+use App\Exports\VacinasExport;
+
 use Maatwebsite\Excel\Facades\Excel;
 
 class RelatoriosController extends Controller
@@ -18,12 +22,14 @@ class RelatoriosController extends Controller
     {
         $listaVacinas = Vacina::all();
         $listaUnidades = Unidade::all();
+        $listaUsuarios = User::all();
 
         return view(
             'relatorios/relatorios',
             [
                 'listaVacinas' => $listaVacinas,
                 'listaUnidades' => $listaUnidades,
+                'listaUsuarios' => $listaUsuarios
             ]
         );
     }
@@ -54,5 +60,16 @@ class RelatoriosController extends Controller
         $dataFinal = $request->nascimentoFinal;
 
         return Excel::download(new DataNascimentoPacientesExport($dataInicial, $dataFinal), 'Espelho de vacinação - Pacientes por data de nascimento.xlsx');
+    }
+
+    public function exportarVacinaEspecifica(Request $request)
+    {   
+        $dataInicial = $request->aplicacaoInicial;
+        $dataFinal = $request->aplicacaoFinal;
+        $idUnidade = $request->unidade;
+        $idUsuario = $request->usuario;
+        $idVacina = $request->vacina;
+
+        return Excel::download(new VacinasExport($dataInicial, $dataFinal, $idUnidade, $idUsuario, $idVacina), 'Espelho de vacinação - Vacina Específica.xlsx');
     }
 }

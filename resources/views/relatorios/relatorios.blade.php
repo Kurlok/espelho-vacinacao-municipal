@@ -47,46 +47,56 @@
                         </button>
                     </div>
                 </div>
-
             </form>
         </div>
         <div class="card-header bg-success text-white">Vacinas</div>
         <div class="card-body">
-            <div class="form-row">
-                <div class="form-group col-md-3">
-                    <label for="vacina">Vacina</label>
-                    <select class="form-control" id="vacina" name="vacina">
-                        <option value="todas">Todas</option>
-                        @foreach($listaVacinas as $vacina)
-                        <option value="{{$vacina->id}}">{{$vacina->vacina}} - {{$vacina->dose}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="unidade">Unidade</label>
-                    <select class="form-control" id="unidade" name="unidade">
-                        <option value="todas">Todas</option>
-                        @foreach($listaUnidades as $unidade)
-                        <option value="{{$unidade->id}}">{{$unidade->nome}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="aplicacaoInicial">Aplicação Inicial</label>
-                    <input type="date" class="form-control" id="dataInicial" name="dataInicial">
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="aplicacaoFinal">Aplicação Final</label>
-                    <input type="date" class="form-control" id="dataFinal" name="dataFinal">
-                </div>
+            <form method="get" name="formVacinas" id="formVacinas" action="{{ route('relatorioVacinaEspecificada') }}">
 
-                <div class="form-group col-md-2">
-                    <label for="buttonVacinas" style="visibility: hidden;">Exportação para arquivo</label>
-                    <button type="submit" class="btn btn-primary btn-xs" name="buttonVacinas" id="buttonVacinas">
-                        <i class="far fa-file-excel"></i> Excel
-                    </button>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label for="vacina">Vacina</label>
+                        <select class="form-control" id="vacina" name="vacina">
+                            <option value="todas">Todas</option>
+                            @foreach($listaVacinas as $vacina)
+                            <option value="{{$vacina->id}}">{{$vacina->vacina}} - {{$vacina->dose}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="unidade">Unidade</label>
+                        <select class="form-control" id="unidade" name="unidade">
+                            <option value="todas">Todas</option>
+                            @foreach($listaUnidades as $unidade)
+                            <option value="{{$unidade->id}}">{{$unidade->nome}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="usuario">Usuário</label>
+                        <select class="form-control" id="usuario" name="usuario">
+                            <option value="todas">Todas</option>
+                            @foreach($listaUsuarios as $usuario)
+                            <option value="{{$usuario->id}}">{{$usuario->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="aplicacaoInicial">Aplicação Inicial</label>
+                        <input type="date" class="form-control" id="aplicacaoInicial" name="aplicacaoInicial">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="aplicacaoFinal">Aplicação Final</label>
+                        <input type="date" class="form-control" id="aplicacaoFinal" name="aplicacaoFinal">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="buttonVacinas" style="visibility: hidden;">Exportação para arquivo</label>
+                        <button type="submit" class="btn btn-primary btn-xs" name="buttonVacinas" id="buttonVacinas">
+                            <i class="far fa-file-excel"></i> Excel
+                        </button>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>

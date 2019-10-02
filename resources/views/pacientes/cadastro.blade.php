@@ -179,14 +179,13 @@
                         <div class="card-header bg-success text-white">{{ __('Vacinas') }}</div>
                         <div class="card-body">
 
-
-
-
                             <div class="form-row">
 
                                 @foreach($listaVacinas as $vacina)
                                 <?php
-                                $pivotVacinaPaciente = $vacina->pacientes()->where('fk_pacientes_id', $paciente->id)->firstOrFail()->pivot;
+                                if (isset($paciente)) {
+                                    $pivotVacinaPaciente = $vacina->pacientes()->where('fk_pacientes_id', $paciente->id)->firstOrFail()->pivot;
+                                }
                                 ?>
                                 @if(isset($vacinaAnterior))
                                 @if(($vacinaAnterior->vacina) != ($vacina->vacina))
