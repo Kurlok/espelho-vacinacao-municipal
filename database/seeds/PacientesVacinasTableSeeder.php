@@ -30,7 +30,7 @@ class PacientesVacinasTableSeeder extends Seeder
                     'fk_vacinas_id' => $j+1,
                     'fk_pacientes_id' => $i+1,
                     'fk_unidades_id' => random_int(1,$numUnidades),
-                    'fk_unidades_id' => random_int(1,$numUsuarios),
+                    'fk_users_id' => random_int(1,$numUsuarios),
                     'data_aplicacao' => $date,
                 ]);
             }
