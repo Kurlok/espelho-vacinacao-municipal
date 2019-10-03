@@ -67,8 +67,9 @@ Route::middleware(['auth', 'SenhaRedefinida'])->group(function () {
     Route::get('/pacientes/cadastro/{id}', 'PacientesController@getPaciente')->name('pacienteId');
     Route::any('/pacientes/busca', 'PacientesController@buscaPaciente')->name('pacientesBusca');
     Route::post('/pacientes/cadastro/novo', 'PacientesController@cadastrarPaciente')->name('cadastrarPaciente');
+    Route::get('/pacientes/visualizar/{id}', 'PacientesController@visualizarPaciente')->name('visualizarPaciente');
     Route::post('/pacientes/cadastro/alterar/{id}', 'PacientesController@alterarPaciente')->name('alterarPaciente');
-    Route::post('/pacientes/delete/{id}', 'PacientesController@deletarPaciente')->name('deletarPaciente');
+    Route::post('/pacientes/deletar/{id}', 'PacientesController@deletarPaciente')->name('deletarPaciente');
 });
 
 Route::middleware(['auth'])->group(function () {

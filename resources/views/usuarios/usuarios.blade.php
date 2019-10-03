@@ -70,8 +70,8 @@
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                                             <form action="{{ route('deletarUsuario', $usuario->id) }}" method="post">
                                                 {{csrf_field()}}
-                                                <input type="submit" class="btn btn-danger btn-xs" value="Excluir">
-                                            </form>
+                                                <button type="submit" class="btn btn-danger btn-xs" value="Excluir">
+                                Excluir </button>                                            </form>
                                         </div>
                                     </div>
                                 </div>

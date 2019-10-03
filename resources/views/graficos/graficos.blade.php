@@ -52,7 +52,7 @@
         <div class="col-md-2">
             <select class="form-control" id="unidade" name="unidade">
                 <option disabled selected>Unidade</option>
-                <option value="todas">Todas</option>
+                <option value="todas">Todas as unidades</option>
 
                 @foreach($listaUnidades as $unidade)
                 <option value="{{$unidade->id}}">{{$unidade->nome}}</option>
@@ -62,7 +62,7 @@
         <div class="col-md-3">
             <select class="form-control" id="vacina" name="vacina">
                 <option disabled selected>Vacina</option>
-                <option value="todas">Todas</option>
+                <option value="todas">Todas as vacinas</option>
                 @foreach($listaVacinas as $vacina)
                 <option value="{{$vacina->id}}">{{$vacina->vacina}} - {{$vacina->dose}}</option>
                 @endforeach

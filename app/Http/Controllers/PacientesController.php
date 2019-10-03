@@ -86,9 +86,24 @@ class PacientesController extends Controller
         return view('pacientes/pacientes')->withMessage('No Details found. Try to search again !');
     }
 
-    public function visualizaPaciente()
+    public function visualizarPaciente(int $id)
     {
-        return view('pacientes/cadastro');
+        $paciente = Paciente::find($id);
+        $listaVacinas = Vacina::where('status', 'Ativo')
+            ->get()
+            ->sortBy(function ($item) {
+                return $item->vacina . '#' . $item->dose;
+            });
+        $listaUnidades = Unidade::all();
+
+        return view(
+            'pacientes/visualizacao',
+            [
+                'paciente' => $paciente,
+                'listaVacinas' => $listaVacinas,
+                'listaUnidades' => $listaUnidades,
+            ]
+        );
     }
 
     public function telaCadastroPaciente()
@@ -116,10 +131,10 @@ class PacientesController extends Controller
         ]);
 
         //Trabalhando com os checkboxes
-        if ($request->obito == 'on') $obito = 'Verdadeiro';
-        else  $obito = 'Falso';
-        if ($request->gestante == 'on') $gestante = 'Verdadeiro';
-        else  $gestante = 'Falso';
+        if ($request->obito == 'on') $obito = 'Sim';
+        else  $obito = 'Não';
+        if ($request->gestante == 'on') $gestante = 'Sim';
+        else  $gestante = 'Não';
 
         $paciente = new Paciente();
         $paciente->nome = $request->nome;
@@ -144,7 +159,7 @@ class PacientesController extends Controller
             $data_aplicacao = $request->input("dataVacina.$i");
             $descricao_outras = $request->input("descricaoOutras.$i");
             $idUnidade = $request->input("unidadeVacina.$i");
-            
+
             $pacienteCadastradoVacinas->attach($vacina->id, [
                 'data_aplicacao' => $data_aplicacao,
                 'descricao_outras' => $descricao_outras,
@@ -174,10 +189,10 @@ class PacientesController extends Controller
     {
 
         //Trabalhando com os checkboxes
-        if ($request->obito == 'on') $obito = 'Verdadeiro';
-        else  $obito = 'Falso';
-        if ($request->gestante == 'on') $gestante = 'Verdadeiro';
-        else  $gestante = 'Falso';
+        if ($request->obito == 'on') $obito = 'Sim';
+        else  $obito = 'Não';
+        if ($request->gestante == 'on') $gestante = 'Sim';
+        else  $gestante = 'Não';
 
         $paciente = Paciente::find($id);
         $paciente->nome = $request->nome;
@@ -203,7 +218,7 @@ class PacientesController extends Controller
             $data_aplicacao = $request->input("dataVacina.$i");
             $descricao_outras = $request->input("descricaoOutras.$i");
             $idUnidade = $request->input("unidadeVacina.$i");
-             if ($pacienteCadastradoVacinas->first()->pivot->data_aplicacao != $data_aplicacao) {
+            if ($pacienteCadastradoVacinas->first()->pivot->data_aplicacao != $data_aplicacao) {
                 $pacienteCadastradoVacinas->updateExistingPivot($vacina->id, [
                     'data_aplicacao' => $data_aplicacao,
                     'descricao_outras' => $descricao_outras,
@@ -213,8 +228,8 @@ class PacientesController extends Controller
             }
             array_push($arrayId, $vacina->id);
         }
-       //return $pacienteCadastradoVacinas->where('fk_vacinas_id', $vacina->id)->first()->pivot->data_aplicacao;
-//return $vacina->id;
+        //return $pacienteCadastradoVacinas->where('fk_vacinas_id', $vacina->id)->first()->pivot->data_aplicacao;
+        //return $vacina->id;
         return redirect()->route('pacientes');
     }
 

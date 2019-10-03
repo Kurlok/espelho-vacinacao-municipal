@@ -141,7 +141,7 @@
                                     <label for="gestante">Gestante</label>
                                     <div class="form-group">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" id="gestante" name="gestante" @if(isset($paciente)) @if($paciente->gestante=='Verdadeiro') checked @endif @elseif(old('gestante')=='Verdadeiro' ) checked @endif>
+                                            <input class="form-check-input" type="checkbox" id="gestante" name="gestante" @if(isset($paciente)) @if($paciente->gestante=='Sim') checked @endif @elseif(old('gestante')=='Sim' ) checked @endif>
                                         </div>
                                     </div>
                                 </div>
@@ -149,7 +149,7 @@
                                     <label for="obito">Óbito</label>
                                     <div class="form-group">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" id="obito" name="obito" @if(isset($paciente)) @if($paciente->obito=='Verdadeiro') checked @endif @elseif(old('obito')=='Verdadeiro' ) checked @endif>
+                                            <input class="form-check-input" type="checkbox" id="obito" name="obito" @if(isset($paciente)) @if($paciente->obito=='Sim') checked @endif @elseif(old('obito')=='Sim' ) checked @endif>
                                         </div>
                                     </div>
                                 </div>

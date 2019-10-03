@@ -18,34 +18,46 @@ class PacientesTableSeeder extends Seeder
                 'nome_mae' => 'Miriane Dombroski Barcelos',
                 'sus' => '1234567890123',
                 'data_nascimento' => '1990-02-16',
-                'gestante' => 'Falso',
+                'gestante' => 'Não',
                 'sexo' => 'Masculino',
-                'obito' => 'Verdadeiro',
+                'obito' => 'Sim',
                 'localidade' => 'Centro',
                 'telefone' => '(42) 93242-4213',
                 'telefone_alternativo' => '(41) 99999-9999',
 
             ]
         );
-        // $faker = Faker::create();
+        $faker = Faker::create('pt_BR');
 
-        // for ($i = 0; $i < 5; $i++) {
-        //     DB::table('pacientes')->insert(
-        //         [
-        //             'nome' => $faker->name,
-        //             'nome_mae' => Str::random(20),
-        //             'sus' => Str::random(13),
-        //             'sexo' => 'Feminino',
-        //             'data_nascimento' => today(),
-        //             'gestante' => 'Falso',
-        //             'obito' => 'Verdadeiro',
-        //             'localidade' => $faker->city,
-        //             'telefone' => Str::random(15),
-        //             'telefone_alternativo' => Str::random(15),
-        //             'observacoes' => Str::random(500),
+        $numUsuarios = DB::table('users')->count();
 
-        //         ]
-        //     );
-        // }
+        for ($i = 0; $i < 5; $i++) {
+            $gender = $faker->randomElement(['male', 'female']);
+            if ($gender == 'male') {
+                $sexo = 'Masculino';
+            } else {
+                $sexo = 'Feminino';
+            }
+            $dt = $faker->dateTimeBetween($startDate = '-100 years', $endDate = 'now');
+            $date = $dt->format("Y-m-d");
+
+            DB::table('pacientes')->insert(
+                [
+                    'nome' => $faker->name($gender),
+                    'nome_mae' => $faker->name('female'),
+                    'sus' => $faker->numerify('###########'),
+                    'sexo' => $sexo,
+                    'data_nascimento' => $date,
+                    'gestante' => 'Não',
+                    'obito' => $faker->randomElement(['Sim', 'Não']),
+                    'localidade' => $faker->city(),
+                    'telefone' =>  $faker->numerify('(##) #####-####'),
+                    'telefone_alternativo' =>  $faker->numerify('(##) #####-####'),
+                    'observacoes' => $faker->sentence($nbWords = 10, $variableNbWords = true),
+                    'fk_users_id' => random_int(1,$numUsuarios),
+
+                ]
+            );
+        }
     }
 }

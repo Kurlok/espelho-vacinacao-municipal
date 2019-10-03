@@ -45,84 +45,87 @@
                         <td>{{$paciente->id}}</td>
                         <td>{{$paciente->nome}}</td>
                         <td>{{$paciente->localidade}}</td>
-                        <td>{{ date('d/m/Y', strtotime($paciente->data_nascimento))}}</td>
-                        <td>{{ $paciente->sus}}</td>
+                        <td>{{date('d/m/Y', strtotime($paciente->data_nascimento))}}</td>
+                        <td>{{$paciente->sus}}</td>
 
                         <td class="actions">
+                            <a class="btn btn-success btn-xs" href="{{ route('visualizarPaciente', $paciente->id) }}"><i class="far fa-eye"></i> Visualizar</a>
+
+
                             {{--
                             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalVisualizarPaciente{{$paciente->id}}">
-                                Visualizar
+                            Visualizar
                             </button>
                             --}}
-                            
-                            <a class="btn btn-success btn-xs" href="{{ route('pacienteId', $paciente->id) }}"><i class="far fa-eye"></i> Visualizar</a>
-                           {{-- @if(($paciente->fk_users_id == Illuminate\Support\Facades\Auth::id()) || (Auth::user()->permissao == 'Administrador'))   --}
+
+                            <a class="btn btn-warning btn-xs" href="{{ route('pacienteId', $paciente->id) }}"><i class="fas fa-edit"></i> Editar</a>
                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalExclusaoPaciente{{$paciente->id}}">
-                            <i class="fas fa-trash"></i> Excluir
+                                <i class="fas fa-trash"></i> Excluir
                             </button>
-                            {{-- @endif --}}
-                            
-                            {{--<div class="modal fade" id="modalVisualizarPaciente{{$paciente->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLongTitle">{{$paciente->nome}}</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Código: {{$paciente->id}}
-                                            <br />
 
-                                            Data de nascimento:
-
-                                            // $origDate = $paciente->data_nascimento;
-                                            // $newDate = date("d-m-Y", strtotime($origDate));
-                                            // $date = str_replace('-', '/', $newDate);
-                                            // echo $date;
-                                            <br/>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                        </div>
+                            {{--
+                                <div class="modal fade" id="modalVisualizarPaciente{{$paciente->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">{{$paciente->nome}}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                     </div>
-                                </div>
-                            </div>--}}
+                                    <div class="modal-body">
+                                        Código: {{$paciente->id}}
+                                        <br />
 
-                            <div class="modal fade" id="modalExclusaoPaciente{{$paciente->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLongTitle">Exclusão de paciente</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Confirma a exclusão de {{$paciente->nome}} (código: {{$paciente->id}})??
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                            <form action="{{ route('deletarPaciente', $paciente->id) }}" method="post">
-                                                {{csrf_field()}}
-                                                <input type="submit" class="btn btn-danger btn-xs" value="Excluir">
-                                            </form>
-                                        </div>
+                                        Data de nascimento:
+
+                                        // $origDate = $paciente->data_nascimento;
+                                        // $newDate = date("d-m-Y", strtotime($origDate));
+                                        // $date = str_replace('-', '/', $newDate);
+                                        // echo $date;
+                                        <br />
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                                     </div>
                                 </div>
                             </div>
-                        </td>
-                    </tr>
-                    @endforeach
-                    @endif
-                </tbody>
-            </table>
+        </div>--}}
 
+        <div class="modal fade" id="modalExclusaoPaciente{{$paciente->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Exclusão de paciente</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Confirma a exclusão de {{$paciente->nome}} (código: {{$paciente->id}})??
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <form action="{{ route('deletarPaciente', $paciente->id) }}" method="post">
+                            {{csrf_field()}}
+                            <button type="submit" class="btn btn-danger btn-xs" value="Excluir">
+                                Excluir </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
+        </td>
+        </tr>
+        @endforeach
+        @endif
+        </tbody>
+        </table>
+
     </div>
-    @if(isset($listaPacientes))
-    {{ $listaPacientes->links() }}
-    @endif
+</div>
+@if(isset($listaPacientes))
+{{ $listaPacientes->links() }}
+@endif
 </div>
 @endsection
