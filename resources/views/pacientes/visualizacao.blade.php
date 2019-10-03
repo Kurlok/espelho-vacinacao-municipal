@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div class="container" >
+<div class="container">
     <?php
     $usuarioLogado = Illuminate\Support\Facades\Auth::user();
 
@@ -15,7 +15,7 @@
                 <form method="POST" action="{{route('cadastrarPaciente')}}">
                     @endif
                     @csrf
-                    <div class="card" id="printableArea">
+                    <div class="card" id="printableArea" name="printableArea">
                         <div class="card-header bg-success text-white">{{ __('Dados Pessoais') }}</div>
 
                         <div class="card-body border-secondary">
@@ -110,19 +110,22 @@
                     </div>
 
                 </form>
-                
+
                 <button type="button" class="btn btn-secondary" onclick="printDiv('printableArea')">Imprimir</button>
 
                 <script>
+                    $(document).ready(function() {
+                        printDiv('printableArea');
+                    });
+
                     function printDiv(divName) {
-                        var printContents = document.getElementById(divName).innerHTML;
-                        var originalContents = document.body.innerHTML;
+                        var printContents = $('#' + divName).html();
+                        print($('body').html(printContents));
+                        // var printContents = document.getElementById(divName).innerHTML;
+                        // document.body.innerHTML = printContents;
+                        // window.print();
 
-                        document.body.innerHTML = printContents;
-
-                        window.print();
-
-                        document.body.innerHTML = originalContents;
+                        // document.body.innerHTML = originalContents;
                     }
                 </script>
 

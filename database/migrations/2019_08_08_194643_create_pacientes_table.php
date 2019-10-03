@@ -17,7 +17,7 @@ class CreatePacientesTable extends Migration
             $table->bigIncrements('id');
             $table->string('nome');
             $table->string('nome_mae');
-            $table->string('sus');
+            $table->string('sus')->nullable();
             $table->date('data_nascimento');
             $table->string('sexo');
             $table->string('gestante');

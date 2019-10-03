@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <form method="POST" action="{{ route('login') }}">
                 @csrf
                 <div class="card">
@@ -17,7 +17,12 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                                     </div>
-                                    <input name="email" class="form-control" placeholder="E-mail" type="email">
+                                    <input name="email" class="form-control @error('email') is-invalid @enderror" placeholder="E-mail" type="email">
+                                    @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group">
@@ -25,7 +30,12 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                                     </div>
-                                    <input class="form-control" placeholder="Senha" type="password" name="password">
+                                    <input class="form-control @error('email') is-invalid @enderror" placeholder="Senha" type="password" name="password">
+                                    @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group">
