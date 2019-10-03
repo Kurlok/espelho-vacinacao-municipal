@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+<?php
+$dataAtual = Carbon\Carbon::now()->toDateString();
+?>
 <div class="container">
     <div id="top" class="row">
         <div class="col-md-3">
@@ -34,11 +37,11 @@
                 <div class="form-row">
                     <div class="form-group col-md-5">
                         <label for="nascimentoInicial">Data de Nascimento Inicial</label>
-                        <input type="date" class="form-control" id="nascimentoInicial" name="nascimentoInicial">
+                        <input type="date" class="form-control" id="nascimentoInicial" name="nascimentoInicial" min="1900-01-01" max='{{$dataAtual}}'>
                     </div>
                     <div class="form-group col-md-5">
                         <label for="nascimentoFinal">Data de Nascimento Final</label>
-                        <input type="date" class="form-control" id="nascimentoFinal" name="nascimentoFinal">
+                        <input type="date" class="form-control" id="nascimentoFinal" name="nascimentoFinal" max='{{$dataAtual}}'>
                     </div>
                     <div class="form-group col-md-2">
                         <label for="buttonPacientes" style="visibility: hidden;">Exportação para arquivo</label>
@@ -75,7 +78,7 @@
                     <div class="form-group col-md-2">
                         <label for="usuario">Usuário</label>
                         <select class="form-control" id="usuario" name="usuario">
-                            <option value="todas">Todas</option>
+                            <option value="todos">Todos</option>
                             @foreach($listaUsuarios as $usuario)
                             <option value="{{$usuario->id}}">{{$usuario->name}}</option>
                             @endforeach
@@ -83,11 +86,12 @@
                     </div>
                     <div class="form-group col-md-2">
                         <label for="aplicacaoInicial">Aplicação Inicial</label>
-                        <input type="date" class="form-control" id="aplicacaoInicial" name="aplicacaoInicial">
+                        <input type="date" class="form-control" id="aplicacaoInicial" name="aplicacaoInicial" required min="1900-01-01" max='{{$dataAtual}}'>
                     </div>
+                    
                     <div class="form-group col-md-2">
                         <label for="aplicacaoFinal">Aplicação Final</label>
-                        <input type="date" class="form-control" id="aplicacaoFinal" name="aplicacaoFinal">
+                        <input type="date" class="form-control" id="aplicacaoFinal" name="aplicacaoFinal" required max='{{$dataAtual}}'>
                     </div>
                     <div class="form-group col-md-2">
                         <label for="buttonVacinas" style="visibility: hidden;">Exportação para arquivo</label>

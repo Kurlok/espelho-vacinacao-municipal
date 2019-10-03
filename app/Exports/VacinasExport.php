@@ -52,6 +52,8 @@ class VacinasExport implements WithHeadings, ShouldAutoSize, FromArray
             'Código Paciente',
             'Paciente',
             'Vacina',
+            'Dose',
+            'Descrição Outras',
             'Data de aplicação',
             'Usuário que cadastrou',
             'Unidade',
@@ -69,65 +71,64 @@ class VacinasExport implements WithHeadings, ShouldAutoSize, FromArray
                         ['fk_unidades_id', '=', $this->idUnidade],
                         ['fk_users_id', '=', $this->idUsuario],
                     ])
+                    ->whereDate('data_aplicacao', '>=', $this->aplicacaoInicial)
+                    ->whereDate('data_aplicacao', '<=', $this->aplicacaoFinal)
                     ->get();
             } else if (($this->idVacina != 'todas') && ($this->idUsuario != 'todos')) {
                 $pesquisa = DB::table('pacientes_vacinas')
                     ->where([
                         ['fk_vacinas_id', '=', $this->idVacina],
                         ['fk_users_id', '=', $this->idUsuario],
-                        ['data_aplicacao', '>=', $this->aplicacaoInicial],
-                        ['data_aplicacao', '<=', $this->aplicacaoFinal],
                     ])
+                    ->whereDate('data_aplicacao', '>=', $this->aplicacaoInicial)
+                    ->whereDate('data_aplicacao', '<=', $this->aplicacaoFinal)
                     ->get();
             } else if (($this->idVacina != 'todas') && ($this->idUnidade != 'todas')) {
                 $pesquisa = DB::table('pacientes_vacinas')
                     ->where([
                         ['fk_vacinas_id', '=', $this->idVacina],
                         ['fk_unidades_id', '=', $this->idUnidade],
-                        ['data_aplicacao', '>=', $this->aplicacaoInicial],
-                        ['data_aplicacao', '<=', $this->aplicacaoFinal],
                     ])
+                    ->whereDate('data_aplicacao', '>=', $this->aplicacaoInicial)
+                    ->whereDate('data_aplicacao', '<=', $this->aplicacaoFinal)
                     ->get();
             } else if (($this->idUsuario != 'todos') && ($this->idUnidade != 'todas')) {
                 $pesquisa = DB::table('pacientes_vacinas')
                     ->where([
                         ['fk_unidades_id', '=', $this->idUnidade],
                         ['fk_users_id', '=', $this->idUsuario],
-                        ['data_aplicacao', '>=', $this->aplicacaoInicial],
-                        ['data_aplicacao', '<=', $this->aplicacaoFinal],
                     ])
+                    ->whereDate('data_aplicacao', '>=', $this->aplicacaoInicial)
+                    ->whereDate('data_aplicacao', '<=', $this->aplicacaoFinal)
                     ->get();
             } else if ($this->idVacina != 'todas') {
                 $pesquisa = DB::table('pacientes_vacinas')
                     ->where([
                         ['fk_vacinas_id', '=', $this->idVacina],
-                        ['data_aplicacao', '>=', $this->aplicacaoInicial],
-                        ['data_aplicacao', '<=', $this->aplicacaoFinal],
                     ])
+                    ->whereDate('data_aplicacao', '>=', $this->aplicacaoInicial)
+                    ->whereDate('data_aplicacao', '<=', $this->aplicacaoFinal)
                     ->get();
             } else if ($this->idUsuario != 'todos') {
                 $pesquisa = DB::table('pacientes_vacinas')
                     ->where([
                         ['fk_users_id', '=', $this->idUsuario],
-                        ['data_aplicacao', '>=', $this->aplicacaoInicial],
-                        ['data_aplicacao', '<=', $this->aplicacaoFinal],
+
                     ])
+                    ->whereDate('data_aplicacao', '>=', $this->aplicacaoInicial)
+                    ->whereDate('data_aplicacao', '<=', $this->aplicacaoFinal)
                     ->get();
             } else if ($this->idUnidade != 'todas') {
                 $pesquisa = DB::table('pacientes_vacinas')
                     ->where([
                         ['fk_unidades_id', '=', $this->idUnidade],
-                        ['data_aplicacao', '>=', $this->aplicacaoInicial],
-                        ['data_aplicacao', '<=', $this->aplicacaoFinal],
                     ])
                     ->get();
             }
         } else {
             $pesquisa = DB::table('pacientes_vacinas')
-                ->where([
-                    ['data_aplicacao', '>=', $this->aplicacaoInicial],
-                    ['data_aplicacao', '<=', $this->aplicacaoFinal],
-                ])
+                ->whereDate('data_aplicacao', '>=', $this->aplicacaoInicial)
+                ->whereDate('data_aplicacao', '<=', $this->aplicacaoFinal)
                 ->get();
         }
 
@@ -139,15 +140,17 @@ class VacinasExport implements WithHeadings, ShouldAutoSize, FromArray
             $unidade = Unidade::find($tupla->fk_unidades_id);
             $usuario = User::find($tupla->fk_users_id);
 
-
             array_push($array, $paciente->id);
             array_push($array, $paciente->nome);
             array_push($array, $vacina->vacina);
+            array_push($array, $vacina->dose);
+            array_push($array, $vacina->descricao_outras);
+
             array_push($array, $tupla->data_aplicacao);
-            if ($usuario != null) {
+            if (isset($usuario)) {
                 array_push($array, $usuario->name);
             }
-            if ($unidade != null) {
+            if (isset($unidade)) {
                 array_push($array, $unidade->nome);
             }
             array_push($arrayFinal, $array);
