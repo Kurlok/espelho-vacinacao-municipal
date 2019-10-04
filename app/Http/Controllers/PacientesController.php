@@ -187,50 +187,58 @@ class PacientesController extends Controller
 
     public function alterarPaciente(Request $request, int $id)
     {
+        try {
 
-        //Trabalhando com os checkboxes
-        if ($request->obito == 'on') $obito = 'Sim';
-        else  $obito = 'Não';
-        if ($request->gestante == 'on') $gestante = 'Sim';
-        else  $gestante = 'Não';
+            //Trabalhando com os checkboxes
+            if ($request->obito == 'on') $obito = 'Sim';
+            else  $obito = 'Não';
+            if ($request->gestante == 'on') $gestante = 'Sim';
+            else  $gestante = 'Não';
 
-        $paciente = Paciente::find($id);
-        $paciente->nome = $request->nome;
-        $paciente->nome_mae = $request->nome_mae;
-        $paciente->data_nascimento = $request->data_nascimento;
-        $paciente->localidade = $request->localidade;
-        $paciente->sus = $request->sus;
-        $paciente->sexo = $request->sexo;
-        $paciente->gestante = $gestante;
-        $paciente->obito = $obito;
-        $paciente->telefone = $request->telefone;
-        $paciente->telefone_alternativo = $request->telefone_alternativo;
-        $paciente->observacoes = $request->observacoes;
-        $paciente->save();
+            $paciente = Paciente::find($id);
+            $paciente->nome = $request->nome;
+            $paciente->nome_mae = $request->nome_mae;
+            $paciente->data_nascimento = $request->data_nascimento;
+            $paciente->localidade = $request->localidade;
+            $paciente->sus = $request->sus;
+            $paciente->sexo = $request->sexo;
+            $paciente->gestante = $gestante;
+            $paciente->obito = $obito;
+            $paciente->telefone = $request->telefone;
+            $paciente->telefone_alternativo = $request->telefone_alternativo;
+            $paciente->observacoes = $request->observacoes;
+            $paciente->save();
 
-        $listaVacinasTamanho = Vacina::count();
-        $pacienteCadastradoVacinas = Paciente::with('vacinas')->find($paciente->id)->vacinas();
+            $listaVacinasTamanho = Vacina::count();
+            $pacienteCadastradoVacinas = Paciente::with('vacinas')->find($paciente->id)->vacinas();
 
-        $vacina = new Vacina();
-        $arrayId = [];
-        for ($i = 0; $i < $listaVacinasTamanho; $i++) {
-            $vacina->id = $request->input("idVacina.$i");
-            $data_aplicacao = $request->input("dataVacina.$i");
-            $descricao_outras = $request->input("descricaoOutras.$i");
-            $idUnidade = $request->input("unidadeVacina.$i");
-            if ($pacienteCadastradoVacinas->first()->pivot->data_aplicacao != $data_aplicacao) {
-                $pacienteCadastradoVacinas->updateExistingPivot($vacina->id, [
-                    'data_aplicacao' => $data_aplicacao,
-                    'descricao_outras' => $descricao_outras,
-                    'fk_unidades_id' => $idUnidade,
-                    'fk_users_id' => Auth::id()
-                ]);
+            $vacina = new Vacina();
+            $arrayId = [];
+            for ($i = 0; $i < $listaVacinasTamanho; $i++) {
+                $vacina->id = $request->input("idVacina.$i");
+                $data_aplicacao = $request->input("dataVacina.$i");
+                $descricao_outras = $request->input("descricaoOutras.$i");
+                $idUnidade = $request->input("unidadeVacina.$i");
+                if (
+                    ($pacienteCadastradoVacinas->first()->pivot->data_aplicacao != $data_aplicacao) || ($pacienteCadastradoVacinas->first()->pivot->descricao_outras != $descricao_outras) || ($pacienteCadastradoVacinas->first()->pivot->fk_unidades_id != $idUnidade)
+
+                ) {
+                    $pacienteCadastradoVacinas->updateExistingPivot($vacina->id, [
+                        'data_aplicacao' => $data_aplicacao,
+                        'descricao_outras' => $descricao_outras,
+                        'fk_unidades_id' => $idUnidade,
+                        'fk_users_id' => Auth::id()
+                    ]);
+                }
+                array_push($arrayId, $vacina->id);
             }
-            array_push($arrayId, $vacina->id);
+            return back()->with('mensagemSucesso', "Alteração realizada com sucesso.");
+
+        } catch (Exception $ex) {
+            return back()->with('mensagemErro', "Ocorreu um erro (" + $ex + ").");
         }
         //return $pacienteCadastradoVacinas->where('fk_vacinas_id', $vacina->id)->first()->pivot->data_aplicacao;
         //return $vacina->id;
-        return redirect()->route('pacientes');
     }
 
     public function deletarPaciente(int $id)

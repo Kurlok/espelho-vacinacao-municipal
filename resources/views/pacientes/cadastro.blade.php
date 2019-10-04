@@ -68,6 +68,34 @@
 
 @section('content')
 <div class="container">
+    @if(session()->has('mensagemSucesso'))
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class=" alert alert-success">
+                {{ session()->get('mensagemSucesso') }}
+            </div>
+        </div>
+    </div>
+    @endif
+    @if (session()->has('mensagemErro'))
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class=" alert alert-danger">
+                {{ session()->get('mensagemErro') }}
+            </div>
+        </div>
+    </div>
+    @endif
+    @if ($errors->any())
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class=" alert alert-danger">
+                Houve um erro, por favor confira se preencheu todos os dados corretamente.
+            </div>
+        </div>
+    </div>
+    @endif
+
     <?php
     $usuarioLogado = Illuminate\Support\Facades\Auth::user();
 
@@ -210,7 +238,7 @@
                                         @endforeach
                                     </select>
                                     @if(isset($paciente))
-                                    @if(($pivotVacinaPaciente->fk_users_id != $usuarioLogado->id) && ($pivotVacinaPaciente->fk_users_id != null))
+                                    @if(($pivotVacinaPaciente->fk_users_id != $usuarioLogado->id) && ($pivotVacinaPaciente->fk_users_id != null) && (Auth::user()->permissao != 'Administrador'))
                                     <select class="form-control" id="unidadeVacinaDisabled[]" name="unidadeVacinaDisabled[]" disabled>
                                         <option value=''>Unidade</option>
                                         @foreach($listaUnidades as $unidade)
