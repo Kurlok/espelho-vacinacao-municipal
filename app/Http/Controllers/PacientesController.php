@@ -154,20 +154,15 @@ class PacientesController extends Controller
         $listaVacinasTamanho = Vacina::count();
         $vacina = new Vacina();
         $pacienteCadastradoVacinas = Paciente::find($paciente->id)->vacinas();
+
+
         for ($i = 0; $i < $listaVacinasTamanho; $i++) {
             $vacina->id = $request->input("idVacina.$i");
             $data_aplicacao = $request->input("dataVacina.$i");
             $descricao_outras = $request->input("descricaoOutras.$i");
             $idUnidade = $request->input("unidadeVacina.$i");
-
-            $pacienteCadastradoVacinas->attach($vacina->id, [
-                'data_aplicacao' => $data_aplicacao,
-                'descricao_outras' => $descricao_outras,
-                'fk_unidades_id' => $idUnidade
-            ]);
-
             if ($data_aplicacao != null) {
-                $pacienteCadastradoVacinas->updateExistingPivot($vacina->id, [
+                $pacienteCadastradoVacinas->attach($vacina->id, [
                     'data_aplicacao' => $data_aplicacao,
                     'descricao_outras' => $descricao_outras,
                     'fk_unidades_id' => $idUnidade,
@@ -175,14 +170,7 @@ class PacientesController extends Controller
                 ]);
             }
         }
-        //echo $paciente->id;
         return redirect()->route('pacientes');
-        //->with('mensagemAlteracaoDados', 'Dados alterados com sucesso!');
-
-        // return view(
-        //     'pacientes/cadastro',
-        //     ['paciente' => $paciente]
-        // );
     }
 
     public function alterarPaciente(Request $request, int $id)
@@ -210,35 +198,32 @@ class PacientesController extends Controller
             $paciente->save();
 
             $listaVacinasTamanho = Vacina::count();
-            $pacienteCadastradoVacinas = Paciente::with('vacinas')->find($paciente->id)->vacinas();
 
             $vacina = new Vacina();
-            $arrayId = [];
             for ($i = 0; $i < $listaVacinasTamanho; $i++) {
                 $vacina->id = $request->input("idVacina.$i");
                 $data_aplicacao = $request->input("dataVacina.$i");
                 $descricao_outras = $request->input("descricaoOutras.$i");
                 $idUnidade = $request->input("unidadeVacina.$i");
-                if (
-                    ($pacienteCadastradoVacinas->first()->pivot->data_aplicacao != $data_aplicacao) || ($pacienteCadastradoVacinas->first()->pivot->descricao_outras != $descricao_outras) || ($pacienteCadastradoVacinas->first()->pivot->fk_unidades_id != $idUnidade)
-
-                ) {
-                    $pacienteCadastradoVacinas->updateExistingPivot($vacina->id, [
-                        'data_aplicacao' => $data_aplicacao,
-                        'descricao_outras' => $descricao_outras,
-                        'fk_unidades_id' => $idUnidade,
-                        'fk_users_id' => Auth::id()
-                    ]);
+                if ($data_aplicacao != null) {
+                    DB::table('pacientes_vacinas')->updateOrInsert(
+                        [
+                            'fk_pacientes_id' => $id,
+                            'fk_vacinas_id' => $vacina->id
+                        ],
+                        [
+                            'data_aplicacao' => $data_aplicacao,
+                            'descricao_outras' => $descricao_outras,
+                            'fk_unidades_id' => $idUnidade,
+                            'fk_users_id' => Auth::id()
+                        ]
+                    );
                 }
-                array_push($arrayId, $vacina->id);
             }
             return back()->with('mensagemSucesso', "Alteração realizada com sucesso.");
-
         } catch (Exception $ex) {
             return back()->with('mensagemErro', "Ocorreu um erro (" + $ex + ").");
         }
-        //return $pacienteCadastradoVacinas->where('fk_vacinas_id', $vacina->id)->first()->pivot->data_aplicacao;
-        //return $vacina->id;
     }
 
     public function deletarPaciente(int $id)

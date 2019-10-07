@@ -166,10 +166,10 @@ class VacinasController extends Controller
         $paciente = new Paciente;
         $paciente = Paciente::all();
 
-        $listaVacinasTamanho = Vacina::count();
-        foreach($paciente as $pac){
-            $pac->vacinas()->attach($vacina->id, ['data_aplicacao' => null]);
-        }
+        // $listaVacinasTamanho = Vacina::count();
+        // foreach($paciente as $pac){
+        //     $pac->vacinas()->attach($vacina->id, ['data_aplicacao' => null]);
+        // }
     
 
         return redirect()->route('telaCadastroVacina');

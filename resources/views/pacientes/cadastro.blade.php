@@ -11,56 +11,10 @@
         $('.date_time').mask('00/00/0000 00:00:00');
         $('#cep').mask('00000-000');
         $('#rg').mask('000000000000000');
-
-        $('.phone').mask('0000-0000');
-        $('.phone_with_ddd').mask('(00) 0000-0000');
         $('.tel').mask('(00) 00000-0000');
-        $('.phone_us').mask('(000) 000-0000');
         $('.mixed').mask('AAA 000-S0S');
         $('.cpf').mask('000.000.000-00', {
             reverse: true
-        });
-        $('#cpf').mask('000.000.000-00', {
-            reverse: true
-        });
-        $('.cnpj').mask('00.000.000/0000-00', {
-            reverse: true
-        });
-        $('.money').mask('000.000.000.000.000,00', {
-            reverse: true
-        });
-        $('.money2').mask("#.##0,00", {
-            reverse: true
-        });
-        $('.ip_address').mask('0ZZ.0ZZ.0ZZ.0ZZ', {
-            translation: {
-                'Z': {
-                    pattern: /[0-9]/,
-                    optional: true
-                }
-            }
-        });
-        $('.ip_address').mask('099.099.099.099');
-        $('.percent').mask('##0,00%', {
-            reverse: true
-        });
-        $('.clear-if-not-match').mask("00/00/0000", {
-            clearIfNotMatch: true
-        });
-        $('.placeholder').mask("00/00/0000", {
-            placeholder: "__/__/____"
-        });
-        $('.fallback').mask("00r00r0000", {
-            translation: {
-                'r': {
-                    pattern: /[\/]/,
-                    fallback: '/'
-                },
-                placeholder: "__/__/____"
-            }
-        });
-        $('.selectonfocus').mask("00/00/0000", {
-            selectOnFocus: true
         });
     });
 </script>
@@ -98,11 +52,10 @@
 
     <?php
     $usuarioLogado = Illuminate\Support\Facades\Auth::user();
-
-
+    $dataAtual = Carbon\Carbon::now()->toDateString();
     ?>
-    <div class="row justify-content-center">
 
+    <div class="row justify-content-center">
         <div class="col-md-12">
             @if(isset($paciente))
             <form method="POST" action="{{route('alterarPaciente', $paciente->id)}}">
@@ -112,7 +65,6 @@
                     @csrf
                     <div class="card">
                         <div class="card-header bg-success text-white">{{ __('Dados Pessoais') }}</div>
-
                         <div class="card-body border-secondary">
                             <div class="form-row">
                                 <div class="form-group col-md-2">
@@ -122,13 +74,10 @@
                                 <div class="form-group col-md-2">
                                     <label for="idade">Idade</label>
                                     <input type="text" class="form-control" name="idade" id="idade" value="@if(isset($paciente)){{Carbon\Carbon::createFromDate($paciente->data_nascimento)->diff(Carbon\Carbon::now())->format('%yA %mM %dD')}}@endif" disabled>
-
-
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="nome">Nome completo</label>
                                     <input type="text" class="form-control @error('nome') is-invalid @enderror" name="nome" id="nome" placeholder="Nome completo" value="@if(isset($paciente)){{$paciente->nome}}@else{{old('nome')}}@endif" @if(isset($paciente)) @if(($paciente->fk_users_id != $usuarioLogado->id) && ($usuarioLogado->permissao != 'Administrador')) readonly @endif @endif>
-
                                     @error('nome')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -139,9 +88,7 @@
                                     <label for="sus">N.º SUS</label>
                                     <input type="text" class="form-control" name="sus" id="sus" placeholder="000000000000000" maxlength="15" value="@if(isset($paciente)){{$paciente->sus}}@else{{old('sus')}}@endif">
                                 </div>
-
                             </div>
-
                             <div class="form-row">
                                 <div class="form-group col-md-4">
                                     <label for="nome_mae">Nome da mãe</label>
@@ -151,7 +98,6 @@
                                     <label for="data_nascimento">Nascimento</label>
                                     <input type="date" class="form-control" id="data_nascimento" name="data_nascimento" value="@if(isset($paciente)){{$paciente->data_nascimento}}@else{{old('data_nascimento')}}@endif" @if(isset($paciente)) @if(($paciente->fk_users_id != $usuarioLogado->id) && ($usuarioLogado->permissao != 'Administrador')) readonly @endif @endif>
                                 </div>
-
                                 <div class="col-md-2 ">
                                     <label for="sexo">Sexo</label>
                                     <div class="form-group">
@@ -181,9 +127,7 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
-
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="localidade">Localidade</label>
@@ -197,7 +141,6 @@
                                     <label for="nome">Telefone Alternativo</label>
                                     <input type="text" class="form-control tel" id="telefone_alternativo" name="telefone_alternativo" placeholder="(00) 00000-0000" value="@if(isset($paciente)){{$paciente->telefone_alternativo}}@else{{old('telefone_alternativo')}}@endif">
                                 </div>
-
                             </div>
                             <div class="form-group">
                                 <label for="observacoes">Observações</label>
@@ -206,13 +149,27 @@
                         </div>
                         <div class="card-header bg-success text-white">{{ __('Vacinas') }}</div>
                         <div class="card-body">
-
                             <div class="form-row">
-
                                 @foreach($listaVacinas as $vacina)
                                 <?php
                                 if (isset($paciente)) {
-                                    $pivotVacinaPaciente = $vacina->pacientes()->where('fk_pacientes_id', $paciente->id)->firstOrFail()->pivot;
+                                    $vacinaQuery = null;
+                                    $vacinaQueryExiste = Illuminate\Support\Facades\DB::table('pacientes_vacinas')
+                                        ->where(
+                                            [
+                                                ['fk_pacientes_id', '=', $paciente->id],
+                                                ['fk_vacinas_id', '=', $vacina->id],
+                                            ]
+                                        )->exists();
+                                    if ($vacinaQueryExiste) {
+                                        $vacinaQuery = Illuminate\Support\Facades\DB::table('pacientes_vacinas')
+                                            ->where(
+                                                [
+                                                    ['fk_pacientes_id', '=', $paciente->id],
+                                                    ['fk_vacinas_id', '=', $vacina->id],
+                                                ]
+                                            )->get();
+                                    }
                                 }
                                 ?>
                                 @if(isset($vacinaAnterior))
@@ -226,23 +183,23 @@
                                     <label for="dataVacina[]">{{$vacina->vacina}} - {{$vacina->dose}}</label>
                                     <input type="text" class="form-control" id="idVacina[]" name="idVacina[]" value="{{$vacina->id}}" hidden>
                                     @if($vacina->vacina == "Outras")
-                                    <input type="text" class="form-control" id="descricaoOutras[]" name="descricaoOutras[]" value="@if(isset($paciente)){{$pivotVacinaPaciente->descricao_outras}}@else{{old('descricaoOutras[]')}}@endif" @if(isset($paciente)) @if(($pivotVacinaPaciente->fk_users_id != $usuarioLogado->id) && ($pivotVacinaPaciente->fk_users_id != null) && ($usuarioLogado->permissao != 'Administrador')) readonly @endif @endif>
+                                    <input type="text" class="form-control" id="descricaoOutras[]" name="descricaoOutras[]" value="@if(isset($paciente) && isset($vacinaQuery[0])){{$vacinaQuery[0]->descricao_outras}}@else{{old('descricaoOutras[]')}}@endif" @if(isset($paciente) && isset($vacinaQuery[0])) @if(($vacinaQuery[0]->fk_users_id != $usuarioLogado->id) && ($vacinaQuery[0]->fk_users_id != null) && ($usuarioLogado->permissao != 'Administrador')) readonly @endif @endif>
                                     @else
-                                    <input type="text" class="form-control" id="descricaoOutras[]" name="descricaoOutras[]" value="@if(isset($paciente)){{$pivotVacinaPaciente->descricao_outras}}@else{{old('descricaoOutras[]')}}@endif" hidden @if(isset($paciente)) @if(($pivotVacinaPaciente->fk_users_id != $usuarioLogado->id) && ($pivotVacinaPaciente->fk_users_id != null) && ($usuarioLogado->permissao != 'Administrador')) readonly @endif @endif>
+                                    <input type="text" class="form-control" id="descricaoOutras[]" name="descricaoOutras[]" value="@if(isset($paciente) && isset($vacinaQuery[0])){{$vacinaQuery[0]->descricao_outras}}@else{{old('descricaoOutras[]')}}@endif" hidden @if(isset($paciente) && isset($vacinaQuery[0])) @if(($vacinaQuery[0]->fk_users_id != $usuarioLogado->id) && ($vacinaQuery[0]->fk_users_id != null) && ($usuarioLogado->permissao != 'Administrador')) readonly @endif @endif>
                                     @endif
-                                    <input type="date" class="form-control" id="dataVacina[]" name="dataVacina[]" value="@if(isset($paciente)){{$pivotVacinaPaciente->data_aplicacao}}@else{{old('dataVacina[]')}}@endif" @if(isset($paciente)) @if(($pivotVacinaPaciente->fk_users_id != $usuarioLogado->id) && ($pivotVacinaPaciente->fk_users_id != null) && ($usuarioLogado->permissao != 'Administrador')) readonly @endif @endif>
-                                    <select class="form-control" id="unidadeVacina[]" name="unidadeVacina[]" @if(isset($paciente)) @if(($pivotVacinaPaciente->fk_users_id != $usuarioLogado->id) && ($pivotVacinaPaciente->fk_users_id != null) && ($usuarioLogado->permissao != 'Administrador')) hidden @endif @endif>
+                                    <input type="date" class="form-control" id="dataVacina[]" name="dataVacina[]" min="1900-01-01" max='{{$dataAtual}}' value="@if(isset($paciente) && isset($vacinaQuery[0])){{$vacinaQuery[0]->data_aplicacao}}@else{{old('dataVacina[]')}}@endif" @if(isset($paciente) && isset($vacinaQuery[0])) @if(($vacinaQuery[0]->fk_users_id != $usuarioLogado->id) && ($vacinaQuery[0]->fk_users_id != null) && ($usuarioLogado->permissao != 'Administrador')) readonly @endif @endif>
+                                    <select class="form-control" id="unidadeVacina[]" name="unidadeVacina[]" @if(isset($paciente) && isset($vacinaQuery[0])) @if(($vacinaQuery[0]->fk_users_id != $usuarioLogado->id) && ($vacinaQuery[0]->fk_users_id != null) && ($usuarioLogado->permissao != 'Administrador')) hidden @endif @endif>
                                         <option value=''>Unidade</option>
                                         @foreach($listaUnidades as $unidade)
-                                        <option value="{{$unidade->id}}" @if(isset($paciente)) @if(($pivotVacinaPaciente->fk_unidades_id) == $unidade->id) selected @endif @endif >{{$unidade->nome}}</option>
+                                        <option value="{{$unidade->id}}" @if(isset($paciente) && isset($vacinaQuery[0])) @if(($vacinaQuery[0]->fk_unidades_id) == $unidade->id) selected @endif @endif >{{$unidade->nome}}</option>
                                         @endforeach
                                     </select>
-                                    @if(isset($paciente))
-                                    @if(($pivotVacinaPaciente->fk_users_id != $usuarioLogado->id) && ($pivotVacinaPaciente->fk_users_id != null) && (Auth::user()->permissao != 'Administrador'))
+                                    @if(isset($paciente) && isset($vacinaQuery[0]))
+                                    @if(($vacinaQuery[0]->fk_users_id != $usuarioLogado->id) && ($vacinaQuery[0]->fk_users_id != null) && (Auth::user()->permissao != 'Administrador'))
                                     <select class="form-control" id="unidadeVacinaDisabled[]" name="unidadeVacinaDisabled[]" disabled>
                                         <option value=''>Unidade</option>
                                         @foreach($listaUnidades as $unidade)
-                                        <option value="{{$unidade->id}}" @if(isset($paciente)) @if(($pivotVacinaPaciente->fk_unidades_id) == $unidade->id) selected @endif @endif >{{$unidade->nome}}</option>
+                                        <option value="{{$unidade->id}}" @if(isset($paciente) && isset($vacinaQuery[0])) @if(($vacinaQuery[0]->fk_unidades_id) == $unidade->id) selected @endif @endif >{{$unidade->nome}}</option>
                                         @endforeach
                                     </select>
                                     @endif
@@ -253,7 +210,6 @@
                                 $vacinaAnterior = $vacina;
                                 ?>
                                 @endforeach
-
                             </div>
                             @if(isset($paciente))
                             <button type="submit" class="btn btn-primary">Alterar</button>
@@ -261,11 +217,8 @@
                             <button type="submit" class="btn btn-primary">Cadastrar</button>
                             @endif
                         </div>
-
                     </div>
-
                 </form>
-
         </div>
     </div>
     @endsection

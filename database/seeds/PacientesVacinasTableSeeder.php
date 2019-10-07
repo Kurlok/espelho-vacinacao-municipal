@@ -21,8 +21,9 @@ class PacientesVacinasTableSeeder extends Seeder
         $faker = Faker::create('pt_BR');
 
 
-        for ($j = 0; $j < $numVacinas; $j++) {
+        for ($j = 0; $j < $numVacinas-90; $j++) {
 
+            
             for ($i = 0; $i < $numPacientes; $i++) {
                 $dt = $faker->dateTimeBetween($startDate = '-50 years', $endDate = 'now');
                 $date = $dt->format("Y-m-d");
@@ -31,7 +32,7 @@ class PacientesVacinasTableSeeder extends Seeder
                     'fk_pacientes_id' => $i+1,
                     'fk_unidades_id' => random_int(1,$numUnidades),
                     'fk_users_id' => random_int(1,$numUsuarios),
-                    'data_aplicacao' => $date,
+                    'data_aplicacao' => $date
                 ]);
             }
         }
