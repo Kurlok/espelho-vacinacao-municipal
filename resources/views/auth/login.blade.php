@@ -1,6 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+    body {
+        background-image: url("{{ asset('img/fundo5.png') }}");
+        background-attachment: fixed;
+        background-position: center;
+        background-size: 100%;
+
+    }
+</style>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">

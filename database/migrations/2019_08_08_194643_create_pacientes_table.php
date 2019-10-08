@@ -28,7 +28,6 @@ class CreatePacientesTable extends Migration
             $table->text('observacoes')->nullable();
             $table->unsignedBigInteger('fk_users_id')->nullable();
             $table->foreign('fk_users_id')->references('id')->on('users');
-
             $table->timestamps();
         });
     }

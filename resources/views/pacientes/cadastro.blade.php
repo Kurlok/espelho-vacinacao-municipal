@@ -77,7 +77,7 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="nome">Nome completo</label>
-                                    <input type="text" class="form-control @error('nome') is-invalid @enderror" name="nome" id="nome" placeholder="Nome completo" value="@if(isset($paciente)){{$paciente->nome}}@else{{old('nome')}}@endif" @if(isset($paciente)) @if(($paciente->fk_users_id != $usuarioLogado->id) && ($usuarioLogado->permissao != 'Administrador')) readonly @endif @endif>
+                                    <input type="text" class="form-control @error('nome') is-invalid @enderror" maxlength="255" name="nome" id="nome" placeholder="Nome completo" value="@if(isset($paciente)){{$paciente->nome}}@else{{old('nome')}}@endif" @if(isset($paciente)) @if(($paciente->fk_users_id != $usuarioLogado->id) && ($usuarioLogado->permissao != 'Administrador')) readonly @endif @endif>
                                     @error('nome')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -86,23 +86,23 @@
                                 </div>
                                 <div class="form-group col-md-2">
                                     <label for="sus">N.º SUS</label>
-                                    <input type="text" class="form-control" name="sus" id="sus" placeholder="000000000000000" maxlength="15" value="@if(isset($paciente)){{$paciente->sus}}@else{{old('sus')}}@endif">
+                                    <input type="text" class="form-control" name="sus" id="sus" placeholder="000000000000000" maxlength="20" value="@if(isset($paciente)){{$paciente->sus}}@else{{old('sus')}}@endif">
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-4">
                                     <label for="nome_mae">Nome da mãe</label>
-                                    <input type="text" class="form-control" id="nome_mae" name="nome_mae" placeholder="Nome da mãe" value="@if(isset($paciente)){{$paciente->nome_mae}}@else{{old('nome_mae')}}@endif">
+                                    <input type="text" class="form-control" id="nome_mae" maxlength="255" name="nome_mae" placeholder="Nome da mãe" value="@if(isset($paciente)){{$paciente->nome_mae}}@else{{old('nome_mae')}}@endif">
                                 </div>
                                 <div class="form-group col-md-2">
                                     <label for="data_nascimento">Nascimento</label>
-                                    <input type="date" class="form-control" id="data_nascimento" name="data_nascimento" value="@if(isset($paciente)){{$paciente->data_nascimento}}@else{{old('data_nascimento')}}@endif" @if(isset($paciente)) @if(($paciente->fk_users_id != $usuarioLogado->id) && ($usuarioLogado->permissao != 'Administrador')) readonly @endif @endif>
+                                    <input type="date" class="form-control" id="data_nascimento" name="data_nascimento" min="1900-01-01" max='{{$dataAtual}}' value="@if(isset($paciente)){{$paciente->data_nascimento}}@else{{old('data_nascimento')}}@endif" @if(isset($paciente)) @if(($paciente->fk_users_id != $usuarioLogado->id) && ($usuarioLogado->permissao != 'Administrador')) readonly @endif @endif>
                                 </div>
                                 <div class="col-md-2 ">
                                     <label for="sexo">Sexo</label>
                                     <div class="form-group">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="sexo" id="masculino" value="Masculino" @if(isset($paciente)) @if($paciente->sexo ==='Masculino') checked @endif @elseif(old('sexo')=='Masculino' ) checked @endif>
+                                            <input class="form-check-input" type="radio" required name="sexo" id="masculino" value="Masculino" @if(isset($paciente)) @if($paciente->sexo ==='Masculino') checked @endif @elseif(old('sexo')=='Masculino' ) checked @endif>
                                             <label class="form-check-label" for="masculino">Masculino</label>
                                         </div>
                                         <div class="form-check">
@@ -131,20 +131,20 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="localidade">Localidade</label>
-                                    <input type="text" class="form-control" id="localidade" name="localidade" placeholder="Pinheiral de baixo" value="@if(isset($paciente)){{$paciente->localidade}}@else{{old('localidade')}}@endif">
+                                    <input type="text" class="form-control" id="localidade" name="localidade" maxlength="255" value="@if(isset($paciente)){{$paciente->localidade}}@else{{old('localidade')}}@endif">
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="telefone">Telefone</label>
-                                    <input type="text" class="form-control tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" value="@if(isset($paciente)){{$paciente->telefone}}@else{{old('telefone')}}@endif">
+                                    <input type="text" class="form-control tel" id="telefone" name="telefone" maxlength="20" placeholder="(00) 00000-0000" value="@if(isset($paciente)){{$paciente->telefone}}@else{{old('telefone')}}@endif">
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="nome">Telefone Alternativo</label>
-                                    <input type="text" class="form-control tel" id="telefone_alternativo" name="telefone_alternativo" placeholder="(00) 00000-0000" value="@if(isset($paciente)){{$paciente->telefone_alternativo}}@else{{old('telefone_alternativo')}}@endif">
+                                    <input type="text" class="form-control tel" id="telefone_alternativo" maxlength="20" name="telefone_alternativo" placeholder="(00) 00000-0000" value="@if(isset($paciente)){{$paciente->telefone_alternativo}}@else{{old('telefone_alternativo')}}@endif">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="observacoes">Observações</label>
-                                <textarea class="form-control" id="observacoes" name="observacoes" rows="4">@if(isset($paciente)){{$paciente->observacoes}}@else{{old('observacoes')}}@endif</textarea>
+                                <textarea class="form-control" id="observacoes" name="observacoes" maxlength="65000" rows="4">@if(isset($paciente)){{$paciente->observacoes}}@else{{old('observacoes')}}@endif</textarea>
                             </div>
                         </div>
                         <div class="card-header bg-success text-white">{{ __('Vacinas') }}</div>

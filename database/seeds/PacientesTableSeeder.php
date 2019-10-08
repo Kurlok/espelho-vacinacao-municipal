@@ -30,7 +30,7 @@ class PacientesTableSeeder extends Seeder
 
         $numUsuarios = DB::table('users')->count();
 
-        for ($i = 0; $i < 1000; $i++) {
+        for ($i = 0; $i < 50000; $i++) {
             $gender = $faker->randomElement(['male', 'female']);
             if ($gender == 'male') {
                 $sexo = 'Masculino';

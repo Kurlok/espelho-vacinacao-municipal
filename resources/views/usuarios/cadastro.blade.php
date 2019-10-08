@@ -85,7 +85,7 @@
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label for="name">{{ __('Nome Completo') }}</label>
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="@if(isset($usuario)){{$usuario->name}}@else {{ old('name') }}@endif " required autocomplete="name" autofocus>
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="@if(isset($usuario)){{$usuario->name}}@else {{ old('name') }}@endif " maxlength="255" required autocomplete="name" autofocus>
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -98,7 +98,7 @@
 
                                 <div class="form-group col-md-4">
                                     <label for="cpf">{{ __('CPF') }}</label>
-                                    <input id="cpf" type="text" class="form-control @error('cpf') is-invalid @enderror" name="cpf" value="@if(isset($usuario)){{$usuario->cpf}}@else{{old('cpf')}}@endif" required autocomplete="cpf" autofocus @if(isset($usuario)) disabled @endif>
+                                    <input id="cpf" type="text" class="form-control @error('cpf') is-invalid @enderror" name="cpf" value="@if(isset($usuario)){{$usuario->cpf}}@else{{old('cpf')}}@endif" required autocomplete="cpf" maxlength="15" autofocus @if(isset($usuario)) disabled @endif>
                                     @error('cpf')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -119,7 +119,7 @@
 
                                 <div class="form-group col-md-4">
                                     <label for="funcao">{{ __('Função') }}</label>
-                                    <input id="funcao" type="text" class="form-control @error('funcao') is-invalid @enderror" name="funcao" value="@if(isset($usuario)){{$usuario->funcao}}@else{{old('funcao')}}@endif" required autocomplete="funcao" autofocus>
+                                    <input id="funcao" type="text" class="form-control @error('funcao') is-invalid @enderror" name="funcao" maxlength="100" value="@if(isset($usuario)){{$usuario->funcao}}@else{{old('funcao')}}@endif" required autocomplete="funcao" autofocus>
                                     @error('funcao')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -127,15 +127,6 @@
                                     @enderror
                                 </div>
                                 <div class="form-group col-md-4">
-                                    {{--
-                                    <label for="unidade">Unidade</label>
-                                    <input id="unidade" type="unidade" class="form-control @error('unidade') is-invalid @enderror" name="unidade" value="@if(isset($usuario)){{$usuario->unidade}}@else{{old('unidade')}}@endif" required autocomplete="unidade">
-                                    @error('unidade')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                    --}}
                                     <label for="unidade">Unidade</label>
 
                                     <select class="form-control" id="unidade" name="unidade">
@@ -147,7 +138,7 @@
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="permissao">Permissão</label>
-                                    <select class="form-control @error('permissao') is-invalid @enderror" required id="permissao" name="permissao">
+                                    <select class="form-control @error('permissao') is-invalid @enderror" maxlength="50" required id="permissao" name="permissao">
                                         <option value="Administrador" @if(isset($usuario)) @if($usuario->permissao == 'Administrador') selected @endif @endif>Administrador</option>
                                         <option value="Comum" @if(isset($usuario)) @if($usuario->permissao != 'Administrador') selected @endif @else selected @endif > Comum</option>
                                     </select>
@@ -159,23 +150,7 @@
                                 </div>
                             </div>
 
-                            {{--
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="senha">{{ __('Senha') }}</label>
-                            <input id="senha" type="password" class="form-control @error('senha') is-invalid @enderror" name="senha" required autocomplete="new-senha">
-                            @error('senha')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="senha-confirm">{{ __('Confirmação de senha') }}</label>
-                    <input id="senha-confirm" type="password" class="form-control" name="senha_confirmation" required autocomplete="new-senha">
-                </div>
-            </div>
-            --}}
+                           
             @if(!isset($usuario))
             <div class="row">
                 <div class="col">

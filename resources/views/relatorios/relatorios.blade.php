@@ -11,7 +11,7 @@ $dataAtual = Carbon\Carbon::now()->toDateString();
         </div>
     </div>
     <div class="card">
-        <form method="get" name="formTodas" id="formTodas">
+        <form method="get" action="relatorios/pacientes/todos" name="formTodas" id="formTodas">
             <div class="card-header bg-success text-white">Todos os dados</div>
             <div class="card-body border-secondary">
                 <div class="form-row">
@@ -24,7 +24,7 @@ $dataAtual = Carbon\Carbon::now()->toDateString();
                         </select>
                     </div>
                     <div class="form-group col-md-2">
-                        <button type="submit" class="btn btn-primary btn-xs" name="buttonTodas" id="buttonTodas">
+                        <button type="submit" class="btn btn-primary btn-xs">
                             <i class="far fa-file-excel"></i> Excel
                         </button>
                     </div>
@@ -95,7 +95,7 @@ $dataAtual = Carbon\Carbon::now()->toDateString();
                     </div>
                     <div class="form-group col-md-2">
                         <label for="buttonVacinas" style="visibility: hidden;">Exportação para arquivo</label>
-                        <button type="submit" class="btn btn-primary btn-xs" name="buttonVacinas" id="buttonVacinas">
+                        <button type="submit" class="btn btn-primary btn-xs">
                             <i class="far fa-file-excel"></i> Excel
                         </button>
                     </div>
@@ -107,7 +107,6 @@ $dataAtual = Carbon\Carbon::now()->toDateString();
 <script>
     comboTodas = document.getElementById('comboTodas');
     formTodas = document.getElementById('formTodas');
-    buttonTodas = document.getElementById('buttonTodas');
     comboTodas.onchange = function(e) {
         if (comboTodas.value == 'todosPacientes') {
             formTodas.action = "relatorios/pacientes/todos";
