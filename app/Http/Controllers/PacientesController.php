@@ -205,18 +205,25 @@ class PacientesController extends Controller
                 $data_aplicacao = $request->input("dataVacina.$i");
                 $descricao_outras = $request->input("descricaoOutras.$i");
                 $idUnidade = $request->input("unidadeVacina.$i");
-                if ($data_aplicacao != null) {
+                $queryRegistro = DB::table('pacientes_vacinas')->where([
+                    ['fk_pacientes_id', $id],
+                    ['fk_vacinas_id', $vacina->id],
+                ])->first();
+
+                if ($data_aplicacao != null && $queryRegistro->data_aplicacao != $data_aplicacao) {
                     DB::table('pacientes_vacinas')->updateOrInsert(
                         [
                             'fk_pacientes_id' => $id,
-                            'fk_vacinas_id' => $vacina->id
+                            'fk_vacinas_id' => $vacina->id,
                         ],
                         [
                             'data_aplicacao' => $data_aplicacao,
                             'descricao_outras' => $descricao_outras,
                             'fk_unidades_id' => $idUnidade,
-                            'fk_users_id' => Auth::id()
+                            'fk_users_id' => Auth::id(),
+                            "updated_at" => Carbon::now()
                         ]
+                        
                     );
                 }
             }

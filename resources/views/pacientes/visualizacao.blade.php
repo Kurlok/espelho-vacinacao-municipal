@@ -83,23 +83,21 @@
                                 @endif
                                 @endif
                                 <div class="form-group col-md-2">
-                                    <span class="small">
-                                        <span class="font-weight-bold">{{$vacina->vacina}} - {{$vacina->dose}}</span>
-                                        <br />
-                                        @if($vacina->vacina == "Outras")
-                                        {{$pivotVacinaPaciente->descricao_outras}}
-                                        <br />
+                                    <span class="font-weight-bold">{{$vacina->vacina}} - {{$vacina->dose}}</span>
+                                    <br />
+                                    @if($vacina->vacina == "Outras")
+                                    {{$pivotVacinaPaciente->descricao_outras}}
+                                    <br />
 
-                                        @endif
-                                        <?php
-                                        $origDataAplicacao = $pivotVacinaPaciente->data_aplicacao;
-                                        $novaDataAplicacao = date("d-m-Y", strtotime($origDataAplicacao));
-                                        $dataAplicacao = str_replace('-', '/', $novaDataAplicacao);
-                                        ?>
-                                        @if($pivotVacinaPaciente->data_aplicacao != null)
-                                        {{$dataAplicacao}}
-                                        @endif
-                                    </span>
+                                    @endif
+                                    <?php
+                                    $origDataAplicacao = $pivotVacinaPaciente->data_aplicacao;
+                                    $novaDataAplicacao = date("d-m-Y", strtotime($origDataAplicacao));
+                                    $dataAplicacao = str_replace('-', '/', $novaDataAplicacao);
+                                    ?>
+                                    @if($pivotVacinaPaciente->data_aplicacao != null)
+                                    {{$dataAplicacao}}
+                                    @endif
                                 </div>
 
                                 @endforeach
@@ -111,24 +109,44 @@
 
                 </form>
 
-                <button type="button" class="btn btn-secondary" onclick="printDiv('printableArea')">Imprimir</button>
+                <button type="button" class="btn btn-secondary" onclick="window.print()">Imprimir</button>
 
                 <script>
-                    $(document).ready(function() {
-                        printDiv('printableArea');
-                    });
+                    window.addEventListener("load", function() {
+                        //printDiv('printableArea');
+                        window.print();
+
+                    })
 
                     function printDiv(divName) {
-                        var printContents = $('#' + divName).html();
-                        print($('body').html(printContents));
-                        // var printContents = document.getElementById(divName).innerHTML;
-                        // document.body.innerHTML = printContents;
-                        // window.print();
-
-                        // document.body.innerHTML = originalContents;
+                        // var printContents = $('#' + divName).html();
+                        // print($('body').html(printContents));
+                        //var printContents = document.getElementById(divName).innerHTML;
+                        //document.body.innerHTML = printContents;
+                        //window.print();
+                        //document.body.innerHTML = originalContents;
                     }
                 </script>
+                <style>
+                    @media print {
+                        body * {
+                            visibility: hidden;
+                        }
 
+                        #printableArea,
+                        #printableArea * {
+                            visibility: visible;
+                            font-size: 18px;
+                            color: black;
+                        }
+
+                        #printableArea {
+                            position: fixed;
+                            left: 0;
+                            top: 0;
+                        }
+                    }
+                </style>
         </div>
     </div>
     @endsection

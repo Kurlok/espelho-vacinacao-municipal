@@ -24,14 +24,13 @@ class PacientesTableSeeder extends Seeder
                 'localidade' => 'Centro',
                 'telefone' => '(42) 93242-4213',
                 'telefone_alternativo' => '(41) 99999-9999',
-
             ]
         );
         $faker = Faker::create('pt_BR');
 
         $numUsuarios = DB::table('users')->count();
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 1000; $i++) {
             $gender = $faker->randomElement(['male', 'female']);
             if ($gender == 'male') {
                 $sexo = 'Masculino';
@@ -55,7 +54,6 @@ class PacientesTableSeeder extends Seeder
                     'telefone_alternativo' =>  $faker->numerify('(##) #####-####'),
                     'observacoes' => $faker->sentence($nbWords = 10, $variableNbWords = true),
                     'fk_users_id' => random_int(1,$numUsuarios),
-
                 ]
             );
         }

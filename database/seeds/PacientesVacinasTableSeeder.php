@@ -16,14 +16,9 @@ class PacientesVacinasTableSeeder extends Seeder
         $numPacientes = DB::table('pacientes')->count();
         $numUnidades = DB::table('unidades')->count();
         $numUsuarios = DB::table('users')->count();
-
-
         $faker = Faker::create('pt_BR');
 
-
         for ($j = 0; $j < $numVacinas-90; $j++) {
-
-            
             for ($i = 0; $i < $numPacientes; $i++) {
                 $dt = $faker->dateTimeBetween($startDate = '-50 years', $endDate = 'now');
                 $date = $dt->format("Y-m-d");
