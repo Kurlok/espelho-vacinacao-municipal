@@ -24,7 +24,9 @@ class TodasVacinasExport implements FromCollection, WithHeadings, ShouldAutoSize
             'Código',
             'Vacina',
             'Dose',
-            'Situação'
+            'Situação',
+            'Criado em',
+            'Modificado em'
         ];
     }
 

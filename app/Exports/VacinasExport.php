@@ -55,8 +55,9 @@ class VacinasExport implements WithHeadings, ShouldAutoSize, FromArray
             'Dose',
             'Descrição Outras',
             'Data de aplicação',
-            'Usuário que cadastrou',
             'Unidade',
+            'Usuário que cadastrou',
+            'Modificado em',
         ];
     }
 
@@ -144,15 +145,18 @@ class VacinasExport implements WithHeadings, ShouldAutoSize, FromArray
             array_push($array, $paciente->nome);
             array_push($array, $vacina->vacina);
             array_push($array, $vacina->dose);
-            array_push($array, $vacina->descricao_outras);
+            array_push($array, $tupla->descricao_outras);
 
             array_push($array, $tupla->data_aplicacao);
-            if (isset($usuario)) {
-                array_push($array, $usuario->name);
-            }
+
             if (isset($unidade)) {
                 array_push($array, $unidade->nome);
             }
+            if (isset($usuario)) {
+                array_push($array, $usuario->name);
+            }
+            array_push($array, $tupla->updated_at);
+
             array_push($arrayFinal, $array);
         }
 

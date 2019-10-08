@@ -205,26 +205,47 @@ class PacientesController extends Controller
                 $data_aplicacao = $request->input("dataVacina.$i");
                 $descricao_outras = $request->input("descricaoOutras.$i");
                 $idUnidade = $request->input("unidadeVacina.$i");
-                $queryRegistro = DB::table('pacientes_vacinas')->where([
-                    ['fk_pacientes_id', $id],
-                    ['fk_vacinas_id', $vacina->id],
-                ])->first();
-
-                if ($data_aplicacao != null && $queryRegistro->data_aplicacao != $data_aplicacao) {
-                    DB::table('pacientes_vacinas')->updateOrInsert(
-                        [
-                            'fk_pacientes_id' => $id,
-                            'fk_vacinas_id' => $vacina->id,
-                        ],
-                        [
-                            'data_aplicacao' => $data_aplicacao,
-                            'descricao_outras' => $descricao_outras,
-                            'fk_unidades_id' => $idUnidade,
-                            'fk_users_id' => Auth::id(),
-                            "updated_at" => Carbon::now()
-                        ]
-                        
-                    );
+                $queryRegistro = null;
+                if ($data_aplicacao != null) {
+                    $queryRegistroExiste = DB::table('pacientes_vacinas')->where([
+                        ['fk_pacientes_id', $id],
+                        ['fk_vacinas_id', $vacina->id],
+                    ])->exists();
+                    if ($queryRegistroExiste) {
+                        $queryRegistro = DB::table('pacientes_vacinas')->where([
+                            ['fk_pacientes_id', $id],
+                            ['fk_vacinas_id', $vacina->id],
+                        ])->first();
+                        if ($queryRegistro->data_aplicacao != $data_aplicacao || $queryRegistro->descricao_outras != $descricao_outras || $queryRegistro->fk_unidades_id != $idUnidade) {
+                            DB::table('pacientes_vacinas')->updateOrInsert(
+                                [
+                                    'fk_pacientes_id' => $id,
+                                    'fk_vacinas_id' => $vacina->id,
+                                ],
+                                [
+                                    'data_aplicacao' => $data_aplicacao,
+                                    'descricao_outras' => $descricao_outras,
+                                    'fk_unidades_id' => $idUnidade,
+                                    'fk_users_id' => Auth::id(),
+                                    "updated_at" => Carbon::now()
+                                ]
+                            );
+                        }
+                    } else {
+                        DB::table('pacientes_vacinas')->updateOrInsert(
+                            [
+                                'fk_pacientes_id' => $id,
+                                'fk_vacinas_id' => $vacina->id,
+                            ],
+                            [
+                                'data_aplicacao' => $data_aplicacao,
+                                'descricao_outras' => $descricao_outras,
+                                'fk_unidades_id' => $idUnidade,
+                                'fk_users_id' => Auth::id(),
+                                "updated_at" => Carbon::now()
+                            ]
+                        );
+                    }
                 }
             }
             return back()->with('mensagemSucesso', "Alteração realizada com sucesso.");

@@ -73,8 +73,25 @@
 
                                 @foreach($listaVacinas as $vacina)
                                 <?php
-                                $pivotVacinaPaciente = $vacina->pacientes()->where('fk_pacientes_id', $paciente->id)->firstOrFail()->pivot;
-                                ?>
+                                if (isset($paciente)) {
+                                    $vacinaQuery = null;
+                                    $vacinaQueryExiste = Illuminate\Support\Facades\DB::table('pacientes_vacinas')
+                                        ->where(
+                                            [
+                                                ['fk_pacientes_id', '=', $paciente->id],
+                                                ['fk_vacinas_id', '=', $vacina->id],
+                                            ]
+                                        )->exists();
+                                    if ($vacinaQueryExiste) {
+                                        $vacinaQuery = Illuminate\Support\Facades\DB::table('pacientes_vacinas')
+                                            ->where(
+                                                [
+                                                    ['fk_pacientes_id', '=', $paciente->id],
+                                                    ['fk_vacinas_id', '=', $vacina->id],
+                                                ]
+                                            )->get();
+                                    }
+                                }                                ?>
                                 @if(isset($vacinaAnterior))
                                 @if(($vacinaAnterior->vacina) != ($vacina->vacina))
                             </div>
@@ -85,18 +102,24 @@
                                 <div class="form-group col-md-2">
                                     <span class="font-weight-bold">{{$vacina->vacina}} - {{$vacina->dose}}</span>
                                     <br />
+                                    @if(isset($vacinaQuery))
                                     @if($vacina->vacina == "Outras")
-                                    {{$pivotVacinaPaciente->descricao_outras}}
+                                    {{$vacinaQuery[0]->descricao_outras}}
                                     <br />
+                                    @endif
 
                                     @endif
                                     <?php
-                                    $origDataAplicacao = $pivotVacinaPaciente->data_aplicacao;
-                                    $novaDataAplicacao = date("d-m-Y", strtotime($origDataAplicacao));
-                                    $dataAplicacao = str_replace('-', '/', $novaDataAplicacao);
+                                    if (isset($vacinaQuery)) {
+                                        $origDataAplicacao = $vacinaQuery[0]->data_aplicacao;
+                                        $novaDataAplicacao = date("d-m-Y", strtotime($origDataAplicacao));
+                                        $dataAplicacao = str_replace('-', '/', $novaDataAplicacao);
+                                    }
                                     ?>
-                                    @if($pivotVacinaPaciente->data_aplicacao != null)
+                                    @if(isset($vacinaQuery))
+                                    @if($vacinaQuery[0]->data_aplicacao != null)
                                     {{$dataAplicacao}}
+                                    @endif
                                     @endif
                                 </div>
 

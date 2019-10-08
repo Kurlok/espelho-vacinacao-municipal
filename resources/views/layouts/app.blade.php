@@ -7,12 +7,9 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-
-
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
     <script src="{{ asset('js/menu.js') }}" defer></script>
@@ -37,11 +34,9 @@
     <!-- Icons -->
     <link href="{{ asset('css/all.css') }}" rel="stylesheet">
     <link rel="icon" href="{{ asset('img/iconeVacinaColorido.png') }}">
-
 </head>
 
 <body>
-
     <div class="d-flex" id="wrapper">
         @auth
         <!-- Sidebar -->
@@ -52,17 +47,12 @@
                 @if (Auth::user()->permissao == 'Administrador')
                 <a href="{{ route('vacinas') }}" class="list-group-item list-group-item-action bg-info text-white"><i class="fas fa-syringe"></i> Vacinas</a>
                 @if (Route::has('unidades'))
-
                 <a href="{{ route('unidades') }}" class="list-group-item list-group-item-action bg-info text-white"><i class="fas fa-hospital"></i> Unidades</a>
                 @endif
                 <a href="{{ route('usuarios') }}" class="list-group-item list-group-item-action bg-info text-white"><i class="fas fa-users"></i> Usuários</a>
-
                 <a href="{{ route('graficos') }}" class="list-group-item list-group-item-action bg-info text-white"><i class="fas fa-chart-bar"></i> Gráficos</a>
-
                 <a href="{{ route('relatorios') }}" class="list-group-item list-group-item-action bg-info text-white"><i class="fas fa-file-export"></i> Relatórios</a>
-
                 @endif
-
             </div>
         </div>
         @endauth
@@ -80,12 +70,9 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         @guest
-                        
-                            <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link text-white" href="{{ route('login') }}">Login</a>
-
                         </li>
-
                         @else
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -107,17 +94,12 @@
                     </ul>
                 </div>
             </nav>
-
             <div class="container-fluid">
-
                 <main class="py-4">
                     @yield('content')
                 </main>
             </div>
         </div>
-
     </div>
-
 </body>
-
 </html>

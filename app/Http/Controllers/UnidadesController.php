@@ -85,25 +85,18 @@ class UnidadesController extends Controller
     public function cadastrarUnidade(Request $request)
     {
         $validatedData = $request->validate([
-            'unidade' => 'required|string|max:255',
-            'dose' => 'required|string|max:255',
+            'nome' => 'required|string|max:255',
+            'endereco' => 'required|string|max:255',
+            'cnes' => 'required|string|max:255'
         ]);
+
         $unidade = new Unidade();
-        $unidade->unidade = $request->unidade;
-        $unidade->dose = $request->dose;
-
-
+        $unidade->nome = $request->nome;
+        $unidade->endereco = $request->endereco;
+        $unidade->cnes = $request->cnes;
         $unidade->save();
-        $paciente = new Paciente;
-        $paciente = Paciente::all();
 
-        $listaUnidadesTamanho = Unidade::count();
-        foreach($paciente as $pac){
-            $pac->unidades()->attach($unidade->id, ['data_aplicacao' => null]);
-        }
-    
-
-        return redirect()->route('telaCadastroUnidade');
+        return redirect()->route('unidades');
         //->with('mensagemAlteracaoDados', 'Dados alterados com sucesso!');
 
         // return view(
@@ -115,13 +108,14 @@ class UnidadesController extends Controller
     public function alterarUnidade(Request $request, int $id)
     {
         $validatedData = $request->validate([
-            'unidade' => 'required|string|max:255',
-            'dose' => 'required|string|max:255',
+            'nome' => 'required|string|max:255',
+            'endereco' => 'required|string|max:255',
+            'cnes' => 'required|string|max:255',
         ]);
         $unidade = Unidade::find($id);
-        $unidade->unidade = $request->unidade;
-        $unidade->dose = $request->dose;
-
+        $unidade->nome = $request->nome;
+        $unidade->endereco = $request->endereco;
+        $unidade->cnes = $request->cnes;
         $unidade->save();
 
         return redirect()->route('unidades');
@@ -131,7 +125,6 @@ class UnidadesController extends Controller
     {
         $unidade = Unidade::find($id);
         $unidade->delete();
-
         return redirect()->route('unidades');
     }
 }

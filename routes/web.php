@@ -58,7 +58,6 @@ Route::middleware(['auth', 'Administrador', 'SenhaRedefinida'])->group(function 
     Route::get('/relatorios/pacientes/todos', 'RelatoriosController@exportarPacientes');
     Route::get('/relatorios/pacientes/nascimento', 'RelatoriosController@exportarPacientesDataNascimento')->name('relatorioPacienteNascimento');
     Route::get('/relatorios/vacinas/especificada', 'RelatoriosController@exportarVacinaEspecifica')->name('relatorioVacinaEspecificada');
-
 });
 
 Route::middleware(['auth', 'SenhaRedefinida'])->group(function () {
@@ -73,8 +72,6 @@ Route::middleware(['auth', 'SenhaRedefinida'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-
-Route::get('/usuarios/redefinir', 'UsuariosController@telaRedefinirSenha')->name('telaRedefinirSenha');
-Route::post('/usuarios/redefinir/altera/{id}', 'UsuariosController@redefinirSenha')->name('redefinirSenha');
-
+    Route::get('/usuarios/redefinir', 'UsuariosController@telaRedefinirSenha')->name('telaRedefinirSenha');
+    Route::post('/usuarios/redefinir/altera/{id}', 'UsuariosController@redefinirSenha')->name('redefinirSenha');
 });

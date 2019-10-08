@@ -35,7 +35,7 @@
                                 <input type="text" class="form-control" name="cnes" id="cnes" maxlength="50" value="@if(isset($unidade)){{$unidade->cnes}}@endif">
                             </div>
                         </div>
-                        @if(isset($vacina))
+                        @if(isset($unidade))
                             <button type="submit" class="btn btn-primary">Alterar</button>
                             @else
                             <button type="submit" class="btn btn-primary">Cadastrar</button>
