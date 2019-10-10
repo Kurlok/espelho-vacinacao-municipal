@@ -15,7 +15,7 @@ class Comum
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->permissao == 'Comum') {
+        if (Auth::user()->permissao == 'Administrador' || Auth::user()->permissao == 'Comum') {
             return $next($request);
         }
         else return redirect('/login');

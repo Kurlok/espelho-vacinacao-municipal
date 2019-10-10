@@ -140,7 +140,8 @@
                                     <label for="permissao">Permissão</label>
                                     <select class="form-control @error('permissao') is-invalid @enderror" maxlength="50" required id="permissao" name="permissao">
                                         <option value="Administrador" @if(isset($usuario)) @if($usuario->permissao == 'Administrador') selected @endif @endif>Administrador</option>
-                                        <option value="Comum" @if(isset($usuario)) @if($usuario->permissao != 'Administrador') selected @endif @else selected @endif > Comum</option>
+                                        <option value="Comum" @if(isset($usuario)) @if($usuario->permissao == 'Comum') selected @endif @else selected @endif > Comum</option>
+                                        <option value="Visualização" @if(isset($usuario)) @if($usuario->permissao == 'Visualização') selected @endif @else selected @endif > Visualização</option>
                                     </select>
                                     @error('permissao')
                                     <span class="invalid-feedback" role="alert">

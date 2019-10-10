@@ -50,7 +50,10 @@
 
                         <td class="actions">
                             <a class="btn btn-secondary btn-xs" href="{{ route('visualizarPaciente', $paciente->id) }}"><i class="fas fa-print"></i> Imprimir</a>
+                            
+                            @if (Auth::user()->permissao == 'Administrador' || Auth::user()->permissao == 'Comum')
                             <a class="btn btn-success btn-xs" href="{{ route('pacienteId', $paciente->id) }}"><i class="far fa-eye"></i> Visualizar</a>
+                            @endif
 
                             @if (Auth::user()->permissao == 'Administrador')
                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalExclusaoPaciente{{$paciente->id}}">

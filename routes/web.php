@@ -58,17 +58,22 @@ Route::middleware(['auth', 'Administrador', 'SenhaRedefinida'])->group(function 
     Route::get('/relatorios/pacientes/todos', 'RelatoriosController@exportarPacientes');
     Route::get('/relatorios/pacientes/nascimento', 'RelatoriosController@exportarPacientesDataNascimento')->name('relatorioPacienteNascimento');
     Route::get('/relatorios/vacinas/especificada', 'RelatoriosController@exportarVacinaEspecifica')->name('relatorioVacinaEspecificada');
+
+    Route::post('/pacientes/deletar/{id}', 'PacientesController@deletarPaciente')->name('deletarPaciente');
+
+});
+
+Route::middleware(['auth', 'Comum', 'SenhaRedefinida'])->group(function () {
+    Route::get('/pacientes/cadastro', 'PacientesController@telaCadastroPaciente')->name('telaCadastroPaciente');
+    Route::get('/pacientes/cadastro/{id}', 'PacientesController@getPaciente')->name('pacienteId');
+    Route::post('/pacientes/cadastro/novo', 'PacientesController@cadastrarPaciente')->name('cadastrarPaciente');
+    Route::post('/pacientes/cadastro/alterar/{id}', 'PacientesController@alterarPaciente')->name('alterarPaciente');
 });
 
 Route::middleware(['auth', 'SenhaRedefinida'])->group(function () {
-    Route::get('/pacientes', 'PacientesController@index')->name('pacientes');
-    Route::get('/pacientes/cadastro', 'PacientesController@telaCadastroPaciente')->name('telaCadastroPaciente');
-    Route::get('/pacientes/cadastro/{id}', 'PacientesController@getPaciente')->name('pacienteId');
-    Route::any('/pacientes/busca', 'PacientesController@buscaPaciente')->name('pacientesBusca');
-    Route::post('/pacientes/cadastro/novo', 'PacientesController@cadastrarPaciente')->name('cadastrarPaciente');
     Route::get('/pacientes/visualizar/{id}', 'PacientesController@visualizarPaciente')->name('visualizarPaciente');
-    Route::post('/pacientes/cadastro/alterar/{id}', 'PacientesController@alterarPaciente')->name('alterarPaciente');
-    Route::post('/pacientes/deletar/{id}', 'PacientesController@deletarPaciente')->name('deletarPaciente');
+    Route::get('/pacientes', 'PacientesController@index')->name('pacientes');
+    Route::any('/pacientes/busca', 'PacientesController@buscaPaciente')->name('pacientesBusca');
 });
 
 Route::middleware(['auth'])->group(function () {

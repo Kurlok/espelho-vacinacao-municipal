@@ -85,7 +85,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group col-md-2">
-                                    <label for="sus">N.º SUS</label>
+                                    <label for="sus">Cartão SUS</label>
                                     <input type="text" class="form-control" name="sus" id="sus" placeholder="000000000000000" maxlength="20" value="@if(isset($paciente)){{$paciente->sus}}@else{{old('sus')}}@endif">
                                 </div>
                             </div>
