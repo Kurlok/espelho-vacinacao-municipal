@@ -52,16 +52,19 @@ class VacinasTableSeeder extends Seeder
             'vacina' => 'Polio',
             'dose' => 'Dose 1',
             'status' => 'Ativo',
+            'inicio_minimo_dias' => 60
         ]);
         DB::table('vacinas')->insert([
             'vacina' => 'Polio',
             'dose' => 'Dose 2',
             'status' => 'Ativo',
+            'inicio_minimo_dias' => 60
         ]);
         DB::table('vacinas')->insert([
             'vacina' => 'Polio',
             'dose' => 'Dose 3',
             'status' => 'Ativo',
+            'inicio_minimo_dias' => 60
         ]);
         DB::table('vacinas')->insert([
             'vacina' => 'Polio',

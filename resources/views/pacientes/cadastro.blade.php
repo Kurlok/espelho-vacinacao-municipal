@@ -188,6 +188,7 @@
                                     <input type="text" class="form-control" id="descricaoOutras[]" name="descricaoOutras[]" value="@if(isset($paciente) && isset($vacinaQuery[0])){{$vacinaQuery[0]->descricao_outras}}@else{{old('descricaoOutras[]')}}@endif" hidden @if(isset($paciente) && isset($vacinaQuery[0])) @if(($vacinaQuery[0]->fk_users_id != $usuarioLogado->id) && ($vacinaQuery[0]->fk_users_id != null) && ($usuarioLogado->permissao != 'Administrador')) readonly @endif @endif>
                                     @endif
                                     <input type="date" class="form-control" id="dataVacina[]" name="dataVacina[]" min="1900-01-01" max='{{$dataAtual}}' value="@if(isset($paciente) && isset($vacinaQuery[0])){{$vacinaQuery[0]->data_aplicacao}}@else{{old('dataVacina[]')}}@endif" @if(isset($paciente) && isset($vacinaQuery[0])) @if(($vacinaQuery[0]->fk_users_id != $usuarioLogado->id) && ($vacinaQuery[0]->fk_users_id != null) && ($usuarioLogado->permissao != 'Administrador')) readonly @endif @endif>
+                                  
                                     <select class="form-control" id="unidadeVacina[]" name="unidadeVacina[]" @if(isset($paciente) && isset($vacinaQuery[0])) @if(($vacinaQuery[0]->fk_users_id != $usuarioLogado->id) && ($vacinaQuery[0]->fk_users_id != null) && ($usuarioLogado->permissao != 'Administrador')) hidden @endif @endif>
                                         <option value=''>Unidade</option>
                                         @foreach($listaUnidades as $unidade)
