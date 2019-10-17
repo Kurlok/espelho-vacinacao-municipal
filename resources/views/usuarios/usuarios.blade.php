@@ -51,7 +51,7 @@
                             <a class="btn btn-success btn-xs" href="{{ route('usuarioId', $usuario->id) }}"><i class="far fa-eye"></i> Visualizar</a>
 
                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalExclusaoUsuario{{$usuario->id}}">
-                            <i class="fas fa-trash"></i> Excluir
+                                <i class="fas fa-trash"></i> Excluir
                             </button>
 
                             <div class="modal fade" id="modalExclusaoUsuario{{$usuario->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -71,7 +71,9 @@
                                             <form action="{{ route('deletarUsuario', $usuario->id) }}" method="post">
                                                 {{csrf_field()}}
                                                 <button type="submit" class="btn btn-danger btn-xs" value="Excluir">
-                                Excluir </button>                                            </form>
+                                                    Excluir
+                                                </button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

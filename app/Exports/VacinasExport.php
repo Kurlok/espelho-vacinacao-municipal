@@ -51,6 +51,7 @@ class VacinasExport implements WithHeadings, ShouldAutoSize, FromArray
         return [
             'Código Paciente',
             'Paciente',
+            'Data Nascimento',
             'Vacina',
             'Dose',
             'Descrição Outras',
@@ -133,7 +134,6 @@ class VacinasExport implements WithHeadings, ShouldAutoSize, FromArray
                 ->get();
         }
 
-
         foreach ($pesquisa as $tupla) {
             $array = array();
             $paciente = Paciente::find($tupla->fk_pacientes_id);
@@ -143,6 +143,8 @@ class VacinasExport implements WithHeadings, ShouldAutoSize, FromArray
 
             array_push($array, $paciente->id);
             array_push($array, $paciente->nome);
+            array_push($array, $paciente->data_nascimento);
+
             array_push($array, $vacina->vacina);
             array_push($array, $vacina->dose);
             array_push($array, $tupla->descricao_outras);
@@ -156,56 +158,8 @@ class VacinasExport implements WithHeadings, ShouldAutoSize, FromArray
                 array_push($array, $usuario->name);
             }
             array_push($array, $tupla->updated_at);
-
             array_push($arrayFinal, $array);
         }
-
-        // foreach ($listaPacientes as $paciente) {
-        //     $paciente->
-        //     $array = array();
-        //     array_push($array, $inscricao->id);
-        //     array_push($array, $inscricao->created_at);
-        //     array_push($array, mb_strtoupper($inscricao->nome, 'UTF-8'));
-        //     array_push($array, $inscricao->dataNascimento);
-        //     array_push($array, $inscricao->cpf);
-        //     array_push($array, $inscricao->rg);
-        //     // array_push($array, $inscricao->ufRg);
-        //     // array_push($array, $inscricao->orgaoExpedidor);
-        //     array_push($array, $inscricao->sexo);
-        //     array_push($array, $inscricao->email);
-        //     array_push($array, $inscricao->telefone);
-        //     array_push($array, $inscricao->telefoneAlternativo);
-        //     array_push($array, $inscricao->cep);
-        //     array_push($array, $inscricao->uf);
-        //     array_push($array, mb_strtoupper($inscricao->cidade, 'UTF-8'));
-        //     array_push($array, mb_strtoupper($inscricao->bairro, 'UTF-8'));
-        //     array_push($array, mb_strtoupper($inscricao->rua, 'UTF-8'));
-        //     array_push($array, mb_strtoupper($inscricao->numero, 'UTF-8'));
-        //     array_push($array, mb_strtoupper($inscricao->complemento, 'UTF-8'));
-        //     array_push($array, $inscricao->deficiencia);
-        //     array_push($array, mb_strtoupper($inscricao->deficienciaDescricao, 'UTF-8'));
-
-        //     $empregoBusca = Vaga::find($inscricao->fk_vagas_id);
-        //     $empregoNome = $empregoBusca->emprego;
-        //     array_push($array, $empregoNome);
-        //     $somaPontos = 0;
-        //     $i = 1;
-
-        //     foreach ($inscricao->titulos as $tit) {
-        //         array_push($array, $tit->titulo);
-        //         array_push($array, $tit->pontos);
-        //         $somaPontos = $somaPontos + $tit->pontos;
-        //         $i = $i + 1;
-        //     }
-
-        //     while ($i <= 5) {
-        //         array_push($array, "");
-        //         array_push($array, "");
-        //         $i++;
-        //     }
-        //     array_push($array, $somaPontos);
-        //     array_push($arrayFinal, $array);
-        // }
 
         return [
             $arrayFinal

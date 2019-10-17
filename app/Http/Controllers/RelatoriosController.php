@@ -13,6 +13,7 @@ use App\Exports\TodosPacientesExport;
 use App\Exports\TodosUsuariosExport;
 use App\Exports\DataNascimentoPacientesExport;
 use App\Exports\VacinasExport;
+use App\Exports\VacinasAtrasadasExport;
 
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -71,5 +72,14 @@ class RelatoriosController extends Controller
         $idVacina = $request->vacina;
 
         return Excel::download(new VacinasExport($dataInicial, $dataFinal, $idUnidade, $idUsuario, $idVacina), 'Espelho de vacinação - Vacina Específica.xlsx');
+    }
+
+    public function exportarVacinasPendentes(Request $request)
+    {   
+        $dataInicial = $request->periodoInicial;
+        $dataFinal = $request->periodoFinal;
+        $idVacina = $request->vacina;
+
+        return Excel::download(new VacinasAtrasadasExport($dataInicial, $dataFinal, $idVacina), 'Espelho de vacinação - Vacinas Atrasadas.xlsx');
     }
 }

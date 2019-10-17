@@ -20,7 +20,7 @@ class PacientesVacinasTableSeeder extends Seeder
 
         for ($j = 0; $j < $numVacinas-90; $j++) {
             for ($i = 0; $i < $numPacientes; $i++) {
-                $dt = $faker->dateTimeBetween($startDate = '-50 years', $endDate = 'now');
+                $dt = $faker->dateTimeBetween($startDate = '-2 years', $endDate = 'now');
                 $date = $dt->format("Y-m-d");
                 DB::table('pacientes_vacinas')->insert([
                     'fk_vacinas_id' => $j+1,

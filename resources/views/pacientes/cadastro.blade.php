@@ -54,12 +54,12 @@
     $usuarioLogado = Illuminate\Support\Facades\Auth::user();
     //$dataAtual = Carbon\Carbon::now()->toDateString();
     $dataAtual = Carbon\Carbon::now();
-    if (isset($paciente)){
-    $idadePaciente = Carbon\Carbon::createFromDate($paciente->data_nascimento)->diff(Carbon\Carbon::now());
-    $idadePacienteAnos = $idadePaciente->format('%y');
-    $idadePacienteMeses = $idadePaciente->format('%m');
-    $idadePacienteDias = $idadePaciente->format('%d');
-}
+    if (isset($paciente)) {
+        $idadePaciente = Carbon\Carbon::createFromDate($paciente->data_nascimento)->diff(Carbon\Carbon::now());
+        $idadePacienteAnos = $idadePaciente->format('%y');
+        $idadePacienteMeses = $idadePaciente->format('%m');
+        $idadePacienteDias = $idadePaciente->format('%d');
+    }
     ?>
 
     <div class="row justify-content-center">
@@ -187,17 +187,17 @@
                                         $idadePacienteMeses;
                                         $idadePacienteDias;
 
-                                        if ($idadePacienteDias >= $vacina->inicio_minimo_dias && $idadePacienteDias <= $vacina->inicio_maximo_dias){ 
-                                            $vacinaAtrasada = true;
-                                        } else { 
-                                            $vacinaAtrasada = false;
-                                        }
-                                        if ($idadePacienteMeses > $vacina->inicio_minimo_meses && $idadePacienteAnos < $vacina->inicio_maximo_meses){ 
+                                        if ($idadePacienteDias >= $vacina->inicio_minimo_dias && $idadePacienteDias <= $vacina->inicio_maximo_dias) {
                                             $vacinaAtrasada = true;
                                         } else {
                                             $vacinaAtrasada = false;
                                         }
-                                        if ($idadePacienteAnos > $vacina->inicio_minimo_anos && $idadePacienteAnos < $vacina->inicio_maximo_anos){
+                                        if ($idadePacienteMeses > $vacina->inicio_minimo_meses && $idadePacienteMeses < $vacina->inicio_maximo_meses) {
+                                            $vacinaAtrasada = true;
+                                        } else {
+                                            $vacinaAtrasada = false;
+                                        }
+                                        if ($idadePacienteAnos > $vacina->inicio_minimo_anos && $idadePacienteAnos < $vacina->inicio_maximo_anos) {
                                             $vacinaAtrasada = true;
                                         } else {
                                             $vacinaAtrasada = false;
@@ -272,11 +272,11 @@
                                     @endif
                                     @if(isset($paciente) && !isset($vacinaQuery[0]))
                                     @if($vacinaAtrasada)
-                                        <p class="text-justify small text-danger">
-                                            <strong>A idade mínima para a vacina é de: {{$vacina->inicio_minimo_anos}} anos, {{$vacina->inicio_minimo_meses}} meses e {{$vacina->inicio_minimo_dias}} dias. A máxima é de: {{$vacina->inicio_maximo_anos}} anos, {{$vacina->inicio_maximo_meses}} meses e {{$vacina->inicio_maximo_dias}} dias.</strong>
-                                        </p>
-                                        @endif
-                                        @endif
+                                    <p class="text-justify small text-danger">
+                                        <strong>A idade mínima para a vacina é de: {{$vacina->inicio_minimo_anos}} anos, {{$vacina->inicio_minimo_meses}} meses e {{$vacina->inicio_minimo_dias}} dias. A máxima é de: {{$vacina->inicio_maximo_anos}} anos, {{$vacina->inicio_maximo_meses}} meses e {{$vacina->inicio_maximo_dias}} dias.</strong>
+                                    </p>
+                                    @endif
+                                    @endif
                                 </div>
 
                                 <?php
