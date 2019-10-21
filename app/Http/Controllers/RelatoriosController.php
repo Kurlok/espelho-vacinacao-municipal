@@ -14,7 +14,7 @@ use App\Exports\TodosUsuariosExport;
 use App\Exports\DataNascimentoPacientesExport;
 use App\Exports\VacinasExport;
 use App\Exports\VacinasAtrasadasExport;
-
+use Carbon\Carbon;
 use Maatwebsite\Excel\Facades\Excel;
 
 class RelatoriosController extends Controller
@@ -56,30 +56,69 @@ class RelatoriosController extends Controller
     }
 
     public function exportarPacientesDataNascimento(Request $request)
-    {   
+    {
         $dataInicial = $request->nascimentoInicial;
         $dataFinal = $request->nascimentoFinal;
 
-        return Excel::download(new DataNascimentoPacientesExport($dataInicial, $dataFinal), 'Espelho de vacinação - Pacientes por data de nascimento.xlsx');
+        $dataInicialFormatada =  Carbon::parse($dataInicial);
+        $dataInicialFormatada = $dataInicialFormatada->format('d-m-Y');
+
+        $dataFinalFormatada =  Carbon::parse($dataFinal);
+        $dataFinalFormatada = $dataFinalFormatada->format('d-m-Y');
+
+        return Excel::download(new DataNascimentoPacientesExport($dataInicial, $dataFinal), 'Pacientes nascidos entre ' . $dataInicialFormatada . ' e ' . $dataFinalFormatada . '.xlsx');
     }
 
     public function exportarVacinaEspecifica(Request $request)
-    {   
+    {
         $dataInicial = $request->aplicacaoInicial;
         $dataFinal = $request->aplicacaoFinal;
         $idUnidade = $request->unidade;
         $idUsuario = $request->usuario;
         $idVacina = $request->vacina;
 
-        return Excel::download(new VacinasExport($dataInicial, $dataFinal, $idUnidade, $idUsuario, $idVacina), 'Espelho de vacinação - Vacina Específica.xlsx');
+        if ($idVacina != 'todas') {
+            $vacinaEscolhida = Vacina::find($idVacina);
+            $vacinaEscolhidaNome = $vacinaEscolhida->vacina . ' - ' . $vacinaEscolhida->dose;
+        } else {
+            $vacinaEscolhidaNome = "Todas vacinas";
+        }
+
+        if ($idUnidade != 'todas') {
+            $unidadeEscolhida = Unidade::find($idUnidade)->nome;
+        } else {
+            $unidadeEscolhida = "Todas unidades";
+        }
+        if ($idUsuario != 'todos') {
+            $usuarioEscolhido = User::find($idUsuario)->name;
+        } else {
+            $usuarioEscolhido = "Todos usuários";
+
+        }
+
+        $dataInicialFormatada =  Carbon::parse($dataInicial);
+        $dataInicialFormatada = $dataInicialFormatada->format('d-m-Y');
+
+        $dataFinalFormatada =  Carbon::parse($dataFinal);
+        $dataFinalFormatada = $dataFinalFormatada->format('d-m-Y');
+
+        return Excel::download(new VacinasExport($dataInicial, $dataFinal, $idUnidade, $idUsuario, $idVacina), $vacinaEscolhidaNome . ' - ' . $dataInicialFormatada . ' a ' . $dataFinal . ' - ' .  $unidadeEscolhida .' - '. $usuarioEscolhido. '.xlsx');
     }
 
     public function exportarVacinasPendentes(Request $request)
-    {   
+    {
         $dataInicial = $request->periodoInicial;
         $dataFinal = $request->periodoFinal;
         $idVacina = $request->vacina;
 
-        return Excel::download(new VacinasAtrasadasExport($dataInicial, $dataFinal, $idVacina), 'Espelho de vacinação - Vacinas Atrasadas.xlsx');
+        $vacinaEscolhida = Vacina::find($idVacina);
+
+        $dataInicialFormatada =  Carbon::parse($dataInicial);
+        $dataInicialFormatada = $dataInicialFormatada->format('d-m-Y');
+
+        $dataFinalFormatada =  Carbon::parse($dataFinal);
+        $dataFinalFormatada = $dataFinalFormatada->format('d-m-Y');
+
+        return Excel::download(new VacinasAtrasadasExport($dataInicial, $dataFinal, $idVacina), 'Pendências ' . $vacinaEscolhida->vacina . ' - ' . $vacinaEscolhida->dose . ' - ' . $dataInicialFormatada . ' a ' . $dataFinal . '.xlsx');
     }
 }

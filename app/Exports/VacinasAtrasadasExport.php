@@ -42,12 +42,6 @@ class VacinasAtrasadasExport implements WithHeadings, ShouldAutoSize, FromArray
             'Código Paciente',
             'Paciente',
             'Data de nascimento',
-            'Vacina',
-            'Dose',
-            'Início Mínimo (em dias)',
-            'Início Máximo (em dias)',
-            'Data Inicial',
-            'Data Final',
             'Data quando a vacina estará pendente',
         ];
     }
@@ -90,13 +84,11 @@ class VacinasAtrasadasExport implements WithHeadings, ShouldAutoSize, FromArray
                         if ($vacinaAtrasada) {
                             array_push($array, $paciente->id);
                             array_push($array, $paciente->nome);
+                            // $dataNascimentoFormatada =  Carbon::parse($paciente->data_nascimento);
+                            // $dataNascimentoFormatada = $dataNascimentoFormatada->format('d/m/Y');
+                            // $dataPendenciaFormatada =  Carbon::parse($data);
+                            // $dataPendenciaFormatada = $dataPendenciaFormatada->format('d/m/Y');
                             array_push($array, $paciente->data_nascimento);
-                            array_push($array, $vacinaEscolhida->vacina);
-                            array_push($array, $vacinaEscolhida->dose);
-                            array_push($array, $vacinaEscolhida->inicio_minimo_dias);
-                            array_push($array, $vacinaEscolhida->inicio_maximo_dias);
-                            array_push($array, $periodoInicialCarbon);
-                            array_push($array, $periodoFinalCarbon);
                             array_push($array, $data);
                             array_push($arrayFinal, $array);
                             break;
