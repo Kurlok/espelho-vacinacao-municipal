@@ -12,24 +12,13 @@ class VacinasTableSeeder extends Seeder
     public function run()
     {
 
-        // for ($i = 0; $i < 2; $i++) {
-        //     DB::table('vacinas')->insert([
-        //         'vacina' => Str::random(10),
-        //         'dose' => 'Dose 1', 'status' => 'Ativo',
-        //     ]);
-        // }
-
         //BCG
         DB::table('vacinas')->insert([
             'vacina' => 'BCG',
             'dose' => 'Dose 1',
             'status' => 'Ativo',
             'inicio_minimo_dias' => 0,
-            'inicio_minimo_meses' => 0,
-            'inicio_minimo_anos' => 0,
-            'inicio_maximo_dias' => 29,
-            'inicio_maximo_meses' => 11,
-            'inicio_maximo_anos' => 4,
+            'inicio_maximo_dias' => 1825 //5 anos
         ]);
 
         //Hepatite B
@@ -37,37 +26,25 @@ class VacinasTableSeeder extends Seeder
             'vacina' => 'Hep-B',
             'dose' => 'Dose 1', 'status' => 'Ativo',
             'inicio_minimo_dias' => 0,
-            'inicio_minimo_meses' => 0,
-            'inicio_minimo_anos' => 0,
-            'inicio_maximo_dias' => 30,
-            'inicio_maximo_meses' => 0,
-            'inicio_maximo_anos' => 0,
+            'inicio_maximo_dias' => 30
         ]);
         DB::table('vacinas')->insert([
             'vacina' => 'Hep-B',
             'dose' => 'Dose 2',
             'status' => 'Ativo',
             'inicio_minimo_dias' => 0,
-            'inicio_minimo_meses' => 0,
-            'inicio_minimo_anos' => 0,
-            'inicio_maximo_dias' => 30,
-            'inicio_maximo_meses' => 0,
-            'inicio_maximo_anos' => 0,
+            'inicio_maximo_dias' => 30
         ]);
         DB::table('vacinas')->insert([
             'vacina' => 'Hep-B',
             'dose' => 'Dose 3',
             'status' => 'Ativo',
             'inicio_minimo_dias' => 0,
-            'inicio_minimo_meses' => 0,
-            'inicio_minimo_anos' => 0,
-            'inicio_maximo_dias' => 30,
-            'inicio_maximo_meses' => 0,
-            'inicio_maximo_anos' => 0,
+            'inicio_maximo_dias' => 30
         ]);
         DB::table('vacinas')->insert([
             'vacina' => 'Hep-B',
-            'dose' => 'Reforço',
+            'dose' => 'Reforço 1',
             'status' => 'Ativo',
         ]);
 
@@ -76,59 +53,40 @@ class VacinasTableSeeder extends Seeder
             'vacina' => 'Polio',
             'dose' => 'Dose 1',
             'status' => 'Ativo',
-            'inicio_minimo_dias' => 0,
-            'inicio_minimo_meses' => 2,
-            'inicio_minimo_anos' => 0,
-            'inicio_maximo_dias' => 29,
-            'inicio_maximo_meses' => 11,
-            'inicio_maximo_anos' => 4,
-
+            'inicio_minimo_dias' => 60,
+            'inicio_maximo_dias' => 1825,
         ]);
+
         DB::table('vacinas')->insert([
             'vacina' => 'Polio',
             'dose' => 'Dose 2',
             'status' => 'Ativo',
-            'inicio_minimo_dias' => 0,
-            'inicio_minimo_meses' => 2,
-            'inicio_minimo_anos' => 0,
-            'inicio_maximo_dias' => 29,
-            'inicio_maximo_meses' => 11,
-            'inicio_maximo_anos' => 4,
-
+            'inicio_minimo_dias' => 60,
+            'inicio_maximo_dias' => 1825,
         ]);
+
         DB::table('vacinas')->insert([
             'vacina' => 'Polio',
             'dose' => 'Dose 3',
             'status' => 'Ativo',
-            'inicio_minimo_dias' => 0,
-            'inicio_minimo_meses' => 2,
-            'inicio_minimo_anos' => 0,
-            'inicio_maximo_dias' => 29,
-            'inicio_maximo_meses' => 11,
-            'inicio_maximo_anos' => 4,
-
+            'inicio_minimo_dias' => 60,
+            'inicio_maximo_dias' => 1825
         ]);
+
         DB::table('vacinas')->insert([
             'vacina' => 'Polio',
-            'dose' => '1º Reforço',
+            'dose' => 'Reforço 1',
             'status' => 'Ativo',
-            'inicio_minimo_dias' => 0,
-            'inicio_minimo_meses' => 3,
-            'inicio_minimo_anos' => 1,
-            'inicio_maximo_dias' => 29,
-            'inicio_maximo_meses' => 11,
-            'inicio_maximo_anos' => 4,
+            'inicio_minimo_dias' => 455,
+            'inicio_maximo_dias' => 1825
+
         ]);
         DB::table('vacinas')->insert([
             'vacina' => 'Polio',
             'dose' => '2º Reforço',
             'status' => 'Ativo',
-            'inicio_minimo_dias' => 0,
-            'inicio_minimo_meses' => 0,
-            'inicio_minimo_anos' => 4,
-            'inicio_maximo_dias' => 29,
-            'inicio_maximo_meses' => 11,
-            'inicio_maximo_anos' => 4,
+            'inicio_minimo_dias' => 1460, //4 anos
+            'inicio_maximo_dias' => 1825,
         ]);
         DB::table('vacinas')->insert([
             'vacina' => 'Polio',
@@ -164,23 +122,16 @@ class VacinasTableSeeder extends Seeder
             'vacina' => 'VORH',
             'dose' => 'Dose 1',
             'status' => 'Ativo',
-            'inicio_minimo_dias' => 0,
-            'inicio_minimo_meses' => 2,
-            'inicio_minimo_anos' => 0,
-            'inicio_maximo_dias' => 15,
-            'inicio_maximo_meses' => 3,
-            'inicio_maximo_anos' => 0,
+            'inicio_minimo_dias' => 60,
+            'inicio_maximo_dias' => 105,
         ]);
+        
         DB::table('vacinas')->insert([
             'vacina' => 'VORH',
             'dose' => 'Dose 2',
             'status' => 'Ativo',
-            'inicio_minimo_dias' => 0,
-            'inicio_minimo_meses' => 4,
-            'inicio_minimo_anos' => 0,
-            'inicio_maximo_dias' => 29,
-            'inicio_maximo_meses' => 7,
-            'inicio_maximo_anos' => 0,
+            'inicio_minimo_dias' => 120,
+            'inicio_maximo_dias' => 243,
         ]);
 
         //Hepatite A
@@ -188,12 +139,8 @@ class VacinasTableSeeder extends Seeder
             'vacina' => 'Hep-A',
             'dose' => 'Dose 1',
             'status' => 'Ativo',
-            'inicio_minimo_dias' => 0,
-            'inicio_minimo_meses' => 15,
-            'inicio_minimo_anos' => 0,
-            'inicio_maximo_dias' => 29,
-            'inicio_maximo_meses' => 11,
-            'inicio_maximo_anos' => 4,
+            'inicio_minimo_dias' => 456,
+            'inicio_maximo_dias' => 1825,
         ]);
 
 

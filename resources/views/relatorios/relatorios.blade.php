@@ -109,7 +109,6 @@ $dataAtual = Carbon\Carbon::now()->toDateString();
                     <div class="form-group col-md-4">
                         <label for="vacina">Vacina</label>
                         <select class="form-control" id="vacina" name="vacina">
-                            <option value="todas">Todas</option>
                             @foreach($listaVacinas as $vacina)
                             <option value="{{$vacina->id}}">{{$vacina->vacina}} - {{$vacina->dose}}</option>
                             @endforeach

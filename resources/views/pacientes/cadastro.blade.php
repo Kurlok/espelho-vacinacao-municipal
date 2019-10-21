@@ -55,10 +55,7 @@
     //$dataAtual = Carbon\Carbon::now()->toDateString();
     $dataAtual = Carbon\Carbon::now();
     if (isset($paciente)) {
-        $idadePaciente = Carbon\Carbon::createFromDate($paciente->data_nascimento)->diff(Carbon\Carbon::now());
-        $idadePacienteAnos = $idadePaciente->format('%y');
-        $idadePacienteMeses = $idadePaciente->format('%m');
-        $idadePacienteDias = $idadePaciente->format('%d');
+        $idadePaciente = Carbon\Carbon::createFromDate($paciente->data_nascimento)->diffInDays(Carbon\Carbon::now(), false);
     }
     ?>
 
@@ -180,54 +177,13 @@
                                     if (isset($paciente) && !isset($vacinaQuery[0])) {
                                         $vacinaAtrasada = false;
                                         $dataNascimentoPaciente = Carbon\Carbon::createFromDate($paciente->data_nascimento);
-                                        $dataPacienteMinimaVacina = $dataNascimentoPaciente;
-                                        $dataPacienteMaximaVacina = $dataNascimentoPaciente;
 
-                                        $idadePacienteAnos;
-                                        $idadePacienteMeses;
-                                        $idadePacienteDias;
-
-                                        if ($idadePacienteDias >= $vacina->inicio_minimo_dias && $idadePacienteDias <= $vacina->inicio_maximo_dias) {
+                                        if ($idadePaciente >= 0 && $idadePaciente >= $vacina->inicio_minimo_dias && $idadePaciente <= $vacina->inicio_maximo_dias) {
                                             $vacinaAtrasada = true;
                                         } else {
                                             $vacinaAtrasada = false;
                                         }
-                                        if ($idadePacienteMeses > $vacina->inicio_minimo_meses && $idadePacienteMeses < $vacina->inicio_maximo_meses) {
-                                            $vacinaAtrasada = true;
-                                        } else {
-                                            $vacinaAtrasada = false;
-                                        }
-                                        if ($idadePacienteAnos > $vacina->inicio_minimo_anos && $idadePacienteAnos < $vacina->inicio_maximo_anos) {
-                                            $vacinaAtrasada = true;
-                                        } else {
-                                            $vacinaAtrasada = false;
-                                        }
-
-                                        // if ($vacina->inicio_minimo_anos != NULL) {
-                                        //     $dataPacienteMinimaVacina = $dataPacienteMinimaVacina->addYears($vacina->inicio_minimo_anos);
-                                        // }
-                                        // if ($vacina->inicio_minimo_meses != NULL) {
-                                        //     $dataPacienteMinimaVacina = $dataPacienteMinimaVacina->addMonths($vacina->inicio_minimo_meses);
-                                        // }
-                                        // if ($vacina->inicio_minimo_dias != NULL) {
-                                        //     $dataPacienteMinimaVacina = $dataPacienteMinimaVacina->addDays($vacina->inicio_minimo_dias);
-                                        // }
-
-                                        // if ($vacina->inicio_maximo_anos != NULL) {
-                                        //     $dataPacienteMaximaVacina = $dataPacienteMaximaVacina->addYears($vacina->inicio_maximo_anos);
-                                        // }
-                                        // if ($vacina->inicio_maximo_meses != NULL) {
-                                        //     $dataPacienteMaximaVacina = $dataPacienteMaximaVacina->addMonths($vacina->inicio_maximo_meses);
-                                        // }
-                                        // if ($vacina->inicio_maximo_dias != NULL) {
-                                        //     $dataPacienteMaximaVacina = $dataPacienteMaximaVacina->addDays($vacina->inicio_maximo_dias);
-                                        // }
-
-                                        // if (isset($dataPacienteMinimaVacina)) {
-                                        //     if ($dataAtual->greaterThanOrEqualTo($dataPacienteMinimaVacina)) {
-                                        //         echo $dataPacienteMinimaVacina;
-                                        //     }
-                                        // }
+                                       // echo $vacinaAtrasada ? 'true' : 'false';
                                     }
                                 }
                                 ?>
@@ -273,7 +229,7 @@
                                     @if(isset($paciente) && !isset($vacinaQuery[0]))
                                     @if($vacinaAtrasada)
                                     <p class="text-justify small text-danger">
-                                        <strong>A idade mínima para a vacina é de: {{$vacina->inicio_minimo_anos}} anos, {{$vacina->inicio_minimo_meses}} meses e {{$vacina->inicio_minimo_dias}} dias. A máxima é de: {{$vacina->inicio_maximo_anos}} anos, {{$vacina->inicio_maximo_meses}} meses e {{$vacina->inicio_maximo_dias}} dias.</strong>
+                                        <strong>A idade mínima para a vacina é de {{$vacina->inicio_minimo_dias}} dias. A máxima é de {{$vacina->inicio_maximo_dias}} dias.</strong>
                                     </p>
                                     @endif
                                     @endif
