@@ -140,7 +140,7 @@ class VacinasController extends Controller
             return redirect()->route('vacinas');
         }
 
-        return view('vacinas/vacinas')->withMessage('No Details found. Try to search again !');
+        return view('vacinas/vacinas')->withMessage('Nada encontrado. Tente buscar novamente!');
     }
 
 
@@ -161,10 +161,12 @@ class VacinasController extends Controller
         $vacina->vacina = $request->vacina;
         $vacina->dose = $request->dose;
         $vacina->status = 'Ativo';  
-
+        $vacina->inicio_minimo_dias = $request->inicioMinimoDias;
+        $vacina->inicio_maximo_dias = $request->inicioMaximoDias;
         $vacina->save();
-        $paciente = new Paciente;
-        $paciente = Paciente::all();
+
+      //  $paciente = new Paciente;
+      //  $paciente = Paciente::all();
 
         // $listaVacinasTamanho = Vacina::count();
         // foreach($paciente as $pac){
@@ -190,7 +192,8 @@ class VacinasController extends Controller
         $vacina = Vacina::find($id);
         $vacina->vacina = $request->vacina;
         $vacina->dose = $request->dose;
-
+        $vacina->inicio_minimo_dias = $request->inicioMinimoDias;
+        $vacina->inicio_maximo_dias = $request->inicioMaximoDias;
         $vacina->save();
 
         return redirect()->route('vacinas');
