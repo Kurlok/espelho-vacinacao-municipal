@@ -24,7 +24,8 @@ class VacinasTableSeeder extends Seeder
         //Hepatite B
         DB::table('vacinas')->insert([
             'vacina' => 'Hep-B',
-            'dose' => 'Dose 1', 'status' => 'Ativo',
+            'dose' => 'Dose 1', 
+            'status' => 'Ativo',
             'inicio_minimo_dias' => 0,
             'inicio_maximo_dias' => 30
         ]);
@@ -83,14 +84,14 @@ class VacinasTableSeeder extends Seeder
         ]);
         DB::table('vacinas')->insert([
             'vacina' => 'Polio',
-            'dose' => '2º Reforço',
+            'dose' => 'Reforço 2',
             'status' => 'Ativo',
             'inicio_minimo_dias' => 1460, //4 anos
             'inicio_maximo_dias' => 1825,
         ]);
         DB::table('vacinas')->insert([
             'vacina' => 'Polio',
-            'dose' => '3º Reforço',
+            'dose' => 'Reforço 3',
             'status' => 'Ativo',
         ]);
 
