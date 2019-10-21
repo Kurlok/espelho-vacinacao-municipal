@@ -3,19 +3,15 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-
         <div class="col-md-12">
             @if(isset($vacina))
             <form method="POST" action="{{route('alterarVacina', $vacina->id)}}">
                 @else
                 <form method="POST" action="{{route('cadastrarVacina')}}">
                     @endif
-
                     @csrf
-
                     <div class="card">
                         <div class="card-header bg-success text-white">{{ __('Vacina') }}</div>
-
                         <div class="card-body border-secondary">
                             <div class="form-row">
                                 <div class="form-group col-md-2">
@@ -42,7 +38,6 @@
                                 <div class="form-group col-md-3">
                                     <input type="text" class="form-control" id="inicioMaximoDias" name="inicioMaximoDias">
                                 </div>
-
                             </div>
                             @if(isset($vacina))
                             <button type="submit" class="btn btn-primary">Alterar</button>
@@ -50,12 +45,8 @@
                             <button type="submit" class="btn btn-primary">Cadastrar</button>
                             @endif
                         </div>
-
-
                     </div>
-
                 </form>
-
         </div>
     </div>
     @endsection

@@ -74,6 +74,9 @@
                                 @foreach($listaVacinas as $vacina)
                                 <?php
                                 if (isset($paciente)) {
+                                    $idadePaciente = Carbon\Carbon::createFromDate($paciente->data_nascimento)->diffInDays(Carbon\Carbon::now(), false);
+                                    $vacinaAtrasada = false;
+
                                     $vacinaQuery = null;
                                     $vacinaQueryExiste = Illuminate\Support\Facades\DB::table('pacientes_vacinas')
                                         ->where(
@@ -91,7 +94,24 @@
                                                 ]
                                             )->get();
                                     }
-                                }                                ?>
+                                }                           
+                                if (isset($vacinaQuery)) {
+                                    $origDataAplicacao = $vacinaQuery[0]->data_aplicacao;
+                                    $novaDataAplicacao = date("d-m-Y", strtotime($origDataAplicacao));
+                                    $dataAplicacao = str_replace('-', '/', $novaDataAplicacao);
+                                }
+
+                                if (isset($paciente) && !isset($vacinaQuery[0])) {
+                                    
+                                    $dataNascimentoPaciente = Carbon\Carbon::createFromDate($paciente->data_nascimento);
+                                    if ($idadePaciente >= 0 && $idadePaciente >= $vacina->inicio_minimo_dias && $idadePaciente <= $vacina->inicio_maximo_dias) {
+                                        $vacinaAtrasada = true;
+                                    } else {
+                                        $vacinaAtrasada = false;
+                                    }
+                                   // echo $vacinaAtrasada ? 'true' : 'false';
+                                }
+                                ?>
                                 @if(isset($vacinaAnterior))
                                 @if(($vacinaAnterior->vacina) != ($vacina->vacina))
                             </div>
@@ -100,7 +120,7 @@
                                 @endif
                                 @endif
                                 <div class="form-group col-md-2">
-                                    <span class="font-weight-bold">{{$vacina->vacina}} - {{$vacina->dose}}</span>
+                                    <span class="font-weight-bold @if($vacinaAtrasada)text-danger @endif">{{$vacina->vacina}} - {{$vacina->dose}}</span>
                                     <br />
                                     @if(isset($vacinaQuery))
                                     @if($vacina->vacina == "Outras")
@@ -109,13 +129,7 @@
                                     @endif
 
                                     @endif
-                                    <?php
-                                    if (isset($vacinaQuery)) {
-                                        $origDataAplicacao = $vacinaQuery[0]->data_aplicacao;
-                                        $novaDataAplicacao = date("d-m-Y", strtotime($origDataAplicacao));
-                                        $dataAplicacao = str_replace('-', '/', $novaDataAplicacao);
-                                    }
-                                    ?>
+
                                     @if(isset($vacinaQuery))
                                     @if($vacinaQuery[0]->data_aplicacao != null)
                                     {{$dataAplicacao}}
