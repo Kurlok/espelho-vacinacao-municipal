@@ -119,6 +119,6 @@ class RelatoriosController extends Controller
         $dataFinalFormatada =  Carbon::parse($dataFinal);
         $dataFinalFormatada = $dataFinalFormatada->format('d-m-Y');
 
-        return Excel::download(new VacinasAtrasadasExport($dataInicial, $dataFinal, $idVacina), 'Pendências ' . $vacinaEscolhida->vacina . ' - ' . $vacinaEscolhida->dose . ' - ' . $dataInicialFormatada . ' a ' . $dataFinal . '.xlsx');
+        return Excel::download(new VacinasAtrasadasExport($dataInicial, $dataFinal, $idVacina), 'Pendências ' . $vacinaEscolhida->vacina . ' - ' . $vacinaEscolhida->dose . ' - ' . $dataInicialFormatada . ' a ' . $dataFinalFormatada . '.xlsx');
     }
 }

@@ -28,15 +28,33 @@
                                 </div>
                             </div>
                             <div class="form-row">
-                                <label for="inicioMinimoDias" class="col-md-2 col-form-label">Início mínimo (em dias)</label>
-                                <div class="form-group col-md-3">
-                                    <input type="text" class="form-control" id="inicioMinimoDias" name="inicioMinimoDias">
+                                <label for="inicioMinimo" class="col-md-2 col-form-label">Início mínimo</label>
+                                <div class="form-group col-md-2">
+                                    <select class="form-control" id="inicioMinimoDias" name="inicioMinimoDias">
+                                        <option disabled selected>Dias</option>
+                                        @for ($i = 0; $i < 60; $i++) <option value="{{$i}}">
+                                            {{$i}}
+                                            </option>
+                                            @endfor
+                                    </select>
                                 </div>
-                            </div>
-                            <div class="form-row">
-                                <label for="inicioMaximoDias" class="col-md-2 col-form-label">Início máximo (em dias)</label>
-                                <div class="form-group col-md-3">
-                                    <input type="text" class="form-control" id="inicioMaximoDias" name="inicioMaximoDias">
+                                <div class="form-group col-md-2">
+                                    <select class="form-control" id="inicioMinimoMeses" name="inicioMinimoMeses">
+                                        <option disabled selected>Meses</option>
+                                        @for ($i = 0; $i < 12; $i++) <option value="{{$i}}">
+                                            {{$i}}
+                                            </option>
+                                            @endfor
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <select class="form-control" id="inicioMinimoAnos" name="inicioMinimoAnos">
+                                        <option disabled selected>Anos</option>
+                                        @for ($i = 0; $i < 101; $i++) <option value="{{$i}}">
+                                            {{$i}}
+                                            </option>
+                                            @endfor
+                                    </select>
                                 </div>
                             </div>
                             @if(isset($vacina))

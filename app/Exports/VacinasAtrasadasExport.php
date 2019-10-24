@@ -52,8 +52,8 @@ class VacinasAtrasadasExport implements WithHeadings, ShouldAutoSize, FromArray
 
         $listaPacientes = Paciente::all();
         $listaVacinas = Vacina::all();
-        $periodoInicialCarbon = $this->periodoInicial;
-        $periodoFinalCarbon = $this->periodoFinal;
+        $periodoInicialCarbon = new Carbon($this->periodoInicial);
+        $periodoFinalCarbon = new Carbon($this->periodoFinal);
 
         if ($this->idVacina != 'todas') {
             foreach ($listaPacientes as $paciente) {
@@ -66,6 +66,8 @@ class VacinasAtrasadasExport implements WithHeadings, ShouldAutoSize, FromArray
                     ->doesntExist();
 
                 if ($naoExisteRegistroVacina) {
+                    $dataNascimentoPacienteCarbon = new Carbon($paciente->data_nascimento);
+
                     $vacinaEscolhida = Vacina::find($this->idVacina);
                     $vacinaAtrasada = false;
 
@@ -73,9 +75,35 @@ class VacinasAtrasadasExport implements WithHeadings, ShouldAutoSize, FromArray
 
                     // Iterando a cada dia no período
                     foreach ($periodo as $data) {
-                        $idadeData = Carbon::createFromDate($paciente->data_nascimento)->diffInDays($data, false);
+                       // $idadeData = Carbon::createFromDate($paciente->data_nascimento)->diffInDays($data, false);
+                       // $data = new Carbon($dt);
 
-                        if ($idadeData >= 0 && $idadeData > $vacinaEscolhida->inicio_minimo_dias && $idadeData < $vacinaEscolhida->inicio_maximo_dias) {
+                      //  $dataSubtraidoMinimo = new Carbon();
+                      //  $dataSubtraidoMaximo = new Carbon();
+
+                        $dataSubtraidoMinimo = new Carbon($data);
+                        $dataSubtraidoMaximo = new Carbon($data);
+
+                        if ($vacinaEscolhida->inicio_minimo_anos != 0) {
+                            $dataSubtraidoMinimo->subYears($vacinaEscolhida->inicio_minimo_anos);
+                        }
+                        if ($vacinaEscolhida->inicio_minimo_meses != 0) {
+                            $dataSubtraidoMinimo->subMonths($vacinaEscolhida->inicio_minimo_meses);
+                        }
+                        if ($vacinaEscolhida->inicio_minimo_dias != 0) {
+                            $dataSubtraidoMinimo->subDays($vacinaEscolhida->inicio_minimo_dias);
+                        }
+                        if ($vacinaEscolhida->inicio_maximo_anos != 0) {
+                            $dataSubtraidoMaximo->subYears($vacinaEscolhida->inicio_maximo_anos);
+                        }
+                        if ($vacinaEscolhida->inicio_maximo_meses != 0) {
+                            $dataSubtraidoMaximo->subMonths($vacinaEscolhida->inicio_maximo_meses);
+                        }
+                        if ($vacinaEscolhida->inicio_maximo_dias != 0) {
+                            $dataSubtraidoMaximo->subDays($vacinaEscolhida->inicio_maximo_dias);
+                        }
+
+                        if (($dataNascimentoPacienteCarbon->lessThanOrEqualTo($dataSubtraidoMinimo)) && ($dataNascimentoPacienteCarbon->greaterThanOrEqualTo($dataSubtraidoMaximo))) {
                             $vacinaAtrasada = true;
                         } else {
                             $vacinaAtrasada = false;
@@ -89,7 +117,9 @@ class VacinasAtrasadasExport implements WithHeadings, ShouldAutoSize, FromArray
                             // $dataPendenciaFormatada =  Carbon::parse($data);
                             // $dataPendenciaFormatada = $dataPendenciaFormatada->format('d/m/Y');
                             array_push($array, $paciente->data_nascimento);
-                            array_push($array, $data);
+                            array_push($array, $data->toDateString());
+
+
                             array_push($arrayFinal, $array);
                             break;
                         }
@@ -130,9 +160,7 @@ class VacinasAtrasadasExport implements WithHeadings, ShouldAutoSize, FromArray
                                 array_push($array, $vacinaEscolhida->dose);
                                 array_push($array, $vacinaEscolhida->inicio_minimo_dias);
                                 array_push($array, $vacinaEscolhida->inicio_maximo_dias);
-                                array_push($array, $periodoInicialCarbon);
-                                array_push($array, $periodoFinalCarbon);
-                                array_push($array, $data);
+                                array_push($array, $data->toDateString());
                                 array_push($arrayFinal, $array);
                                 break;
                             }

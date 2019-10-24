@@ -19,11 +19,17 @@ class CreateVacinasTable extends Migration
             $table->string('dose');
             
             $table->integer('inicio_minimo_dias')->default(0);
-            // $table->integer('inicio_minimo_meses')->nullable()->default(0);
-            // $table->integer('inicio_minimo_anos')->nullable()->default(0);
+            $table->integer('inicio_minimo_meses')->default(0);
+            $table->integer('inicio_minimo_anos')->default(0);
             $table->integer('inicio_maximo_dias')->default(0);
-            // $table->integer('inicio_maximo_meses')->nullable()->default(0);
-            // $table->integer('inicio_maximo_anos')->nullable()->default(0);
+            $table->integer('inicio_maximo_meses')->default(0);
+            $table->integer('inicio_maximo_anos')->default(0);
+            $table->integer('intervalo_recomendado_dias')->default(0);
+            $table->integer('intervalo_recomendado_meses')->default(0);
+            $table->integer('intervalo_recomendado_anos')->default(0);
+
+            $table->unsignedBigInteger('vacina_exigida_id')->nullable();
+            $table->foreign('vacina_exigida_id')->references('id')->on('vacinas');
 
             $table->string('status');
             $table->timestamps();

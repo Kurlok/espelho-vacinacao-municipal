@@ -163,6 +163,10 @@ class VacinasController extends Controller
         $vacina->status = 'Ativo';  
         $vacina->inicio_minimo_dias = $request->inicioMinimoDias;
         $vacina->inicio_maximo_dias = $request->inicioMaximoDias;
+        $vacina->inicio_minimo_dias = $request->inicioMinimoMeses;
+        $vacina->inicio_maximo_dias = $request->inicioMaximoMeses;
+        $vacina->inicio_minimo_dias = $request->inicioMinimoAnos;
+        $vacina->inicio_maximo_dias = $request->inicioMaximoAnos;
         $vacina->save();
 
       //  $paciente = new Paciente;
@@ -194,6 +198,10 @@ class VacinasController extends Controller
         $vacina->dose = $request->dose;
         $vacina->inicio_minimo_dias = $request->inicioMinimoDias;
         $vacina->inicio_maximo_dias = $request->inicioMaximoDias;
+        $vacina->inicio_minimo_dias = $request->inicioMinimoMeses;
+        $vacina->inicio_maximo_dias = $request->inicioMaximoMeses;
+        $vacina->inicio_minimo_dias = $request->inicioMinimoAnos;
+        $vacina->inicio_maximo_dias = $request->inicioMaximoAnos;
         $vacina->save();
 
         return redirect()->route('vacinas');
