@@ -41,7 +41,7 @@
                                 <div class="form-group col-md-2">
                                     <select class="form-control" id="inicioMinimoMeses" name="inicioMinimoMeses">
                                         <option disabled selected>Meses</option>
-                                        @for ($i = 0; $i < 12; $i++) <option value="{{$i}}">
+                                        @for ($i = 0; $i < 24; $i++) <option value="{{$i}}">
                                             {{$i}}
                                             </option>
                                             @endfor

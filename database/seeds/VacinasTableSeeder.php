@@ -496,11 +496,31 @@ class VacinasTableSeeder extends Seeder
             'vacina' => 'Mening. C',
             'dose' => 'Dose 1',
             'status' => 'Ativo',
+            'inicio_minimo_dias' => 0,
+            'inicio_minimo_meses' => 3,
+            'inicio_minimo_anos' => 0,
+            'inicio_maximo_dias' => 29, 
+            'inicio_maximo_meses' => 11, 
+            'inicio_maximo_anos' => 4,
+            'intervalo_recomendado_dias' => 0,
+            'intervalo_recomendado_meses' => 0,
+            'intervalo_recomendado_anos' => 0,
         ]);
         DB::table('vacinas')->insert([
             'vacina' => 'Mening. C',
             'dose' => 'Dose 2',
             'status' => 'Ativo',
+            'inicio_minimo_dias' => 0,
+            'inicio_minimo_meses' => 3,
+            'inicio_minimo_anos' => 0,
+            'inicio_maximo_dias' => 29, 
+            'inicio_maximo_meses' => 11, 
+            'inicio_maximo_anos' => 4,
+            'intervalo_recomendado_dias' => 60,
+            'intervalo_recomendado_meses' => 0,
+            'intervalo_recomendado_anos' => 0,
+            'vacina_exigida_id' => 48,
+
         ]);
         DB::table('vacinas')->insert([
             'vacina' => 'Mening. C',
@@ -522,6 +542,15 @@ class VacinasTableSeeder extends Seeder
             'vacina' => 'Mening. Única',
             'dose' => 'Única',
             'status' => 'Ativo',
+            'inicio_minimo_dias' => 0,
+            'inicio_minimo_meses' => 0,
+            'inicio_minimo_anos' => 11,
+            'inicio_maximo_dias' => 29, 
+            'inicio_maximo_meses' => 11, 
+            'inicio_maximo_anos' => 14,
+            'intervalo_recomendado_dias' => 0,
+            'intervalo_recomendado_meses' => 0,
+            'intervalo_recomendado_anos' => 0,
         ]);
 
         //Vacina Inativada Poliomielite - VIP
@@ -529,16 +558,45 @@ class VacinasTableSeeder extends Seeder
             'vacina' => 'VIP',
             'dose' => 'Dose 1',
             'status' => 'Ativo',
+            'inicio_minimo_dias' => 0,
+            'inicio_minimo_meses' => 2,
+            'inicio_minimo_anos' => 0,
+            'inicio_maximo_dias' => 29, 
+            'inicio_maximo_meses' => 11, 
+            'inicio_maximo_anos' => 4,
+            'intervalo_recomendado_dias' => 0,
+            'intervalo_recomendado_meses' => 0,
+            'intervalo_recomendado_anos' => 0,
         ]);
         DB::table('vacinas')->insert([
             'vacina' => 'VIP',
             'dose' => 'Dose 2',
             'status' => 'Ativo',
+            'inicio_minimo_dias' => 0,
+            'inicio_minimo_meses' => 2,
+            'inicio_minimo_anos' => 0,
+            'inicio_maximo_dias' => 29, 
+            'inicio_maximo_meses' => 11, 
+            'inicio_maximo_anos' => 4,
+            'intervalo_recomendado_dias' => 60,
+            'intervalo_recomendado_meses' => 0,
+            'intervalo_recomendado_anos' => 0,
+            'vacina_exigida_id' => 54,
         ]);
         DB::table('vacinas')->insert([
             'vacina' => 'VIP',
             'dose' => 'Dose 3',
             'status' => 'Ativo',
+            'inicio_minimo_dias' => 0,
+            'inicio_minimo_meses' => 2,
+            'inicio_minimo_anos' => 0,
+            'inicio_maximo_dias' => 29, 
+            'inicio_maximo_meses' => 11, 
+            'inicio_maximo_anos' => 4,
+            'intervalo_recomendado_dias' => 60,
+            'intervalo_recomendado_meses' => 0,
+            'intervalo_recomendado_anos' => 0,
+            'vacina_exigida_id' => 55,
         ]);
 
         //Pentavalente
@@ -546,16 +604,45 @@ class VacinasTableSeeder extends Seeder
             'vacina' => 'Pentavalente',
             'dose' => 'Dose 1',
             'status' => 'Ativo',
+            'inicio_minimo_dias' => 0,
+            'inicio_minimo_meses' => 2,
+            'inicio_minimo_anos' => 0,
+            'inicio_maximo_dias' => 29, 
+            'inicio_maximo_meses' => 11, 
+            'inicio_maximo_anos' => 4,
+            'intervalo_recomendado_dias' => 0,
+            'intervalo_recomendado_meses' => 0,
+            'intervalo_recomendado_anos' => 0,
         ]);
         DB::table('vacinas')->insert([
             'vacina' => 'Pentavalente',
             'dose' => 'Dose 2',
             'status' => 'Ativo',
+            'inicio_minimo_dias' => 0,
+            'inicio_minimo_meses' => 2,
+            'inicio_minimo_anos' => 0,
+            'inicio_maximo_dias' => 29, 
+            'inicio_maximo_meses' => 11, 
+            'inicio_maximo_anos' => 4,
+            'intervalo_recomendado_dias' => 60,
+            'intervalo_recomendado_meses' => 0,
+            'intervalo_recomendado_anos' => 0,
+            'vacina_exigida_id' => 57,
         ]);
         DB::table('vacinas')->insert([
             'vacina' => 'Pentavalente',
             'dose' => 'Dose 3',
             'status' => 'Ativo',
+            'inicio_minimo_dias' => 0,
+            'inicio_minimo_meses' => 2,
+            'inicio_minimo_anos' => 0,
+            'inicio_maximo_dias' => 29, 
+            'inicio_maximo_meses' => 11, 
+            'inicio_maximo_anos' => 4,
+            'intervalo_recomendado_dias' => 60,
+            'intervalo_recomendado_meses' => 0,
+            'intervalo_recomendado_anos' => 0,
+            'vacina_exigida_id' => 58,
         ]);
 
         //Febre Amarela
@@ -563,6 +650,7 @@ class VacinasTableSeeder extends Seeder
             'vacina' => 'Febre Amarela',
             'dose' => 'Dose 1',
             'status' => 'Ativo',
+            
         ]);
         DB::table('vacinas')->insert([
             'vacina' => 'Febre Amarela',
@@ -585,32 +673,93 @@ class VacinasTableSeeder extends Seeder
             'vacina' => 'Influenza',
             'dose' => 'Dose 1',
             'status' => 'Ativo',
+            'inicio_minimo_dias' => 0,
+            'inicio_minimo_meses' => 0,
+            'inicio_minimo_anos' => 60,
+            'inicio_maximo_dias' => 0, 
+            'inicio_maximo_meses' => 0, 
+            'inicio_maximo_anos' => 0,
+            'intervalo_recomendado_dias' => 0,
+            'intervalo_recomendado_meses' => 0,
+            'intervalo_recomendado_anos' => 0,
         ]);
+
         DB::table('vacinas')->insert([
             'vacina' => 'Influenza',
             'dose' => 'Dose 2',
             'status' => 'Ativo',
+            'inicio_minimo_dias' => 0,
+            'inicio_minimo_meses' => 0,
+            'inicio_minimo_anos' => 60,
+            'inicio_maximo_dias' => 0, 
+            'inicio_maximo_meses' => 0, 
+            'inicio_maximo_anos' => 0,
+            'intervalo_recomendado_dias' => 0,
+            'intervalo_recomendado_meses' => 0,
+            'intervalo_recomendado_anos' => 1,
+            'vacina_exigida_id' => 64,
+
         ]);
         DB::table('vacinas')->insert([
             'vacina' => 'Influenza',
             'dose' => 'Dose 3',
             'status' => 'Ativo',
+            'inicio_minimo_dias' => 0,
+            'inicio_minimo_meses' => 0,
+            'inicio_minimo_anos' => 60,
+            'inicio_maximo_dias' => 0, 
+            'inicio_maximo_meses' => 0, 
+            'inicio_maximo_anos' => 0,
+            'intervalo_recomendado_dias' => 0,
+            'intervalo_recomendado_meses' => 0,
+            'intervalo_recomendado_anos' => 1,
+            'vacina_exigida_id' => 65,
         ]);
         DB::table('vacinas')->insert([
             'vacina' => 'Influenza',
             'dose' => 'Dose 4',
             'status' => 'Ativo',
-        ]);
+            'inicio_minimo_dias' => 0,
+            'inicio_minimo_meses' => 0,
+            'inicio_minimo_anos' => 60,
+            'inicio_maximo_dias' => 0, 
+            'inicio_maximo_meses' => 0, 
+            'inicio_maximo_anos' => 0,
+            'intervalo_recomendado_dias' => 0,
+            'intervalo_recomendado_meses' => 0,
+            'intervalo_recomendado_anos' => 1,
+            'vacina_exigida_id' => 66,
+                    ]);
         DB::table('vacinas')->insert([
             'vacina' => 'Influenza',
             'dose' => 'Dose 5',
             'status' => 'Ativo',
-        ]);
+            'inicio_minimo_dias' => 0,
+            'inicio_minimo_meses' => 0,
+            'inicio_minimo_anos' => 60,
+            'inicio_maximo_dias' => 0, 
+            'inicio_maximo_meses' => 0, 
+            'inicio_maximo_anos' => 0,
+            'intervalo_recomendado_dias' => 0,
+            'intervalo_recomendado_meses' => 0,
+            'intervalo_recomendado_anos' => 1,
+            'vacina_exigida_id' => 67,
+                    ]);
         DB::table('vacinas')->insert([
             'vacina' => 'Influenza',
             'dose' => 'Dose 6',
             'status' => 'Ativo',
-        ]);
+            'inicio_minimo_dias' => 0,
+            'inicio_minimo_meses' => 0,
+            'inicio_minimo_anos' => 60,
+            'inicio_maximo_dias' => 0, 
+            'inicio_maximo_meses' => 0, 
+            'inicio_maximo_anos' => 0,
+            'intervalo_recomendado_dias' => 0,
+            'intervalo_recomendado_meses' => 0,
+            'intervalo_recomendado_anos' => 1,
+            'vacina_exigida_id' => 68,
+                    ]);
 
         //Outras
         DB::table('vacinas')->insert([
@@ -721,6 +870,15 @@ class VacinasTableSeeder extends Seeder
             'vacina' => 'Varicela',
             'dose' => 'Dose 1',
             'status' => 'Ativo',
+            'inicio_minimo_dias' => 0,
+            'inicio_minimo_meses' => 0,
+            'inicio_minimo_anos' => 4,
+            'inicio_maximo_dias' => 29, 
+            'inicio_maximo_meses' => 11, 
+            'inicio_maximo_anos' => 6,
+            'intervalo_recomendado_dias' => 0,
+            'intervalo_recomendado_meses' => 0,
+            'intervalo_recomendado_anos' => 0,
         ]);
         DB::table('vacinas')->insert([
             'vacina' => 'Varicela',
@@ -733,11 +891,30 @@ class VacinasTableSeeder extends Seeder
             'vacina' => 'Pneumo. 23',
             'dose' => 'Dose 1',
             'status' => 'Ativo',
+            'inicio_minimo_dias' => 0,
+            'inicio_minimo_meses' => 0,
+            'inicio_minimo_anos' => 60,
+            'inicio_maximo_dias' => 0, 
+            'inicio_maximo_meses' => 0, 
+            'inicio_maximo_anos' => 0,
+            'intervalo_recomendado_dias' => 0,
+            'intervalo_recomendado_meses' => 0,
+            'intervalo_recomendado_anos' => 0,
         ]);
         DB::table('vacinas')->insert([
             'vacina' => 'Pneumo. 23',
             'dose' => 'Dose 2',
             'status' => 'Ativo',
+            'inicio_minimo_dias' => 0,
+            'inicio_minimo_meses' => 0,
+            'inicio_minimo_anos' => 60,
+            'inicio_maximo_dias' => 0, 
+            'inicio_maximo_meses' => 0, 
+            'inicio_maximo_anos' => 0,
+            'intervalo_recomendado_dias' => 0,
+            'intervalo_recomendado_meses' => 0,
+            'intervalo_recomendado_anos' => 5,
+            'vacina_exigida_id' => 92,
         ]);
     }
 }
