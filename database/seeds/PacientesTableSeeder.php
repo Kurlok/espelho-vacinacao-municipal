@@ -37,7 +37,7 @@ class PacientesTableSeeder extends Seeder
             } else {
                 $sexo = 'Feminino';
             }
-            $dt = $faker->dateTimeBetween($startDate = '-100 years', $endDate = 'now');
+            $dt = $faker->dateTimeBetween($startDate = '-40 years', $endDate = 'now');
             $date = $dt->format("Y-m-d");
 
             DB::table('pacientes')->insert(

@@ -29,9 +29,8 @@ class VacinasController extends Controller
             [
                 'listaVacinas' => $listaVacinas,
             ],
-            
-        );
 
+        );
     }
 
     /**
@@ -103,22 +102,28 @@ class VacinasController extends Controller
     public function getVacina(int $id)
     {
         $vacina = Vacina::find($id);
+        $listaVacinas = Vacina::all();
         return view(
             'vacinas/cadastro',
-            ['vacina' => $vacina]
+            [
+                'vacina' => $vacina,
+
+                'listaVacinas' => $listaVacinas
+            ]
+
         );
     }
 
     public function buscaVacina(Request $request)
     {
-       // $q = Input::get('q');
-       //$q = $request->input('q');
+        // $q = Input::get('q');
+        //$q = $request->input('q');
         $q = $request->input('q');
 
         //Conversão da data
         //$dataBr = $q;
-       // $date = str_replace('/', '-', $dataBr);
-       // $dataSql = date("Y-m-d", strtotime($date));
+        // $date = str_replace('/', '-', $dataBr);
+        // $dataSql = date("Y-m-d", strtotime($date));
 
         //Busca
         if ($q != "") {
@@ -146,8 +151,13 @@ class VacinasController extends Controller
 
     public function telaCadastroVacina()
     {
-        
-        return view('vacinas/cadastro');
+        $listaVacinas = Vacina::all();
+        return view(
+            'vacinas/cadastro',
+            [
+                'listaVacinas' => $listaVacinas
+            ]
+        );
     }
 
     public function cadastrarVacina(Request $request)
@@ -156,27 +166,36 @@ class VacinasController extends Controller
             'vacina' => 'required|string|max:255',
             'dose' => 'required|string|max:255',
         ]);
-        
+
         $vacina = new Vacina();
         $vacina->vacina = $request->vacina;
         $vacina->dose = $request->dose;
-        $vacina->status = 'Ativo';  
+        $vacina->status = 'Ativo';
         $vacina->inicio_minimo_dias = $request->inicioMinimoDias;
         $vacina->inicio_maximo_dias = $request->inicioMaximoDias;
-        $vacina->inicio_minimo_dias = $request->inicioMinimoMeses;
-        $vacina->inicio_maximo_dias = $request->inicioMaximoMeses;
-        $vacina->inicio_minimo_dias = $request->inicioMinimoAnos;
-        $vacina->inicio_maximo_dias = $request->inicioMaximoAnos;
+        $vacina->inicio_minimo_meses = $request->inicioMinimoMeses;
+        $vacina->inicio_maximo_meses = $request->inicioMaximoMeses;
+        $vacina->inicio_minimo_anos = $request->inicioMinimoAnos;
+        $vacina->inicio_maximo_anos = $request->inicioMaximoAnos;
+
+        $vacina->intervalo_recomendado_dias = $request->intervaloRecomendadoDias;
+        $vacina->intervalo_recomendado_meses = $request->intervaloRecomendadoMeses;
+        $vacina->intervalo_recomendado_anos = $request->intervaloRecomendadoAnos;
+        if ($request->vacinaExigida != 'nenhuma') {
+            $vacina->vacina_exigida_id = $request->vacinaExigida;
+        } else {
+            $vacina->vacina_exigida_id = null;
+        }
         $vacina->save();
 
-      //  $paciente = new Paciente;
-      //  $paciente = Paciente::all();
+        //  $paciente = new Paciente;
+        //  $paciente = Paciente::all();
 
         // $listaVacinasTamanho = Vacina::count();
         // foreach($paciente as $pac){
         //     $pac->vacinas()->attach($vacina->id, ['data_aplicacao' => null]);
         // }
-    
+
 
         return redirect()->route('telaCadastroVacina');
         //->with('mensagemAlteracaoDados', 'Dados alterados com sucesso!');
@@ -198,10 +217,21 @@ class VacinasController extends Controller
         $vacina->dose = $request->dose;
         $vacina->inicio_minimo_dias = $request->inicioMinimoDias;
         $vacina->inicio_maximo_dias = $request->inicioMaximoDias;
-        $vacina->inicio_minimo_dias = $request->inicioMinimoMeses;
-        $vacina->inicio_maximo_dias = $request->inicioMaximoMeses;
-        $vacina->inicio_minimo_dias = $request->inicioMinimoAnos;
-        $vacina->inicio_maximo_dias = $request->inicioMaximoAnos;
+        $vacina->inicio_minimo_meses = $request->inicioMinimoMeses;
+        $vacina->inicio_maximo_meses = $request->inicioMaximoMeses;
+        $vacina->inicio_minimo_anos = $request->inicioMinimoAnos;
+        $vacina->inicio_maximo_anos = $request->inicioMaximoAnos;
+
+        $vacina->intervalo_recomendado_dias = $request->intervaloRecomendadoDias;
+        $vacina->intervalo_recomendado_meses = $request->intervaloRecomendadoMeses;
+        $vacina->intervalo_recomendado_anos = $request->intervaloRecomendadoAnos;
+
+        if ($request->vacinaExigida != 'nenhuma') {
+            $vacina->vacina_exigida_id = $request->vacinaExigida;
+        } else {
+            $vacina->vacina_exigida_id = null;
+        }
+
         $vacina->save();
 
         return redirect()->route('vacinas');
@@ -219,7 +249,7 @@ class VacinasController extends Controller
     {
         $vacina = Vacina::find($id);
         if ($vacina->status = 'Ativo')
-        $vacina->status = 'Inativo';
+            $vacina->status = 'Inativo';
         $vacina->save();
 
         return redirect()->route('vacinas');
@@ -229,10 +259,9 @@ class VacinasController extends Controller
     {
         $vacina = Vacina::find($id);
         if ($vacina->status = 'Inativo')
-        $vacina->status = 'Ativo';
+            $vacina->status = 'Ativo';
         $vacina->save();
 
         return redirect()->route('vacinas');
     }
 }
-

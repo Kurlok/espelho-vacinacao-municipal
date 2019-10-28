@@ -65,24 +65,22 @@ class VacinasAtrasadasExport implements WithHeadings, ShouldAutoSize, FromArray
                     ])
                     ->doesntExist();
 
+
                 if ($naoExisteRegistroVacina) {
+
                     $dataNascimentoPacienteCarbon = new Carbon($paciente->data_nascimento);
 
                     $vacinaEscolhida = Vacina::find($this->idVacina);
-                    $vacinaAtrasada = false;
-
                     $periodo = CarbonPeriod::create($periodoInicialCarbon, $periodoFinalCarbon);
+                    $vacinaAtrasada = false;
+                    $passouDoIntervalo = false;
+                    $estaNaIdade = false;
 
                     // Iterando a cada dia no período
                     foreach ($periodo as $data) {
-                       // $idadeData = Carbon::createFromDate($paciente->data_nascimento)->diffInDays($data, false);
-                       // $data = new Carbon($dt);
-
-                      //  $dataSubtraidoMinimo = new Carbon();
-                      //  $dataSubtraidoMaximo = new Carbon();
-
                         $dataSubtraidoMinimo = new Carbon($data);
                         $dataSubtraidoMaximo = new Carbon($data);
+                        $dataIteracao = new Carbon($data);
 
                         if ($vacinaEscolhida->inicio_minimo_anos != 0) {
                             $dataSubtraidoMinimo->subYears($vacinaEscolhida->inicio_minimo_anos);
@@ -103,10 +101,50 @@ class VacinasAtrasadasExport implements WithHeadings, ShouldAutoSize, FromArray
                             $dataSubtraidoMaximo->subDays($vacinaEscolhida->inicio_maximo_dias);
                         }
 
+                        if ($vacinaEscolhida->vacina_exigida_id != null) {
+                            $existeRegistroVacina = DB::table('pacientes_vacinas')
+                                ->where([
+                                    ['fk_vacinas_id', '=', $vacinaEscolhida->vacina_exigida_id],
+                                    ['fk_pacientes_id', '=', $paciente->id]
+                                ])->exists();
+                            if ($existeRegistroVacina) {
+                                $vacinaExigida = Vacina::find($vacinaEscolhida->vacina_exigida_id);
+
+                                $queryRegistro = DB::table('pacientes_vacinas')->where([
+                                    ['fk_vacinas_id', $vacinaEscolhida->vacina_exigida_id],
+                                    ['fk_pacientes_id', $paciente->id],
+                                ])->first();
+
+                                //$dataAplicacaoCarbon = new Carbon($queryRegistro->data_aplicacao);
+                                $dataLimite = new Carbon($queryRegistro->data_aplicacao);
+                                if ($vacinaEscolhida->intervalo_recomendado_anos != 0) {
+                                    $dataLimite->addYears($vacinaEscolhida->intervalo_recomendado_anos);
+                                }
+                                if ($vacinaEscolhida->intervalo_recomendado_meses != 0) {
+                                    $dataLimite->addMonths($vacinaEscolhida->intervalo_recomendado_meses);
+                                }
+                                if ($vacinaEscolhida->intervalo_recomendado_dias != 0) {
+                                    $dataLimite->addDays($vacinaEscolhida->intervalo_recomendado_dias);
+                                }
+                                if ($dataIteracao->greaterThanOrEqualTo($dataLimite)) {
+                                    $passouDoIntervalo = true;
+                                }
+                            }
+                        }
+
                         if (($dataNascimentoPacienteCarbon->lessThanOrEqualTo($dataSubtraidoMinimo)) && ($dataNascimentoPacienteCarbon->greaterThanOrEqualTo($dataSubtraidoMaximo))) {
-                            $vacinaAtrasada = true;
+                            $estaNaIdade = true;
+                        }
+
+
+                        if (($vacinaEscolhida->intervalo_recomendado_dias != 0) || ($vacinaEscolhida->intervalo_recomendado_meses != 0) || ($vacinaEscolhida->intervalo_recomendado_anos != 0)){
+                            if ($passouDoIntervalo && $estaNaIdade){
+                                $vacinaAtrasada = true;
+                            }
                         } else {
-                            $vacinaAtrasada = false;
+                            if ($estaNaIdade){
+                                $vacinaAtrasada = true;       
+                            }
                         }
 
                         if ($vacinaAtrasada) {
@@ -118,8 +156,8 @@ class VacinasAtrasadasExport implements WithHeadings, ShouldAutoSize, FromArray
                             // $dataPendenciaFormatada = $dataPendenciaFormatada->format('d/m/Y');
                             array_push($array, $paciente->data_nascimento);
                             array_push($array, $data->toDateString());
-
-
+                             array_push($array, $vacinaExigida->vacina . $vacinaExigida->dose);
+                             array_push($array, $queryRegistro->data_aplicacao);
                             array_push($arrayFinal, $array);
                             break;
                         }

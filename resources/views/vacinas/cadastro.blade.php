@@ -28,35 +28,111 @@
                                 </div>
                             </div>
                             <div class="form-row">
-                                <label for="inicioMinimo" class="col-md-2 col-form-label">Início mínimo</label>
+                                <label for="inicioMinimoDias" class="col-md-2 col-form-label">Início mínimo</label>
                                 <div class="form-group col-md-2">
-                                    <select class="form-control" id="inicioMinimoDias" name="inicioMinimoDias">
+                                    <select class="form-control" id="inicioMinimoDias" name="inicioMinimoDias" required>
                                         <option disabled selected>Dias</option>
-                                        @for ($i = 0; $i < 60; $i++) <option value="{{$i}}">
+                                        @for ($i = 0; $i < 60; $i++) <option value="{{$i}}" @if(isset($vacina)) @if($vacina->inicio_minimo_dias == $i) selected @endif @endif>
                                             {{$i}}
                                             </option>
                                             @endfor
                                     </select>
                                 </div>
                                 <div class="form-group col-md-2">
-                                    <select class="form-control" id="inicioMinimoMeses" name="inicioMinimoMeses">
+                                    <select class="form-control" id="inicioMinimoMeses" name="inicioMinimoMeses" required>
                                         <option disabled selected>Meses</option>
-                                        @for ($i = 0; $i < 24; $i++) <option value="{{$i}}">
+                                        @for ($i = 0; $i < 24; $i++) <option value="{{$i}}" @if(isset($vacina)) @if($vacina->inicio_minimo_meses == $i) selected @endif @endif>
                                             {{$i}}
                                             </option>
                                             @endfor
                                     </select>
                                 </div>
                                 <div class="form-group col-md-2">
-                                    <select class="form-control" id="inicioMinimoAnos" name="inicioMinimoAnos">
+                                    <select class="form-control" id="inicioMinimoAnos" name="inicioMinimoAnos" required>
                                         <option disabled selected>Anos</option>
-                                        @for ($i = 0; $i < 101; $i++) <option value="{{$i}}">
+                                        @for ($i = 0; $i < 201; $i++) <option value="{{$i}}" @if(isset($vacina)) @if($vacina->inicio_minimo_anos == $i) selected @endif @endif>
                                             {{$i}}
                                             </option>
                                             @endfor
                                     </select>
                                 </div>
                             </div>
+                            <div class="form-row">
+                                <label for="inicioMaximoDias" class="col-md-2 col-form-label">Início máximo</label>
+                                <div class="form-group col-md-2">
+                                    <select class="form-control" id="inicioMaximoDias" name="inicioMaximoDias" required>
+                                        <option disabled selected>Dias</option>
+                                        @for ($i = 0; $i < 60; $i++) <option value="{{$i}}" @if(isset($vacina)) @if($vacina->inicio_maximo_dias == $i) selected @endif @endif>
+                                            {{$i}}
+                                            </option>
+                                            @endfor
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <select class="form-control" id="inicioMaximoMeses" name="inicioMaximoMeses" required>
+                                        <option disabled selected>Meses</option>
+                                        @for ($i = 0; $i < 24; $i++) <option value="{{$i}}" @if(isset($vacina)) @if($vacina->inicio_maximo_meses == $i) selected @endif @endif>
+                                            {{$i}}
+                                            </option>
+                                            @endfor
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <select class="form-control" id="inicioMaximoAnos" name="inicioMaximoAnos" required>
+                                        <option disabled selected>Anos</option>
+                                        @for ($i = 0; $i < 201; $i++) <option value="{{$i}}" @if(isset($vacina)) @if($vacina->inicio_maximo_anos == $i) selected @endif @endif>
+                                            {{$i}}
+                                            </option>
+                                            @endfor
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <label for="vacinaExigida" class="col-md-2 col-form-label">Vacina exigida</label>
+                                <div class="form-group col-md-6">
+                                    <select class="form-control" id="vacinaExigida" name="vacinaExigida" required>
+                                        <option value="nenhuma">Nenhuma</option>
+                                        @foreach($listaVacinas as $vlistada)
+                                        <?php $contador = 1 ?>
+                                        <option value="{{$vlistada->id}}" @if(isset($vacina)) @if($vlistada->vacina_exigida_id == $vacina->id) selected @endif @endif>
+                                            {{$vlistada->vacina}} - {{$vlistada->dose}} - {{$vacina->id}} - {{$vlistada->vacina_exigida_id}}
+                                        </option>
+                                        <?php $contador++ ?>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <label for="intervaloRecomendado" class="col-md-2 col-form-label">Intervalo recomendado</label>
+                                <div class="form-group col-md-2">
+                                    <select class="form-control" id="intervaloRecomendadoDias" name="intervaloRecomendadoDias" required>
+                                        <option disabled selected>Dias</option>
+                                        @for ($i = 0; $i < 60; $i++) <option value="{{$i}}" @if(isset($vacina)) @if($vacina->intervalo_recomendado_dias == $i) selected @endif @endif>
+                                            {{$i}}
+                                            </option>
+                                            @endfor
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <select class="form-control" id="intervaloRecomendadoMeses" name="intervaloRecomendadoMeses" required>
+                                        <option disabled selected>Meses</option>
+                                        @for ($i = 0; $i < 24; $i++) <option value="{{$i}}" @if(isset($vacina)) @if($vacina->intervalo_recomendado_meses == $i) selected @endif @endif>
+                                            {{$i}}
+                                            </option>
+                                            @endfor
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <select class="form-control" id="intervaloRecomendadoAnos" name="intervaloRecomendadoAnos" required>
+                                        <option disabled selected>Anos</option>
+                                        @for ($i = 0; $i < 201; $i++) <option value="{{$i}}" @if(isset($vacina)) @if($vacina->intervalo_recomendado_anos == $i) selected @endif @endif>
+                                            {{$i}}
+                                            </option>
+                                            @endfor
+                                    </select>
+                                </div>
+                            </div>
+
                             @if(isset($vacina))
                             <button type="submit" class="btn btn-primary">Alterar</button>
                             @else
