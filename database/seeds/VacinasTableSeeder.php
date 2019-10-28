@@ -355,7 +355,7 @@ class VacinasTableSeeder extends Seeder
             'intervalo_recomendado_dias' => 0,
             'intervalo_recomendado_meses' => 0,
             'intervalo_recomendado_anos' => 0,
-            'vacina_exigida_id' => 27,
+            'vacina_exigida_id' => 31,
         ]);
         DB::table('vacinas')->insert([
             'vacina' => 'dTp',

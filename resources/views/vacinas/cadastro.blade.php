@@ -93,11 +93,9 @@
                                     <select class="form-control" id="vacinaExigida" name="vacinaExigida" required>
                                         <option value="nenhuma">Nenhuma</option>
                                         @foreach($listaVacinas as $vlistada)
-                                        <?php $contador = 1 ?>
-                                        <option value="{{$vlistada->id}}" @if(isset($vacina)) @if($vlistada->vacina_exigida_id == $vacina->id) selected @endif @endif>
-                                            {{$vlistada->vacina}} - {{$vlistada->dose}} - {{$vacina->id}} - {{$vlistada->vacina_exigida_id}}
+                                        <option value="{{$vlistada->id}}" @if(isset($vacina)) @if(($vlistada->id) == ($vacina->vacina_exigida_id)) selected @endif @endif>
+                                            {{$vlistada->vacina}} - {{$vlistada->dose}}
                                         </option>
-                                        <?php $contador++ ?>
                                         @endforeach
                                     </select>
                                 </div>
